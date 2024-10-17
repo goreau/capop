@@ -79,6 +79,7 @@
 import { TabulatorFull as Tabulator } from "tabulator-tables"; //import Tabulator library
 import { ResponsiveLayoutModule } from 'tabulator-tables';
 import lang from "./lang";
+import autoTable from "jspdf-autotable";
 
 
 export default {
@@ -161,6 +162,8 @@ export default {
         movableColumns: true,
         paginationCounter: "rows",
       });
+
+
 
 
       this.cbColumns = this.columns.filter(el => el.title !== "Ações");

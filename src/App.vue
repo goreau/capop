@@ -243,7 +243,7 @@ export default {
           ],
         },
         {
-          href: "/report",
+          href: "",
           title: "Relatórios",
           icon: {
             element: "font-awesome-icon",
@@ -254,6 +254,32 @@ export default {
             },
             // text: ''
           },
+          child: [
+            {
+              href: "/mainReport/1",
+              title: "Resumo de Uniforme",
+            },
+            {
+              href: "/mainReport/2",
+              title: "Planejamento Financeiro",
+            },
+            {
+              href: "/mainReport/3",
+              title: "Planejamento Operacional",
+            },
+            {
+              href: "/mainReport/4",
+              title: "Planejado X Executado",
+            },
+            {
+              href: "/mainReport/5",
+              title: "Capacidade Instalada",
+            },
+            {
+              href: "/mainReport/6",
+              title: "Uniforme/Servidor",
+            },
+          ],
         },
       ],
     };

@@ -132,6 +132,16 @@ const routes = [
     name: 'editFinanceiro',
     component: () => import(/* webpackChunkName: "user" */ '../views/financeiro/EditFinanceiroView.vue'),
   },
+  {
+    path: '/mainReport/:id',
+    name: 'mainReport',
+    component: () => import(/* webpackChunkName: "user" */ '../views/report/MainReportView.vue'),
+  },
+  {
+    path: '/report/:id',
+    name: 'report',
+    component: () => import(/* webpackChunkName: "user" */ '../views/report/ReportView.vue'),
+  },
 ]
 
 const router = createRouter({
