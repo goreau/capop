@@ -159,7 +159,7 @@
       download_pdf() {
         this.tabulator.download("pdf", "data.pdf", {
           orientation: "portrait", //set page orientation to portrait
-          title: "Sistema Edduca", //add title to report
+          title: "Sistema CapOp", //add title to report
         });
       },
       download_json() {
@@ -180,9 +180,9 @@
           placeholder:"Nenhum registro atende aos critérios escolhidos!",
           reactiveData: true, //enable data reactivity
           columns: this.columns, //define table columns
-          pagination: "programa",
+          pagination: "servidor",
           paginationSize: 10,
-          groupBy: ['municipio','programa'],
+          groupBy: ['local', 'programa'],
           groupStartOpen:[false, false],
           groupHeader:[
                   function(value, count, data, group){ //generate header contents for gender groups 
@@ -190,10 +190,9 @@
                       var total = 0;
                       var rows = tabulatorGetGroupData(group);
                       for (var i = 0; i < rows.length; i++) {
-                          total += parseFloat(rows[i].data.saldo);
+                          total += parseFloat(rows[i].data.total);
                       }
-                      var tot = total.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                      tot += rows[0].data.unidade == 'Litro' ? ' l' : (rows[0].data.unidade == 'Kg' ? ' Kg' : ' Unidades');
+                      var tot = ' - R$ ' +  total.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             
                       function tabulatorGetGroupData(group) {
                           var rows = [];
@@ -209,11 +208,17 @@
                       return rows;
                   }
   
-                      return "Município: " + value;
+                      return "Local: " + value + "<span style='color:#00d; margin-left:10px;'>  - Total: " + tot + "</span>";
                   },
                   function(value, count, data, group){ //generate header contents for color groups
+                      var total = 0;
+                      
+                      for (var i = 0; i < data.length; i++) {
+                          total += parseFloat(data[i].total);
+                      }
+                      var tot = ' - R$ ' +  total.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                       group.getElement().style.backgroundColor = '#F1F2F8';
-                      return "Programa: " + value;
+                      return "Programa: " + value + "<span style='color:#1D8423; margin-left:10px;'>  -  " + tot + "</span>";
                   },
                   
           ],

@@ -28,6 +28,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ '../views/user/ListUsersView.vue'),
   },
   {
+    path: '/troca',
+    name: 'troca',
+    component: () => import(/* webpackChunkName: "user" */ '../views/user/TrocaUserView.vue'),
+  },
+  {
     path: '/editUser/:id',
     name: 'editUser',
     component: () => import(/* webpackChunkName: "user" */ '../views/user/EditUsuarioView.vue'),
@@ -141,6 +146,16 @@ const routes = [
     path: '/report/:id',
     name: 'report',
     component: () => import(/* webpackChunkName: "user" */ '../views/report/ReportView.vue'),
+  },
+  {
+    path: '/mensalReport',
+    name: 'mensalReport',
+    component: () => import(/* webpackChunkName: "user" */ '../views/report/MensalView.vue'),
+  },
+  {
+    path: '/mensalReportData/:linha',
+    name: 'mensalReportData',
+    component: () => import(/* webpackChunkName: "user" */ '../views/report/MensalReportView.vue'),
   },
 ]
 

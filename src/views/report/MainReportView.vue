@@ -287,8 +287,8 @@ export default {
   watch: {
     '$route'() {
       this.tipo_relat = this.$route.params.id;
-      var dtarray = new Array('1', '3', '4', '6', '7', '8');
-      this.hasData = dtarray.indexOf(this.tipo_relat) != -1;
+      var dtarray = new Array('1', '5');
+      this.hasData = dtarray.indexOf(this.tipo_relat) == -1;
     }
   },
 };

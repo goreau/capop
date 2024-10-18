@@ -9,8 +9,8 @@
           </header>
           <div class="card-content">
             <span class="filter">{{ strFiltro }}</span>
-            <MyTable :tableData="dataTable" :columns="columns" :is-filtered="false" :has-exports="true" :auto="this.id == 1" v-if="id != 99"/>
-            <MyGroupedTable :tableData="dataTable" :columns="columns" :is-filtered="false" :has-exports="true" v-if="id == 99"/>
+            <MyTable :tableData="dataTable" :columns="columns" :filtered="false"  v-if="id != 12"/>
+            <MyGroupedTable :tableData="dataTable" :columns="columns" :filtered="false" v-if="id == 12"/>
           </div>
         </div>
       </div>
@@ -52,20 +52,7 @@ export default {
             case '1':
             case '5':
               this.columns = [
-                { title: "Local", field: "local", type: "string" },
-               /* { title: "34", field: "34", type: "string" },
-                { title: "36", field: "36", type: "string" },
-                { title: "38", field: "38", type: "string" },
-                { title: "40", field: "40", type: "string" },
-                { title: "42", field: "42", type: "string" },
-                { title: "44", field: "44", type: "string" },
-                { title: "46", field: "46", type: "string" },
-                { title: "48", field: "48", type: "string" },
-                { title: "50", field: "50", type: "string" },
-                { title: "52", field: "52", type: "string" },
-                { title: "54", field: "54", type: "string" },
-                { title: "56", field: "56", type: "string" },
-                { title: "58", field: "58", type: "string" },*/
+                { title: "Local", field: "local", type: "string" }
               ];
               for (var i = 34; i<=58; i++){
                 if (i % 2 === 0) {
@@ -247,6 +234,162 @@ export default {
                         { title: "Jaqueta", field: "jaqueta", type: "string" },
                       ];
           break;
+        case '7':
+          this.title = 'Resumo Atividades Campo';
+          this.columns = [
+                        { title: "Programa", field: "programa", type: "string" },
+                        { title: "Atividade", field: "atividade", type: "string" },
+                        { title: "Produção", field: "producao", type: "integer", sorter: "number", hozAlign:"right" },
+                        { title: "H/D", field: "hd", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },
+                        { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },
+                        { title: "Gratifição", field: "gratificacao", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },    
+                        { title: "Etapa", field: "etapa", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },         
+                      ];
+          break;
+        case '8':
+          this.title = 'Indicador de Perdas';
+          this.columns = [
+                        { title: "Local", field: "local", type: "string" },
+                        { title: "Motivo", field: "motivo", type: "string" },
+                        { title: "Dias", field: "dias", type: "string" },
+                      ];
+          break;
+        case '9':
+          this.title = 'Indicador de Rendimento';
+          this.columns = [
+                        { title: "Servidor", field: "nome", type: "string" },
+                        { title: "Programa", field: "programa", type: "string" },
+                        { title: "Atividade", field: "atividade", type: "string" },
+                        { title: "Rendimento", field: "rendimento", type: "string" },
+                        { title: "H/D", field: "hd", type: "string" },
+                        { title: "Produção", field: "producao", type: "string", sorter: "date" },
+                        { title: "Ind. Rendimento", field: "ind_rend", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          } },
+                      ];
+          break;
+        case '10':
+          this.title = 'Diárias e Passagens';
+          this.columns = [
+                        { title: "Favorecido", field: "favorecido", type: "string" },
+                        { title: "Função", field: "funcao", type: "string" },
+                        { title: "Local", field: "local", type: "string" },
+                        { title: "Programa", field: "programa", type: "string" },
+                        { title: "Atividade", field: "atividade", type: "string" },
+                        { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },
+                        { title: "Passagem", field: "passagem", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },    
+                      ];
+          break;
+        case '11':
+          this.title = 'Detalhamento de Perdas';
+          this.columns = [
+                        { title: "Servidor", field: "nome", type: "string" },
+                        { title: "Função", field: "funcao", type: "string" },
+                        { title: "Trabalhados", field: "trab", type: "number", hozAlign:"right" },
+                        {title: "Perdas", headerHozAlign:"center", columns: [
+                          { title: "Lic Prêmio", field: "lic_premio", type: "number", hozAlign:"right"},
+                          { title: "Justif", field: "justif", type: "number", hozAlign:"right"},
+                          { title: "Compensação", field: "comp", type: "number", hozAlign:"right" },
+                          { title: "Clima", field: "clima", type: "number", hozAlign:"right" },
+                          { title: "Falta Viat", field: "viat", type: "number", hozAlign:"right" },
+                          { title: "Falta Prog", field: "prog", type: "number", hozAlign:"right" },
+                          { title: "Falta Verba", field: "verba", type: "number", hozAlign:"right" },
+                          { title: "Greve", field: "greve", type: "number", hozAlign:"right" },
+                          { title: "Outros", field: "outros", type: "number", hozAlign:"right" },
+                        ]},
+                        { title: "Total", field: "total", type: "number", hozAlign:"right" },
+                      ];
+          break;
+        case '12':
+        this.title = 'Custo por Programa';
+        this.group = ['local','programa']
+          this.columns = [
+                        { title: "Local", field: "local" },
+                        { title: "Programa", field: "programa"},
+                        { title: "Favorecido", field: "favorecido"},
+                        { title: "Função", field: "funcao"},                       
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },
+                        { title: "Gratificação", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },    
+                        { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },   
+                      ];
+          break;
         default:
           break;
       }
@@ -258,17 +401,22 @@ export default {
     reportService.getRelat(this.id,this.filter)
       .then((response) => {
         var data = response.data;
-        this.dataTable = data.data;
+        if (this.id == '8'){
+          this.dataTable = data.data.dados;
+        } else {
+          this.dataTable = data.data;
+        }
         this.strFiltro = data.filter;
-        this.isLoading = false;
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => (this.isLoading = false));
+      .finally(() => {
+        console.log('done');
+        this.isLoading = false;
+      });
     
     this.createColumns();
-    this.isLoading = false;
   },
   created() {
     this.id = this.$route.params.id;

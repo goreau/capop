@@ -82,6 +82,7 @@ import { TabulatorFull as Tabulator } from "tabulator-tables"; //import Tabulato
 import { ResponsiveLayoutModule } from 'tabulator-tables';
 import lang from "./lang";
 import Loader from "@/components/general/Loader.vue";
+import autoTable from "jspdf-autotable";
 
 
 export default {
@@ -104,30 +105,6 @@ export default {
     Loader,
   },
   methods: {
-    setFilter() {
-      let obj = this.form;
-
-      const col = this.columns.filter((v) => v.field === obj.field, obj);
-      obj.typed = col[0].type;
-
-      this.arrFilter.push({ field: obj.field, type: obj.type, value: obj.value });
-
-      this.tabulator.setFilter(this.arrFilter);//obj.column, obj.operator, obj.value);
-
-      localStorage.setItem(this.tableName, JSON.stringify(this.arrFilter));//));
-    },
-    clearFilter() {
-     // this.isLoading = true;
-      this.form.field = "0";
-      this.form.type = "0";
-      this.form.value = "";
-
-      this.arrFilter = [],
-
-        this.tabulator.clearFilter();
-      localStorage.removeItem(this.tableName);
-      this.isLoading = false;
-    },
     download_csv() {
       this.tabulator.download("csv", "data.csv");
     },
@@ -152,7 +129,7 @@ export default {
       this.filter = e.target.checked;
     },
   },
-  props: ["tableData", "columns", "filtered", "tableName"],
+  props: ["tableData", "tableName"],
   watch: {
     tableData(value) {
       //this.isLoading = true;
@@ -165,23 +142,20 @@ export default {
         layout: "fitColumns",
         placeholder: "Nenhum registro atende aos critérios escolhidos!",
         reactiveData: true, //enable data reactivity
-        columns: this.columns, //define table columns
-        pagination: "local",
+        autoTable: true,
         paginationSize: 10,
         paginationSizeSelector: [5, 10, 15, 20],
         movableColumns: true,
         paginationCounter: "rows",
       });
 
-      this.cbColumns = this.columns.filter(el => el.title !== "Ações");
-
-      this.tabulator.on("tableBuilt", function () {
+     /* this.tabulator.on("tableBuilt", function () {
         if (this.filter && this.tabulator.ta) {
           this.tabulator.setFilter(this.arrFilter);//this.form.column, this.form.operator, this.form.value);
           this.$router.go();
         }
         this.isLoading = false;
-      });
+      });*/
       
     },
   },
@@ -206,22 +180,6 @@ export default {
       "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"
     );
     document.head.appendChild(externalScript2);
-
-
-
-    let stFilter = JSON.parse(localStorage.getItem(this.tableName));
-
-    if (stFilter) {
-      if (Array.isArray(stFilter)) {
-        this.arrFilter = stFilter;
-        var obj = stFilter[0];
-        this.form = obj;//JSON.parse(obj);
-        this.filter = true;
-      } else {
-        localStorage.removeItem(this.tableName);
-      }
-    }
-    this.isLoading = false;
 
   },
 };

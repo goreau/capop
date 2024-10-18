@@ -6,10 +6,10 @@
         <option
           v-for="gen in data"
           :key="gen.id"
-          :value="gen.id"
+          :value="gen.campo"
           :selected="gen.id == sel"
         >
-          {{ gen.nome }}
+          {{ gen.exibe }}
         </option>
       </select>
     </div>

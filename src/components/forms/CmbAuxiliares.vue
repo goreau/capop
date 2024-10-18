@@ -20,7 +20,7 @@
 import auxiliaresService from "@/services/auxiliares.service.js";
 
 export default {
-  name: "CmbTerritorio",
+  name: "CmbAuxiliar",
   data() {
     return {
       auxiliares: [],

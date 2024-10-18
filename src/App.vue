@@ -110,6 +110,18 @@ export default {
                 },
               },
             },
+            {
+              href: "/troca",
+              title: "Excluir",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-trash",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
           ],
         },
         {
@@ -244,7 +256,38 @@ export default {
         },
         {
           href: "",
-          title: "Relatórios",
+          title: "Relatórios de Campo",
+          icon: {
+            element: "font-awesome-icon",
+            class: "small",
+            attributes: {
+              icon: "fa-solid fa-file-lines",
+              transform: "shrink-10",
+            },
+            // text: ''
+          },
+          child: [
+            {
+              href: "/mainReport/7",
+              title: "Resumo Atividades Campo",
+            },
+            {
+              href: "/mainReport/8",
+              title: "Indicador de Perdas",
+            },
+            {
+              href: "/mainReport/9",
+              title: "Indicador de Rendimento",
+            },
+            {
+              href: "/mainReport/11",
+              title: "Detalhamento de Perdas",
+            },
+          ],
+        },
+        {
+          href: "",
+          title: "Relatórios Gerenciais",
           icon: {
             element: "font-awesome-icon",
             class: "small",
@@ -279,8 +322,34 @@ export default {
               href: "/mainReport/6",
               title: "Uniforme/Servidor",
             },
+            {
+              href: "/mainReport/10",
+              title: "Diárias X Passagens",
+            },
+            {
+              href: "/mainReport/12",
+              title: "Custo por Programa",
+            },
           ],
         },
+        {
+          href: "",
+          title: "Relatórios Mensais",
+          icon: {
+            element: "font-awesome-icon",
+            class: "small",
+            attributes: {
+              icon: "fa-solid fa-file-lines",
+              transform: "shrink-10",
+            },
+          },
+          child: [
+            {
+              href: "/mensalReport",
+              title: "Construir",
+            },
+          ]
+        }
       ],
     };
   },
