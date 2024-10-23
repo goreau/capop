@@ -16,7 +16,8 @@
     top: 10rem;
     left: 0;
     height: 90%;
-    width: 100%;
+    margin-left: 290px;
+    width: calc(100% - 290px);
     background: #fff;
     opacity: 1;
     z-index: 10;

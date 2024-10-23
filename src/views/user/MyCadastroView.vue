@@ -216,7 +216,6 @@ export default {
       user: {
         nome: {required$, minLength: minLength$(10)},
         new_password: {required$, minLength: minLength$(4)},
-        username: {required$, minLength: minLength$(4)},
         email: {required$, email$},
       },
       senha: {sameAs: sameAs$(this.user.new_password)}

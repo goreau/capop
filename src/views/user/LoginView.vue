@@ -30,6 +30,7 @@
                         </div>
                   </div>
                   <a href="#/forgot">Esqueci minha senha</a>
+                  <br><p><b>Atenção: versão em testes e não liberada para uso em rotina. Para a versão corrente, acesse esse link <a href="https://vigent.saude.sp.gov.br/capop_old">Capop</a></b></p>
                 </div>
               </div>
               <footer class="card-footer">

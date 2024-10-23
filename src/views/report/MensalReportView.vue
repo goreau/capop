@@ -44,7 +44,7 @@ export default {
   methods: {
     createColumns(){
         this.columns = [
-            { title: this.fantasia, field: "linha"},
+            { title: this.fantasia.toUpperCase(), field: "linha"},
             { title: "JAN", field: "jan"},
             { title: "FEV", field: "fev"},
             { title: "MAR", field: "mar"},

@@ -52,7 +52,7 @@
                 </div>
                 <div class="column">
                   <div class="field">
-                    <label for="" class="label">Planejamento</label>
+                    <label for="" class="label">Atividade</label>
                     <div class="control">
                       <CmbAuxiliares @selAux="planejamento.id_aux_atividade = $event" :tipo="6" :aux="planejamento.id_programa"
                         :sel="planejamento.id_aux_atividade" />

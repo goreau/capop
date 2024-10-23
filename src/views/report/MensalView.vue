@@ -53,7 +53,7 @@
                                         <div class="field">
                                             <label class="label">Linha</label>
                                             <div class="control">
-                                                <CmbGeneric :data="linhas" @change="setFantasia($event)" @selGen="mensal.linha = $event" />
+                                                <CmbGeneric :data="linhas" @change="setFantasia($event)" @selGen="mensal.linha = $event" :sel="mensal.linha"/>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                         <div class="field">
                                             <label class="label">Variável</label>
                                             <div class="control">
-                                                <CmbGeneric :data="incrementos" @selGen="mensal.incremento = $event" />
+                                                <CmbGeneric :data="incrementos" @selGen="mensal.incremento = $event" :sel="mensal.incremento"/>
                                             </div>
                                         </div>
                                     </div>
@@ -99,25 +99,25 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="columns is-centered" v-if="filtros.indexOf('Ano') != -1">
+                                <div class="columns is-centered" v-if="filtros.indexOf('Unidade') != -1">
                                     <div class="column is-3">
                                         <label class="label">Unidade</label>
                                         <div class="control">
-                                            <CmbTerritorio :id_prop="1" :tipo="9" @selTerr="mensal.filtro.id_territorio = $event" />
+                                            <CmbTerritorio :id_prop="1" :tipo="9" @selTerr="mensal.filtro.unidade = $event" />
                                         </div>
                                     </div>
-                                    <div class="column is-1">
+                                    <div class="column is-1" v-if="filtros.indexOf('Municipio') != -1">
                                         <label for="">&nbsp;</label>
                                         <div class="control">OU</div>
                                     </div>
-                                    <div class="column is-3">
+                                    <div class="column is-3" v-if="filtros.indexOf('Municipio') != -1">
                                         <label class="label">Município</label>
                                         <div class="control">
-                                            <CmbMunicipio :id_prop="1" :tipo="9" @selMun="mensal.filtro.id_municipio = $event" />
+                                            <CmbMunicipio :id_prop="1" :tipo="9" @selMun="mensal.filtro.municipio = $event" />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="columns is-centered" v-if="filtros.indexOf('Ano') != -1">
+                                <div class="columns is-centered" v-if="filtros.indexOf('Programa') != -1">
                                     <div class="column is-3">
                                         <label class="label">Programa</label>
                                         <div class="control">
@@ -126,16 +126,16 @@
                                     </div>
                                     <div class="column is-1">
                                         <label for="">&nbsp;</label>
-                                        
+                                    
                                     </div>
-                                    <div class="column is-3">
+                                    <div class="column is-3" v-if="filtros.indexOf('Atividade') != -1">
                                         <label class="label">Atividade</label>
                                         <div class="control">
-                                            <CmbAuxiliares @selAux="mensal.filtro.id_aux_atividade = $event" :tipo="6" :aux="mensal.filtro.id_programa" />
+                                            <CmbAuxiliares @selAux="mensal.filtro.id_aux_atividade = $event" :tipo="tipoAtiv" :aux="mensal.filtro.id_programa" />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="columns is-centered" v-if="filtros.indexOf('Ano') != -1">
+                                <div class="columns is-centered" v-if="filtros.indexOf('Servidor') != -1">
                                     <div class="column is-3">
                                         <label class="label">Servidor</label>
                                         <div class="control">
@@ -146,7 +146,7 @@
                                         <label for="">&nbsp;</label>
                                         
                                     </div>
-                                    <div class="column is-3">
+                                    <div class="column is-3" v-if="filtros.indexOf('Pagamento') != -1">
                                         <label class="label">Pagamento</label>
                                         <div class="select">
                                             <select v-model="mensal.filtro.id_pagamento" class="input"
@@ -204,10 +204,13 @@ export default {
                     dt_inicio: '',
                     dt_final: '',
                     ano: '',
+                    unidade: 0,
+                    municipio: 0,
                 }
             },
             fantasia: '',
             info: 0,
+            tipoAtiv: 0,
             linhas: [],
             incrementos: [],
             filtros: [],
@@ -233,7 +236,7 @@ export default {
         create(){
             localStorage.setItem('mensalCapop', JSON.stringify(this.mensal));
             
-            this.$router.push(`/mensalReportData/${this.fantasia}`);
+            this.$router.push(`/mensalReportData/${this.fantasia.toUpperCase()}`);
         },
         startDate() {
             const teste = document.querySelector('#dtIni');
@@ -345,6 +348,10 @@ export default {
     watch: {
         info(value) {
             this.mensal.info = value;
+            this.tipoAtiv = value == 4 ? 10 : 6;
+            this.mensal.linha = 0;
+            this.mensal.incremento = 0;
+
             this.loadCombos();
         },
         filtros(){
