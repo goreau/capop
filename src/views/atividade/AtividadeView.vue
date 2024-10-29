@@ -83,7 +83,7 @@
                     <label for="" class="label">Atividade</label>
                     <div class="control">
                       <CmbAuxiliares @selAux="atividade.id_aux_atividade = $event" :tipo="6" :aux="atividade.id_programa"
-                        :sel="atividade.id_aux_atividade" />
+                        :sel="atividade.id_aux_atividade" @change="setCaption($event)" />
                       <span class="is-error" v-if="v$.atividade.id_aux_atividade.$error">
                         {{ v$.atividade.id_aux_atividade.$errors[0].$message }}
                       </span>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="column">
                   <div class="field">
-                    <label class="label">Produção</label>
+                    <label class="label">{{ strProd }}</label>
                     <input class="input" type="text" v-model="atividade.producao"
                       :disabled="atividade.id_perda != 999" />
                   </div>
@@ -200,6 +200,7 @@ export default {
       message: "",
       caption: "",
       strLocal: "Local",
+      strProd: "Produção",
       type: "",
       showMessage: false,
       cFooter: {
@@ -244,6 +245,10 @@ export default {
     footerCard
   },
   methods: {
+    setCaption(ev){
+      var rc = ev.target.options[ev.target.selectedIndex].dataset.g;
+      this.strProd =  rc;
+    },
     repeat(){
       let dt = moment(this.atividade.dt_cadastro).add(1, 'd');
       this.atividade.dt_cadastro = dt.format('YYYY-MM-DD');

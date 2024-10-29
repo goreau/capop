@@ -138,6 +138,41 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ '../views/financeiro/EditFinanceiroView.vue'),
   },
   {
+    path: '/programa/:id',
+    name: 'programa',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ProgramaView.vue'),
+  },
+  {
+    path: '/aux_atividade/:id',
+    name: 'aux_atividade',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/AuxAtividadeView.vue'),
+  },
+  {
+    path: '/ativ_lab/:id',
+    name: 'ativ_lab',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/AtivLabView.vue'),
+  },
+  {
+    path: '/modalidade/:id',
+    name: 'modalidade',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ModalidadeView.vue'),
+  },
+  {
+    path: '/perda/:id',
+    name: 'perda',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/PerdasView.vue'),
+  },
+  {
+    path: '/siafem/:id',
+    name: 'siafem',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/SiafemView.vue'),
+  },
+  {
+    path: '/listManutencao/:id',
+    name: 'listManutencao',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ListManutencaoView.vue'),
+  },
+  {
     path: '/mainReport/:id',
     name: 'mainReport',
     component: () => import(/* webpackChunkName: "user" */ '../views/report/MainReportView.vue'),

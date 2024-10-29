@@ -66,6 +66,9 @@
                   <div class="field">
                     <label class="label">Imóveis</label>
                     <input class="input" type="text" v-model="planejamento.imoveis" />
+                    <span class="is-error" v-if="v$.planejamento.imoveis.$error">
+                        {{ v$.planejamento.imoveis.$errors[0].$message }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -77,24 +80,36 @@
                         <div class="field">
                           <label class="label">Desinsetizador</label>
                           <input class="input" type="text" v-model="planejamento.desin" />
+                          <span class="is-error" v-if="v$.planejamento.desin.$error">
+                            {{ v$.planejamento.desin.$errors[0].$message }}
+                          </span>
                         </div>
                       </div>
                       <div class="column">
                         <div class="field">
                           <label class="label">Of. Operacional</label>
                           <input class="input" type="text" v-model="planejamento.motorista" />
+                          <span class="is-error" v-if="v$.planejamento.motorista.$error">
+                            {{ v$.planejamento.motorista.$errors[0].$message }}
+                          </span>
                         </div>
                       </div>
                       <div class="column">
                         <div class="field">
                           <label class="label">Ag. Téc. Saúde</label>
                           <input class="input" type="text" v-model="planejamento.vis_san" />
+                          <span class="is-error" v-if="v$.planejamento.vis_san.$error">
+                            {{ v$.planejamento.vis_san.$errors[0].$message }}
+                          </span>
                         </div>
                       </div>
                       <div class="column">
                         <div class="field">
                           <label class="label">Outros</label>
                           <input class="input" type="text" v-model="planejamento.outros" />
+                          <span class="is-error" v-if="v$.planejamento.outros.$error">
+                            {{ v$.planejamento.outros.$errors[0].$message }}
+                          </span>
                         </div>
                       </div>
               </div>
@@ -106,18 +121,27 @@
                         <div class="field">
                           <label class="label">Diária</label>
                           <input class="input" type="text" v-model="planejamento.diaria" />
+                            <span class="is-error" v-if="v$.planejamento.diaria.$error">
+                              {{ v$.planejamento.diaria.$errors[0].$message }}
+                            </span>
                         </div>
                       </div>
                       <div class="column">
                         <div class="field">
                           <label class="label">Gratificação</label>
                           <input class="input" type="text" v-model="planejamento.gratificacao" />
+                            <span class="is-error" v-if="v$.planejamento.gratificacao.$error">
+                              {{ v$.planejamento.gratificacao.$errors[0].$message }}
+                            </span>
                         </div>
                       </div>
                       <div class="column">
                         <div class="field">
                           <label class="label">Etapa</label>
                           <input class="input" type="text" v-model="planejamento.etapa" />
+                            <span class="is-error" v-if="v$.planejamento.etapa.$error">
+                              {{ v$.planejamento.etapa.$errors[0].$message }}
+                            </span>
                         </div>
                       </div>
               </div>
@@ -352,7 +376,9 @@ export default {
       return str.replace(/,/g , ".");
     },
     create() {
-      this.planejamento.valor = this.forceChangeComma(this.planejamento.valor);
+      this.planejamento.diaria = this.forceChangeComma(this.planejamento.diaria);
+      this.planejamento.gratificacao = this.forceChangeComma(this.planejamento.gratificacao);
+      this.planejamento.etapa = this.forceChangeComma(this.planejamento.etapa);
 
       this.v$.$validate();
       if (!this.v$.$error) {

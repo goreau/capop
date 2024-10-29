@@ -101,7 +101,12 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Data', field: 'data', type: 'string', sorter:"date", minWidth: 50, responsive: 2},
+          {title: 'Data', field: 'data', sorter:"date", minWidth: 50, responsive: 2,formatter:"datetime", formatterParams:{
+              inputFormat:"yyyy-MM-dd",
+              outputFormat:"dd/MM/yyyy",
+              invalidPlaceholder:"Data inválida",
+              timezone:"America/Sao_Paulo",
+          }},
           {title: 'Servidor', field: 'servidor', type: 'string', minWidth: 300, responsive: 1},
           {title: 'Local', field: 'local', type: 'string', minWidth: 250},
           {title: 'Programa', field: 'programa', minWidth: 150},

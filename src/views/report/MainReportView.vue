@@ -239,7 +239,10 @@ export default {
         dateFormat: "dd/MM/yyyy",
         startDate: this.ini_date,
         showHeader: false,
-        color: "primary"
+        color: "primary",
+        cancelLabel: 'Cancelar',
+        showClearButton: false,
+        todayLabel: 'Hoje',
       };
 
       var calini = bulmaCalendar.attach('#dtIni', options);
@@ -255,25 +258,53 @@ export default {
         });
       }
 
+      const parentDiv1 = document.querySelector('#contIni');
+      const btToday1 = parentDiv1.querySelector('.datetimepicker-footer-today');
+      if (btToday1) {
+        btToday1.classList.remove('has-text-warning');
+        btToday1.classList.add('has-text-link');
+        btToday1.addEventListener('click', () => {
+          const todayDate = new Date();
+          element.bulmaCalendar.options.startDate = todayDate;
+          element.bulmaCalendar.emit('select', { startDate: todayDate });
+        });
+      }
+
       options = {
         type: "date",
         dateFormat: "dd/MM/yyyy",
         startDate: this.fim_date,
         showHeader: false,
-        color: "primary"
+        color: "primary",
+        cancelLabel: 'Cancelar',
+        showClearButton: false,
+        todayLabel: 'Hoje',
       };
 
       var calfim = bulmaCalendar.attach('#dtFim', options);
 
       const element2 = document.querySelector('#dtFim');
-      console.log(element2);
+
       if (element2) {
         // bulmaCalendar instance is available as element.bulmaCalendar
         element2.bulmaCalendar.on('select', datepicker => {
           this.filter.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
         });
+        
         element2.bulmaCalendar.on('clear', datepicker => {
           this.filter.dt_final = '';
+        });
+      }
+
+      const parentDiv = document.querySelector('#contFim');
+      const btToday = parentDiv.querySelector('.datetimepicker-footer-today');
+      if (btToday) {
+        btToday.classList.remove('has-text-warning');
+        btToday.classList.add('has-text-link');
+        btToday.addEventListener('click', () => {
+          const todayDate = new Date();
+          element2.bulmaCalendar.options.startDate = todayDate;
+          element2.bulmaCalendar.emit('select', { startDate: todayDate });
         });
       }
     }
@@ -282,7 +313,6 @@ export default {
     this.tipo_relat = this.$route.params.id;
     var dtarray = new Array('1', '5');
     this.hasData = dtarray.indexOf(this.tipo_relat) == -1;
-    //console.log(this.hasData)
   },
   watch: {
     '$route'() {
@@ -305,6 +335,9 @@ export default {
   margin: 0 auto;
   cursor: pointer;
   transition: 0.5s;
+}
+.myToday {
+  color:#FF5722 !important
 }
 
 .submit-btn:hover {

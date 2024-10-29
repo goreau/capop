@@ -101,7 +101,12 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Data', field: 'data', type: 'string', sorter:"date", minWidth: 50, responsive: 2},
+          {title: 'Data', field: 'data', type: 'string', sorter:"date", minWidth: 50, responsive: 2, formatter:"datetime", formatterParams:{
+              inputFormat:"yyyy-MM-dd",
+              outputFormat:"dd/MM/yyyy",
+              invalidPlaceholder:"Data inválida",
+              timezone:"America/Sao_Paulo",
+          }},
           {title: 'Local', field: 'local', type: 'string', minWidth: 250},
           {title: 'Ações', responsive: 0, minWidth: 250, 
             formatter: (cell, formatterParrams) =>{

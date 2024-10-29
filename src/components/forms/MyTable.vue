@@ -92,7 +92,6 @@ export default {
         field: "0",
         type: "0",
         value: "",
-        typed: "string",
       },
       arrFilter: [],
       filter: false,
@@ -108,13 +107,18 @@ export default {
       let obj = this.form;
 
       const col = this.columns.filter((v) => v.field === obj.field, obj);
-      obj.typed = col[0].type;
 
-      this.arrFilter.push({ field: obj.field, type: obj.type, value: obj.value });
+      var finalValue = obj.value;
+
+      if (col[0].formatter == 'datetime'){
+        finalValue = obj.value.split('/').reverse().join('-');
+      }
+
+      this.arrFilter.push({ field: obj.field, type: obj.type, value: finalValue });
 
       this.tabulator.setFilter(this.arrFilter);//obj.column, obj.operator, obj.value);
 
-      localStorage.setItem(this.tableName, JSON.stringify(this.arrFilter));//));
+      localStorage.setItem(this.tableName, JSON.stringify(this.arrFilter));
     },
     clearFilter() {
      // this.isLoading = true;

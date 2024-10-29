@@ -125,6 +125,92 @@ export default {
           ],
         },
         {
+          href: "",
+          title: "Manutenção",
+          icon: {
+            element: "font-awesome-icon",
+            attributes: {
+              icon: "fa-solid fa-person-walking",
+              size: "lg",
+              transform: "shrink-8",
+            },
+          },
+          child: [
+            {
+              href: "/listManutencao/1",
+              title: "Programas",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listManutencao/2",
+              title: "Atividades",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listManutencao/3",
+              title: "Ativ. Laboratório",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listManutencao/4",
+              title: "Modalidade",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listManutencao/5",
+              title: "Perdas",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listManutencao/6",
+              title: "Listas SIAFEM",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+          ],
+        },
+        {
           href: "/servidor",
           title: "Servidores",
           icon: {
@@ -329,6 +415,10 @@ export default {
             {
               href: "/mainReport/12",
               title: "Custo por Programa",
+            },
+            {
+              href: "/mainReport/13",
+              title: "Resumo para PPA",
             },
           ],
         },

@@ -390,6 +390,18 @@ export default {
                         },   
                       ];
           break;
+        case '13':
+          this.title = 'Resumo para PPA';
+          this.group = ['local','programa']
+          this.columns = [
+                        { title: "Visitas", field: "visitas" },
+                        { title: "Capacitações", field: "capacitacoes"},
+                        { title: "Assessorias", field: "assessorias"},
+                        {title:"Total", field:"c", mutator:function(value, data){
+                            return data.visitas + data.capacitacoes + data.assessorias;
+                        }},
+                      ];
+          break;
         default:
           break;
       }

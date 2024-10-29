@@ -8,6 +8,7 @@
           :key="loc.id"
           :value="loc.id"
           :selected="loc.id == sel"
+          :data-g="loc.geral"
         >
           {{ loc.nome }}
         </option>
