@@ -254,13 +254,13 @@ export default {
 
       if (teste.type == 'text') {
         const elDt = document.querySelector('#contDate');
-        elDt.innerHTML = "<input type='date' id='dtCad' />";
+        elDt.innerHTML = "<input type='month' id='dtCad' />";
         
       }
 
       const options = {
         type: "date",
-        dateFormat: "dd/MM/yyyy",
+        dateFormat: "MMMM/yyyy",
         startDate: this.planejamento.dt_cadastro,
         showHeader: false,
         color: "info",

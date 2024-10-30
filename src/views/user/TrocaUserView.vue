@@ -135,7 +135,7 @@ import CmbAuxiliares from "@/components/forms/CmbAuxiliares.vue";
               setTimeout(() => (this.showMessage = false), 3000);
             },
             (error) => {
-              this.message = error;
+              this.message = error.message;
                /* (error.response &&
                   error.response.data &&
                   error.response.data.message) ||

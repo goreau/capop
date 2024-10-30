@@ -130,7 +130,7 @@ export default {
           icon: {
             element: "font-awesome-icon",
             attributes: {
-              icon: "fa-solid fa-person-walking",
+              icon: "fa-solid fa-wrench",
               size: "lg",
               transform: "shrink-8",
             },

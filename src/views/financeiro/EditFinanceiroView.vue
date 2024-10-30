@@ -111,7 +111,7 @@
             </div>
           </div>
           <footer class="card-footer">
-            <footerCard @submit="create" @cancel="null" @aux="repeat" :cFooter="cFooter" />
+            <footerCard @submit="update" @cancel="null" @aux="repeat" :cFooter="cFooter" />
           </footer>
         </div>
       </div>
@@ -202,7 +202,7 @@ export default {
     startCalendar() {
       const options = {
         type: "date",
-        dateFormat: "dd/MM/yyyy",
+        dateFormat: "MMMM/yyyy",
         startDate: this.financeiro.dt_cadastro,
         showHeader: false,
         color: "info",
@@ -217,7 +217,7 @@ export default {
 
       const element = document.querySelector('#dtCad');
 
-      const input = document.querySelector('.datetimepicker-dummy-input');
+     /* const input = document.querySelector('.datetimepicker-dummy-input');
       input.removeAttribute('readonly');
       input.setAttribute('value', "__/__/____");
       input.setAttribute('data-mask', "__/__/____");
@@ -225,7 +225,7 @@ export default {
 
       input.addEventListener('blur', () => {
         this.financeiro.dt_cadastro = moment(input.value).format('YYYY-MM-DD');
-      })
+      })*/
 
       if (element) {
         // bulmaCalendar instance is available as element.bulmaCalendar

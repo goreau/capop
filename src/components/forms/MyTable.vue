@@ -74,7 +74,7 @@
   </div>
   <br>
   <Loader v-if="isLoading" />
-  <div ref="table" class="is-striped"></div>
+  <div ref="table" id="myTable" class="is-striped"></div>
 </template>
 
 <script>
@@ -130,7 +130,7 @@ export default {
 
         this.tabulator.clearFilter();
       localStorage.removeItem(this.tableName);
-      this.isLoading = false;
+     // this.isLoading = false;
     },
     download_csv() {
       this.tabulator.download("csv", "data.csv");
@@ -159,7 +159,7 @@ export default {
   props: ["tableData", "columns", "filtered", "tableName"],
   watch: {
     tableData(value) {
-      //this.isLoading = true;
+     // this.isLoading = true;
       this.tabulator = new Tabulator(this.$refs.table, {
         columnHeaderVertAlign:"middle",
         langs: lang,
@@ -184,7 +184,7 @@ export default {
           this.tabulator.setFilter(this.arrFilter);//this.form.column, this.form.operator, this.form.value);
           this.$router.go();
         }
-        this.isLoading = false;
+      //  this.isLoading = false;
       });
       
     },
@@ -231,6 +231,13 @@ export default {
 };
 </script>
 <style scoped>
+#myTable{
+    background-color:#f2f3f8;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+
 .tabela {
   width: 800px;
   height: auto;

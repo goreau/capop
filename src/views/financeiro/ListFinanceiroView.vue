@@ -103,7 +103,7 @@ export default {
       this.columns = [
           {title: 'Data', field: 'data', type: 'string', sorter:"date", minWidth: 50, responsive: 2, formatter:"datetime", formatterParams:{
               inputFormat:"yyyy-MM-dd",
-              outputFormat:"dd/MM/yyyy",
+              outputFormat:"MM/yyyy",
               invalidPlaceholder:"Data inválida",
               timezone:"America/Sao_Paulo",
           }},

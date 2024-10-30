@@ -6,7 +6,7 @@
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title is-centered">Usuários Cadastrados</p>
+            <p class="card-header-title is-centered">Servidores Cadastrados</p>
             <button class="button is-primary is-outlined" @click="newUser">
               <span class="icon">
                 <font-awesome-icon icon="fa-solid fa-plus-circle" />

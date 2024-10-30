@@ -52,7 +52,7 @@ export default {
             case '1':
             case '5':
               this.columns = [
-                { title: "Local", field: "local", type: "string" }
+                { title: "Local", field: "local",  }
               ];
               for (var i = 34; i<=58; i++){
                 if (i % 2 === 0) {
@@ -65,19 +65,19 @@ export default {
             case '3':
             case '4':
               this.columns = [
-                { title: "Local", field: "local", type: "string" },
-                { title: "PP", field: "PP", type: "string" },
-                { title: "P", field: "P", type: "string" },
-                { title: "M", field: "M", type: "string" },
-                { title: "G", field: "G", type: "string" },
-                { title: "GG", field: "GG", type: "string" },
-                { title: "XGG", field: "XGG", type: "string" },
-                { title: "XXGG", field: "XXGG", type: "string" },
+                { title: "Local", field: "local",  },
+                { title: "PP", field: "PP",  },
+                { title: "P", field: "P",  },
+                { title: "M", field: "M",  },
+                { title: "G", field: "G",  },
+                { title: "GG", field: "GG",  },
+                { title: "XGG", field: "XGG",  },
+                { title: "XXGG", field: "XXGG",  },
               ];
               break;  
             default:
               this.columns = [
-                { title: "Local", field: "local", type: "string" },
+                { title: "Local", field: "local",  },
               ];
               for (var i = 33; i<=45; i++){
                 var j = i.toString();
@@ -91,9 +91,9 @@ export default {
         case '2':
           this.title = 'Planejamento Financeiro';
           this.columns = [
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
-                        { title: "Município", field: "local", type: "string" },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Município", field: "local",  },
                         { title: "Imóveis", field: "imoveis", type: "integer", sorter: "number", hozAlign:"right" },
                         { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
@@ -104,7 +104,7 @@ export default {
                             precision:false,
                           }
                         },
-                        { title: "Gratifição", field: "gratificacao", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -113,7 +113,7 @@ export default {
                             precision:false,
                           }
                         },    
-                        { title: "Etapa", field: "etapa", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -127,9 +127,9 @@ export default {
         case '3':
           this.title = 'Planejamento Operacional';
           this.columns = [
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
-                        { title: "Município", field: "local", type: "string" },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Município", field: "local",  },
                         { title: "Imóveis", field: "imoveis", type: "number", hozAlign:"right" },
                         { title: "Desinsetizador", field: "desin", type: "number", hozAlign:"right" },
                         { title: "Of. Operacional", field: "motorista", type: "number", hozAlign:"right" },
@@ -140,9 +140,9 @@ export default {
         case '4':
           this.title = 'Planejado X Executado';
           this.columns = [
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
-                        { title: "Município", field: "local", type: "string" },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Município", field: "local",  },
                         {title: "Programado", headerHozAlign:"center", columns: [
                           { title: "Imóveis", field: "imoveis", type: "number", hozAlign:"right" },
                           { title: "H/D", field: "hdp", type: "number", hozAlign:"right" },
@@ -155,7 +155,7 @@ export default {
                               precision:false,
                             }
                           },
-                          { title: "Gratifição", field: "gratificacaop", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Gratifição", field: "gratificacaop", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -164,7 +164,7 @@ export default {
                               precision:false,
                             }
                           },    
-                          { title: "Etapa", field: "etapap", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Etapa", field: "etapap", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -186,7 +186,7 @@ export default {
                               precision:false,
                             }
                           },
-                          { title: "Gratifição", field: "gratificacao", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -195,7 +195,7 @@ export default {
                               precision:false,
                             }
                           },    
-                          { title: "Etapa", field: "etapa", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -211,7 +211,7 @@ export default {
         case '5':
           this.title = 'Capacidade Instalada';
           this.columns = [
-                        { title: "Local", field: "local", type: "string" },
+                        { title: "Local", field: "local",  },
                         { title: "Desinsetizador", field: "desin", type: "number", hozAlign:"right" },
                         { title: "Of. Operacional", field: "motorista", type: "number", hozAlign:"right" },
                         { title: "ATS", field: "ats", type: "number", hozAlign:"right" }, 
@@ -225,20 +225,20 @@ export default {
           this.title = 'Uniforme por Servidor';
          // this.group = ['municipio','programa']
           this.columns = [
-                        { title: "Servidor", field: "nome", type: "string" },
-                        { title: "Calça", field: "calca", type: "string" },
-                        { title: "Bermuda", field: "bermuda", type: "string" },
-                        { title: "Sapato", field: "sapato", type: "string" },
-                        { title: "Camisa", field: "camisa", type: "string" },
-                        { title: "Camiseta", field: "camiseta", type: "string", sorter: "date" },
-                        { title: "Jaqueta", field: "jaqueta", type: "string" },
+                        { title: "Servidor", field: "nome",  },
+                        { title: "Calça", field: "calca",  },
+                        { title: "Bermuda", field: "bermuda",  },
+                        { title: "Sapato", field: "sapato",  },
+                        { title: "Camisa", field: "camisa",  },
+                        { title: "Camiseta", field: "camiseta" },
+                        { title: "Jaqueta", field: "jaqueta",  },
                       ];
           break;
         case '7':
           this.title = 'Resumo Atividades Campo';
           this.columns = [
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
                         { title: "Produção", field: "producao", type: "integer", sorter: "number", hozAlign:"right" },
                         { title: "H/D", field: "hd", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
@@ -258,7 +258,7 @@ export default {
                             precision:false,
                           }
                         },
-                        { title: "Gratifição", field: "gratificacao", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -267,7 +267,7 @@ export default {
                             precision:false,
                           }
                         },    
-                        { title: "Etapa", field: "etapa", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -281,20 +281,20 @@ export default {
         case '8':
           this.title = 'Indicador de Perdas';
           this.columns = [
-                        { title: "Local", field: "local", type: "string" },
-                        { title: "Motivo", field: "motivo", type: "string" },
-                        { title: "Dias", field: "dias", type: "string" },
+                        { title: "Local", field: "local",  },
+                        { title: "Motivo", field: "motivo",  },
+                        { title: "Dias", field: "dias",  },
                       ];
           break;
         case '9':
           this.title = 'Indicador de Rendimento';
           this.columns = [
-                        { title: "Servidor", field: "nome", type: "string" },
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
-                        { title: "Rendimento", field: "rendimento", type: "string" },
-                        { title: "H/D", field: "hd", type: "string" },
-                        { title: "Produção", field: "producao", type: "string", sorter: "date" },
+                        { title: "Servidor", field: "nome",  },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Rendimento", field: "rendimento",  },
+                        { title: "H/D", field: "hd",  },
+                        { title: "Produção", field: "producao", sorter: "date" },
                         { title: "Ind. Rendimento", field: "ind_rend", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
@@ -308,11 +308,11 @@ export default {
         case '10':
           this.title = 'Diárias e Passagens';
           this.columns = [
-                        { title: "Favorecido", field: "favorecido", type: "string" },
-                        { title: "Função", field: "funcao", type: "string" },
-                        { title: "Local", field: "local", type: "string" },
-                        { title: "Programa", field: "programa", type: "string" },
-                        { title: "Atividade", field: "atividade", type: "string" },
+                        { title: "Favorecido", field: "favorecido",  },
+                        { title: "Função", field: "funcao",  },
+                        { title: "Local", field: "local",  },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
                         { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
@@ -322,7 +322,7 @@ export default {
                             precision:false,
                           }
                         },
-                        { title: "Passagem", field: "passagem", type: "string", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Passagem", field: "passagem", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -336,8 +336,8 @@ export default {
         case '11':
           this.title = 'Detalhamento de Perdas';
           this.columns = [
-                        { title: "Servidor", field: "nome", type: "string" },
-                        { title: "Função", field: "funcao", type: "string" },
+                        { title: "Servidor", field: "nome",  },
+                        { title: "Função", field: "funcao",  },
                         { title: "Trabalhados", field: "trab", type: "number", hozAlign:"right" },
                         {title: "Perdas", headerHozAlign:"center", columns: [
                           { title: "Lic Prêmio", field: "lic_premio", type: "number", hozAlign:"right"},

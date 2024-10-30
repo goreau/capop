@@ -216,7 +216,7 @@ export default {
 
       const options = {
         type: "date",
-        dateFormat: "dd/MM/yyyy",
+        dateFormat: "MMMM/yyyy",
         startDate: this.financeiro.dt_cadastro,
         showHeader: false,
         color: "info",
