@@ -1,7 +1,7 @@
 <template>
   <div class="control">
     <div class="select">
-      <select @change="onChange($event)" class="input" :class="errclass">
+      <select @change="onChange($event)" class="input" :class="errclass" :disabled="disabled">
         <option value="0">-- Selecione --</option>
         <option
           v-for="loc in auxiliares"
@@ -27,7 +27,7 @@ export default {
       auxiliares: [],
     };
   },
-  props: ['sel', 'errclass','tipo', 'aux'],
+  props: ['sel', 'errclass','tipo', 'aux', 'disabled'],
   methods: {
     onChange(event) {
       this.$emit('selAux',event.target.value);

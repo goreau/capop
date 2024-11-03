@@ -14,7 +14,7 @@
                 <label class="label">Nome</label>
                 <div class="control">
                   <input class="input" type="text" placeholder="Nome" v-model="modalidade.descricao"
-                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" />
+                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" maxlength="40"/>
                   <span class="is-error" v-if="v$.modalidade.descricao.$error">
                     {{ v$.modalidade.descricao.$errors[0].$message }}
                   </span>
@@ -130,9 +130,9 @@ export default {
         modalidadeService.update(this.modalidade).then(
           (response) => {
             this.showMessage = true;
-            this.message = "Dados da modalidade alterados com sucesso.";
+            this.message = "Dados da perda alterados com sucesso.";
             this.type = "success";
-            this.caption = "Modalidade";
+            this.caption = "Perdas";
             setTimeout(() => (this.showMessage = false), 3000);
           },
           (error) => {
@@ -145,7 +145,7 @@ export default {
               error.toString();
             this.showMessage = true;
             this.type = "alert";
-            this.caption = "Modalidade";
+            this.caption = "Perdas";
             setTimeout(() => (this.showMessage = false), 3000);
           }
         )
@@ -156,9 +156,9 @@ export default {
             manutencaoService.create(4, this.modalidade).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Modalidade cadastrada com sucesso.";
+                            this.message = "Perda cadastrada com sucesso.";
                             this.type = "success";
-                            this.caption = "Modalidade";
+                            this.caption = "Perdas";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -171,7 +171,7 @@ export default {
                              error.toString();*/
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Modalidade";
+                            this.caption = "Perdas";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -183,7 +183,7 @@ export default {
         this.message = "Corrija os erros para enviar as informações";
         this.showMessage = true;
         this.type = "alert";
-        this.caption = "Modalidade";
+        this.caption = "Perdas";
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },

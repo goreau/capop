@@ -45,8 +45,8 @@
                   <div class="field">
                     <label class="label">Município</label>
                     <div class="control">
-                      <CmbMunicipio :id_prop="atividade.id_municipio" :tipo="9"
-                        @selMun="atividade.id_municipio = $event" :sel="atividade.id_municipio"
+                      <CmbMunicipio :id_prop="atividade.id_municipio" :tipo="9" :disabled="atividade.id_perda != 999"
+                        @selMun="atividade.id_municipio = $event" :sel="atividade.id_municipio" :all="currentUser.nivel > 1"
                         :errclass="{ 'is-danger': v$.atividade.id_municipio.$error }" />
                       <span class="is-error" v-if="v$.atividade.id_municipio.$error">
                         {{ v$.atividade.id_municipio.$errors[0].$message }}
@@ -58,7 +58,7 @@
                   <div class="field">
                     <label for="" class="label">Perda</label>
                     <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_perda = $event" :tipo="4" :sel="atividade.id_perda" />
+                      <CmbAuxiliares @selAux="atividade.id_perda = $event" :tipo="4" :sel="atividade.id_perda" @change="trocaPerda($event)" />
                       <span class="is-error" v-if="v$.atividade.id_perda.$error">
                         {{ v$.atividade.id_perda.$errors[0].$message }}
                       </span>
@@ -71,7 +71,7 @@
                   <div class="field">
                     <label for="" class="label">Programa</label>
                     <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_programa = $event" :tipo="5" :sel="atividade.id_programa" />
+                      <CmbAuxiliares @selAux="atividade.id_programa = $event" :tipo="5" :sel="atividade.id_programa" :disabled="atividade.id_perda != 999"/>
                       <span class="is-error" v-if="v$.atividade.id_programa.$error">
                         {{ v$.atividade.id_programa.$errors[0].$message }}
                       </span>
@@ -83,7 +83,7 @@
                     <label for="" class="label">Atividade</label>
                     <div class="control">
                       <CmbAuxiliares @selAux="atividade.id_aux_atividade = $event" :tipo="6"
-                        :aux="atividade.id_programa" :sel="atividade.id_aux_atividade" />
+                        :aux="atividade.id_programa" :sel="atividade.id_aux_atividade" :disabled="atividade.id_perda != 999" />
                       <span class="is-error" v-if="v$.atividade.id_aux_atividade.$error">
                         {{ v$.atividade.id_aux_atividade.$errors[0].$message }}
                       </span>
@@ -97,7 +97,7 @@
                     <label for="" class="label">Modalidade</label>
                     <div class="control">
                       <CmbAuxiliares @selAux="atividade.id_modalidade = $event" :tipo="7" :aux="atividade.id_modalidade"
-                        :sel="atividade.id_modalidade" />
+                        :sel="atividade.id_modalidade" :disabled="atividade.id_perda != 999" />
                       <span class="is-error" v-if="v$.atividade.id_modalidade.$error">
                         {{ v$.atividade.id_modalidade.$errors[0].$message }}
                       </span>
@@ -118,7 +118,7 @@
                   <div class="columns">
                     <div class="column is-3" v-for="pgt in pgtos" :key="pgt.id">
                       <label class="radio">
-                        <input type="radio" name="pgto" :value="pgt.id" v-model="atividade.id_pagamento" />
+                        <input type="radio" name="pgto" :value="pgt.id" v-model="atividade.id_pagamento" :disabled="atividade.id_perda != 999" />
                         {{ pgt.nome }}
                       </label>
                     </div>
@@ -134,7 +134,7 @@
                     <label for="" class="label">Lista Siafem</label>
                     <div class="control">
                       <CmbAuxiliares @selAux="atividade.id_lista = $event" :tipo="9" :aux="atividade.id_lista"
-                        :sel="atividade.id_lista" />
+                        :sel="atividade.id_lista" :disabled="atividade.id_perda != 999"/>
                       <span class="is-error" v-if="v$.atividade.id_lista.$error">
                         {{ v$.atividade.id_lista.$errors[0].$message }}
                       </span>
@@ -244,6 +244,22 @@ export default {
     footerCard
   },
   methods: {
+  trocaPerda(ev){
+      if (ev.target.value == '999' || ev.target.value == '0'){
+        this.atividade.id_perda = 999;   
+        this.atividade.id_municipio = 0;             
+        this.atividade.id_programa = 0;
+        this.atividade.id_aux_atividade = 0;
+        this.atividade.id_modalidade = 0;
+        this.atividade.id_lista = 0; 
+      } else {
+        this.atividade.id_municipio = 999;             
+        this.atividade.id_programa = 999;
+        this.atividade.id_aux_atividade = 999;
+        this.atividade.id_modalidade = 999;
+        this.atividade.id_lista = 0; 
+      }                 
+    },
     startCalendar() {
       const options = {
         type: "date",

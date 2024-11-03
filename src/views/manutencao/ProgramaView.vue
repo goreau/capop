@@ -14,7 +14,7 @@
                 <label class="label">Nome</label>
                 <div class="control">
                   <input class="input" type="text" placeholder="Nome" v-model="programa.descricao"
-                    :class="{ 'is-danger': v$.programa.descricao.$error }" />
+                    :class="{ 'is-danger': v$.programa.descricao.$error }" maxlength="40" />
                   <span class="is-error" v-if="v$.programa.descricao.$error">
                     {{ v$.programa.descricao.$errors[0].$message }}
                   </span>
@@ -183,7 +183,7 @@ export default {
         this.message = "Corrija os erros para enviar as informações";
         this.showMessage = true;
         this.type = "alert";
-        this.caption = "Servidor";
+        this.caption = "Programa";
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },

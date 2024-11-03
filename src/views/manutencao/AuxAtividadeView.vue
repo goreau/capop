@@ -34,7 +34,7 @@
                                 <label class="label">Nome</label>
                                 <div class="control">
                                     <input class="input" type="text" placeholder="Nome"
-                                        v-model="aux_atividade.descricao"
+                                        v-model="aux_atividade.descricao" maxlength="50"
                                         :class="{ 'is-danger': v$.aux_atividade.descricao.$error }" />
                                     <span class="is-error" v-if="v$.aux_atividade.descricao.$error">
                                         {{ v$.aux_atividade.descricao.$errors[0].$message }}
@@ -179,7 +179,7 @@ export default {
                         error.toString();
                     this.showMessage = true;
                     this.type = "alert";
-                    this.caption = "Programa";
+                    this.caption = "Atividade";
                     setTimeout(() => (this.showMessage = false), 3000);
                 }
             );
@@ -195,9 +195,9 @@ export default {
                     manutencaoService.update(2, this.aux_atividade).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Dados do aux_atividade alterados com sucesso.";
+                            this.message = "Dados da atividade alterados com sucesso.";
                             this.type = "success";
-                            this.caption = "Programa";
+                            this.caption = "Atividade";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -210,7 +210,7 @@ export default {
                                 error.toString();
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Programa";
+                            this.caption = "Atividade";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -221,9 +221,9 @@ export default {
                     manutencaoService.create(2, this.aux_atividade).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Servidor cadastrado com sucesso.";
+                            this.message = "Atividade cadastrada com sucesso.";
                             this.type = "success";
-                            this.caption = "Servidor";
+                            this.caption = "Atividade";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -236,7 +236,7 @@ export default {
                              error.toString();*/
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Servidor";
+                            this.caption = "Atividade";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -248,7 +248,7 @@ export default {
                 this.message = "Corrija os erros para enviar as informações";
                 this.showMessage = true;
                 this.type = "alert";
-                this.caption = "Servidor";
+                this.caption = "Atividade";
                 setTimeout(() => (this.showMessage = false), 3000);
             }
         },

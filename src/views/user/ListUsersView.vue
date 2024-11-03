@@ -100,10 +100,10 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Nome', field: 'nome', type: 'string', minWidth: 200, responsive: 3},
-          {title: 'Login', field: 'username', type: 'string', minWidth: 150},
-          {title: 'Local', field: 'local', type: 'string', minWidth: 150},
-          {title: 'Nivel', field: 'role', type: 'string', minWidth: 150},
+          {title: 'Nome', field: 'nome', minWidth: 200, responsive: 3},
+          {title: 'Login', field: 'username', minWidth: 150},
+          {title: 'Local', field: 'local', minWidth: 150},
+          {title: 'Nivel', field: 'role', minWidth: 150},
           {title: 'Ações', responsive: 0, minWidth: 250, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();

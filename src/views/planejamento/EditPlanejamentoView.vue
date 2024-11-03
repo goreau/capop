@@ -29,7 +29,7 @@
                     <label class="label">Município</label>
                     <div class="control">
                       <CmbMunicipio :id_prop="planejamento.id_municipio" :tipo="9" :sel="planejamento.id_municipio"
-                        @selMun="planejamento.id_municipio = $event"
+                        @selMun="planejamento.id_municipio = $event" :all="currentUser.nivel > 1"
                         :errclass="{ 'is-danger': v$.planejamento.id_municipio.$error }" />
                       <span class="is-error" v-if="v$.planejamento.id_municipio.$error">
                         {{ v$.planejamento.id_municipio.$errors[0].$message }}
@@ -230,7 +230,6 @@ export default {
         cancelLabel: 'Cancelar',
         showClearButton: false,
         todayLabel: 'Hoje',
-        maxDate: new Date(),
       };
 
       var calini = bulmaCalendar.attach('#dtCad', options);

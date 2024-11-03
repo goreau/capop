@@ -1,17 +1,23 @@
 <template>
-  <div class="control">
-    <div class="select">
-      <select @change="onChange($event)" class="input" :class="errclass">
-        <option value="0">-- Selecione --</option>
-        <option
-          v-for="mun in municipios"
-          :key="mun.id"
-          :value="mun.id"
-          :selected="mun.id == sel"
-        >
-          {{ mun.nome }}
-        </option>
-      </select>
+  <div class="field has-addons">
+    <div class="control is-expanded">
+      <div class="select is-fullwidth">
+        <select @change="onChange($event)" class="input" :class="errclass" :disabled="disabled">
+          <option value="0">-- Selecione --</option>
+          <option v-for="mun in municipios" :key="mun.id" :value="mun.id" :selected="mun.id == sel">
+            {{ mun.nome }}
+          </option>
+          <option value="999" :selected="sel == 999" :v-if="disabled">NÃO SE APLICA</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="control" v-if="all">
+      <button class="button" :v-if="tudo" @click="trocaLista()">
+        <span class="icon is-small has-text-success">
+          <font-awesome-icon icon="fa-solid fa-repeat" />
+        </span>
+      </button>
     </div>
   </div>
 </template>
@@ -24,36 +30,50 @@ export default {
   data() {
     return {
       municipios: [],
+      tudo: false,
     };
   },
-  props: ['id_prop', 'sel', 'errclass'],
+  props: ['id_prop', 'sel', 'errclass', 'disabled', 'all'],
   methods: {
+    trocaLista() {
+      this.tudo = this.tudo ? false : true;
+      this.loadData();
+    },
     onChange(event) {
-      this.$emit('selMun',event.target.value);
+      this.$emit('selMun', event.target.value);
     },
     loadData() {
-      TerritorioService.getComboMun(this.id_prop)
-      .then((res) => {
-        this.municipios = res.data;
-      })
-      .catch((err) => {
-        console.log(err.response);
-        this.municipios = [];
-      })
+      if (this.tudo) {
+        TerritorioService.getComboAll()
+          .then((res) => {
+            this.municipios = res.data;
+          })
+          .catch((err) => {
+            console.log(err.response);
+            this.municipios = [];
+          })
+      } else {
+        TerritorioService.getComboMun(this.id_prop)
+          .then((res) => {
+            this.municipios = res.data;
+          })
+          .catch((err) => {
+            console.log(err.response);
+            this.municipios = [];
+          })
+      }
     }
   },
   watch: {
-    id_prop(value) {
-      this.loadData();
-    }
+    /*  id_prop(value) {
+        this.loadData();
+      },*/
   },
   mounted() {
     this.loadData();
   },
-  
+
 };
 </script>
 
-<style scoped>
-  
-</style>
+<style scoped></style>

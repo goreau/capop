@@ -100,9 +100,9 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Nome', field: 'nome', type: 'string', minWidth: 400, responsive: 1},
-          {title: 'Função', field: 'funcao', type: 'string', minWidth: 100},
-          {title: 'Local', field: 'local', type: 'string', minWidth: 350},
+          {title: 'Nome', field: 'nome', minWidth: 400, responsive: 1},
+          {title: 'Função', field: 'funcao', minWidth: 100},
+          {title: 'Local', field: 'local', minWidth: 350},
           {title: 'Ativo', field: 'ativo', formatter:"tickCross", hozAlign:"center",minWidth: 20},
           {title: 'Temp', field: 'temporario', formatter:"tickCross", hozAlign:"center",minWidth: 20},
           {title: 'Ações', responsive: 0, minWidth: 250, 

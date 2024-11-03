@@ -55,7 +55,7 @@
                     />
                     Administrador
                   </label>
-                  <label class="radio" v-if="user.role==9">
+                  <label class="radio" v-if="user.role==2">
                     <input
                       type="radio"
                       nome="role"
@@ -64,7 +64,7 @@
                     />
                     Gestor Regional
                   </label>
-                  <label class="radio" v-if="user.role==2">
+                  <label class="radio" v-if="user.role==3">
                     <input
                       type="radio"
                       nome="role"
@@ -72,15 +72,6 @@
                       checked="checked"
                     />
                     Gestor Local
-                  </label>
-                  <label class="radio"  v-if="user.role==3">
-                    <input
-                      type="radio"
-                      nome="role"
-                      value="3"
-                      checked="checked"
-                    />
-                    Usuário Setor
                   </label>
                 </div>
               </div>

@@ -70,6 +70,16 @@ class TerritorioService {
         return error.response.data;
     })
   }
+
+  getComboAll(){
+    return axios.get('/muncomboall')
+    .then(response => {
+        return {data: response.data};
+    },
+    (error) => {
+        return error.response.data;
+    })
+  }
   
 }
 

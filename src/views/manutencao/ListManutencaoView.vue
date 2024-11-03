@@ -7,7 +7,7 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title is-centered">{{ strTipo }}</p>
-            <button class="button is-primary is-outlined" @click="newItem">
+            <button class="button is-primary is-outlined" @click="newItem" :disabled="currentUser.nivel != 1">
               <span class="icon">
                 <font-awesome-icon icon="fa-solid fa-plus-circle" />
               </span>
@@ -113,8 +113,8 @@ export default {
 
     if (this.tipo == 1){
       this.columns = [
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {
@@ -181,11 +181,11 @@ export default {
     ]
     } else if (this.tipo == 2){
       this.columns = [
-      { title: 'Programa', field: 'programa', type: 'string', minWidth: 100 }, 
-      { title: 'Codigo', field: 'codigo', type: 'string', minWidth: 100 }, 
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Produção', field: 'producao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Programa', field: 'programa', minWidth: 100 }, 
+      { title: 'Codigo', field: 'codigo', minWidth: 100 }, 
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Produção', field: 'producao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {
@@ -252,9 +252,9 @@ export default {
     ]
     } else if (this.tipo == 3){
       this.columns = [
-      { title: 'Programa', field: 'programa', type: 'string', minWidth: 100 }, 
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Programa', field: 'programa', minWidth: 100 }, 
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {
@@ -321,9 +321,9 @@ export default {
     ]
     } else if (this.tipo == 4){
       this.columns = [
-      { title: 'Codigo', field: 'id_modalidade', type: 'string', minWidth: 100 },
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Codigo', field: 'id_modalidade', minWidth: 100 },
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {
@@ -390,9 +390,9 @@ export default {
     ]
     } else if (this.tipo == 5){
       this.columns = [
-      { title: 'Codigo', field: 'id_perda', type: 'string', minWidth: 100 },
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Codigo', field: 'id_perda', minWidth: 100 },
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {
@@ -459,8 +459,8 @@ export default {
     ]
     } else if (this.tipo == 6){
       this.columns = [
-      { title: 'Nome', field: 'descricao', type: 'string', minWidth: 100 },
-      { title: 'Ativo', field: 'active', type: 'string', minWidth: 100, formatter:"tickCross" },
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
       {
         title: 'Ações', responsive: 0, minWidth: 250,
         formatter: (cell, formatterParrams) => {

@@ -113,7 +113,7 @@
                                     <div class="column is-3" v-if="filtros.indexOf('Municipio') != -1">
                                         <label class="label">Município</label>
                                         <div class="control">
-                                            <CmbMunicipio :id_prop="1" :tipo="9" @selMun="mensal.filtro.municipio = $event" />
+                                            <CmbMunicipio :id_prop="1" :tipo="9" @selMun="mensal.filtro.municipio = $event" :all="false" />
                                         </div>
                                     </div>
                                 </div>

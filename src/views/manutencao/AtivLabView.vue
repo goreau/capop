@@ -24,7 +24,7 @@
                                 <label class="label">Nome</label>
                                 <div class="control">
                                     <input class="input" type="text" placeholder="Nome"
-                                        v-model="ativ_lab.descricao"
+                                        v-model="ativ_lab.descricao" maxlength="40"
                                         :class="{ 'is-danger': v$.ativ_lab.descricao.$error }" />
                                     <span class="is-error" v-if="v$.ativ_lab.descricao.$error">
                                         {{ v$.ativ_lab.descricao.$errors[0].$message }}
@@ -130,7 +130,7 @@ export default {
                         error.toString();
                     this.showMessage = true;
                     this.type = "alert";
-                    this.caption = "Programa";
+                    this.caption = "Ativ. Laboratorial";
                     setTimeout(() => (this.showMessage = false), 3000);
                 }
             );
@@ -146,9 +146,9 @@ export default {
                     manutencaoService.update(3, this.ativ_lab).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Dados do ativ_lab alterados com sucesso.";
+                            this.message = "Dados do atividade alterados com sucesso.";
                             this.type = "success";
-                            this.caption = "Programa";
+                            this.caption = "Ativ. Laboratorial";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -161,7 +161,7 @@ export default {
                                 error.toString();
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Programa";
+                            this.caption = "Ativ. Laboratorial";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -172,9 +172,9 @@ export default {
                     manutencaoService.create(3, this.ativ_lab).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Servidor cadastrado com sucesso.";
+                            this.message = "Atividade cadastrada com sucesso.";
                             this.type = "success";
-                            this.caption = "Servidor";
+                            this.caption = "Ativ. Laboratorial";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -187,7 +187,7 @@ export default {
                              error.toString();*/
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Servidor";
+                            this.caption = "Ativ. Laboratorial";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )

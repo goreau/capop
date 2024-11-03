@@ -101,13 +101,13 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Data', field: 'data', type: 'string', sorter:"date", minWidth: 50, responsive: 2, formatter:"datetime", formatterParams:{
+          {title: 'Data', field: 'data', sorter:"date", minWidth: 50, responsive: 2, formatter:"datetime", formatterParams:{
               inputFormat:"yyyy-MM-dd",
               outputFormat:"dd/MM/yyyy",
               invalidPlaceholder:"Data inválida",
               timezone:"America/Sao_Paulo",
           }},
-          {title: 'Servidor', field: 'servidor', type: 'string', minWidth: 300, responsive: 1},
+          {title: 'Servidor', field: 'servidor', minWidth: 300, responsive: 1},
           {title: 'Programa', field: 'programa', minWidth: 150},
           {title: 'Atividade', field: 'atividade', minWidth: 250, responsive: 3},
           {title: 'Produção', field: 'producao', minWidth: 100},

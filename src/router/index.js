@@ -43,9 +43,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "home" */ '../views/user/MyCadastroView.vue'), 
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/general/AboutView.vue'),
+    path: '/ajuda',
+    name: 'ajuda',
+    component: () => import(/* webpackChunkName: "about" */ '../views/general/AjudaView.vue'),
   },
   {
     path: '/forgot',

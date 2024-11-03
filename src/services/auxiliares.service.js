@@ -21,6 +21,15 @@ class AuxiliaresService {
     })
   }
   
+  getListaAtividades(){
+    return axios.get(`/listaatividades`)
+    .then(response => {
+        return {data: response.data};
+    },
+    (error) => {
+        return error.response.data;
+    })
+  }
 }
 
 export default new AuxiliaresService();

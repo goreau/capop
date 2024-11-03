@@ -14,7 +14,7 @@
                 <label class="label">Nome</label>
                 <div class="control">
                   <input class="input" type="text" placeholder="Nome" v-model="modalidade.descricao"
-                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" />
+                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" maxlength="50"/>
                   <span class="is-error" v-if="v$.modalidade.descricao.$error">
                     {{ v$.modalidade.descricao.$errors[0].$message }}
                   </span>

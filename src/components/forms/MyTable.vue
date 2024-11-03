@@ -74,6 +74,13 @@
   </div>
   <br>
   <Loader v-if="isLoading" />
+  <div v-if="extra">
+    <div class="columns is-centered">
+      <div class="column is-10"><b>{{ extra }}</b></div>
+    </div>
+    <br>
+  </div>
+  
   <div ref="table" id="myTable" class="is-striped"></div>
 </template>
 
@@ -121,28 +128,28 @@ export default {
       localStorage.setItem(this.tableName, JSON.stringify(this.arrFilter));
     },
     clearFilter() {
-     // this.isLoading = true;
+      this.isLoading = true;
       this.form.field = "0";
       this.form.type = "0";
       this.form.value = "";
 
       this.arrFilter = [],
 
-        this.tabulator.clearFilter();
+      this.tabulator.clearFilter();
       localStorage.removeItem(this.tableName);
-     // this.isLoading = false;
+      this.isLoading = false;
     },
     download_csv() {
       this.tabulator.download("csv", "data.csv");
     },
     download_xlsx() {
-      this.tabulator.download("xlsx", "data.xlsx", { sheetName: "Educa" });
+      this.tabulator.download("xlsx", "data.xlsx", { sheetName: "Capop" });
     },
     download_pdf() {
       try {
         this.tabulator.download("pdf", "data.pdf", {
           orientation: "landscape", //set page orientation to portrait
-          title: "Sistema Educa", //add title to report
+          title: "Sistema Capop", //add title to report
         });
       } catch (error) {
         this.$router.go();
@@ -156,7 +163,7 @@ export default {
       this.filter = e.target.checked;
     },
   },
-  props: ["tableData", "columns", "filtered", "tableName"],
+  props: ["tableData", "columns", "filtered", "tableName", "extra"],
   watch: {
     tableData(value) {
      // this.isLoading = true;
@@ -178,11 +185,14 @@ export default {
       });
 
       this.cbColumns = this.columns.filter(el => el.title !== "Ações");
+      let me = this;
 
       this.tabulator.on("tableBuilt", function () {
-        if (this.filter && this.tabulator.ta) {
-          this.tabulator.setFilter(this.arrFilter);//this.form.column, this.form.operator, this.form.value);
-          this.$router.go();
+        if (me.filter && me.tabulator.ta) {
+          if (this.arrFilter.lenght > 0){
+            this.tabulator.setFilter(this.arrFilter);
+          }
+         // this.$router.go();
         }
       //  this.isLoading = false;
       });

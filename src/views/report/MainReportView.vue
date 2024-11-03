@@ -23,101 +23,108 @@
                         </div>
                       </div>
                     </div>
-                    </div>
-                    <div class="columns" v-if="currentUser.nivel >= 2">
-                      <div class="column is-full">
-                        <div class="field">
-                          <label class="label">GVE</label>
-                          <div class="control">
-                            <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_gve" :tipo="3"
-                              @selTerr="filter.id_gve = $event" />
-                          </div>
+                  </div>
+                  <div class="columns" v-if="currentUser.nivel >= 2">
+                    <div class="column is-full">
+                      <div class="field">
+                        <label class="label">GVE</label>
+                        <div class="control">
+                          <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_gve" :tipo="3"
+                            @selTerr="filter.id_gve = $event" />
                         </div>
                       </div>
-                    </div>
-                    <div class="columns">
-                      <div class="column is-full">
-                        <div class="field">
-                          <label class="label">Município</label>
-                          <div class="control">
-                            <CmbMunicipio :id_prop="currentUser.id" :sel="filter.id_municipio" :tipo="9"
-                              @selTerr="filter.id_municipio = $event" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="columns" v-if="tipo_relat == 1">
-                      <div class="column is-full">
-                        <div class="field">
-                          <label class="label">Servidor</label>
-                          <div class="control">
-                            <CmbServidor :id_prop="filter.id_prop" :tipo="9" @selServ="filter.id_servidor = $event" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <fieldset class="fieldset" v-if="tipo_relat == 1">
-                <legend>Tipo de Uniforme</legend>
-                <div class="control has-icons-left has-icons-right">
-                  <div class="columns">
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="1" v-model="filter.unif" />
-                        Calça
-                      </label>
-                    </div>
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="2" v-model="filter.unif" />
-                        Camisa
-                      </label>
-                    </div>
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="3" v-model="filter.unif" />
-                        Camiseta
-                      </label>
-                    </div>
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="4" v-model="filter.unif" />
-                        Jaqueta
-                      </label>
-                    </div>
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="5" v-model="filter.unif" />
-                        Bermuda
-                      </label>
-                    </div>
-                    <div class="column is-2">
-                      <label class="radio">
-                        <input type="radio" name="unif" value="6" v-model="filter.unif" />
-                        Sapato
-                      </label>
                     </div>
                   </div>
-                </div>
-              </fieldset>
-                    <div class="columns" v-if="hasData">
-                      <div class="column is-half">
-                        <label class="label">Início</label>
-                        <div class="field">
-                          <div class="control" id="contIni">
-                            <input type="date" id="dtIni" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="column is-half">
-                        <label class="label">Término</label>
-                        <div class="field">
-                          <div class="control" id="contFim">
-                            <input type="date" id="dtFim" />
-                          </div>
+                  <div class="columns">
+                    <div class="column is-full">
+                      <div class="field">
+                        <label class="label">Município</label>
+                        <div class="control">
+                          <CmbMunicipio :id_prop="currentUser.id" :sel="filter.id_municipio" :tipo="9" :all="false"
+                            @selTerr="filter.id_municipio = $event" />
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="columns" v-if="tipo_relat == 1 || tipo_relat == 14">
+                    <div class="column is-full">
+                      <div class="field">
+                        <label class="label">Servidor</label>
+                        <div class="control">
+                          <CmbServidor :id_prop="filter.id_prop" :tipo="9" @selServ="filter.id_servidor = $event" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <fieldset class="fieldset" v-if="tipo_relat == 1">
+                    <legend>Tipo de Uniforme</legend>
+                    <div class="control has-icons-left has-icons-right">
+                      <div class="columns">
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="1" v-model="filter.unif" />
+                            Calça
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="2" v-model="filter.unif" />
+                            Camisa
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="3" v-model="filter.unif" />
+                            Camiseta
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="4" v-model="filter.unif" />
+                            Jaqueta
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="5" v-model="filter.unif" />
+                            Bermuda
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="unif" value="6" v-model="filter.unif" />
+                            Sapato
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="columns" v-if="hasData">
+                    <div class="column is-4">
+                      <label class="label">Início</label>
+                      <div class="field">
+                        <div class="control" id="contIni">
+                          <input type="date" id="dtIni" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-4">
+                      <label class="label">Término</label>
+                      <div class="field">
+                        <div class="control" id="contFim">
+                          <input type="date" id="dtFim" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-4">
+                      <label class="label">Mês</label>
+                      <div class="field">
+                        <div class="control" id="contMes">
+                          <input type="month" id="dtMes" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
               <section class="section" v-if="tipo_relat > 0">
@@ -160,6 +167,7 @@ export default {
         id_gve: 0,
         dt_inicio: "",
         dt_final: "",
+        mes: "",
         id_programa: 0,
         id_servidor: 0,
         id_prop: 0,
@@ -228,7 +236,7 @@ export default {
       if (teste.type == 'text') {
         const elIni = document.querySelector('#contIni');
         elIni.innerHTML = "<input type='date' id='dtIni' />";
-        
+
         const elFim = document.querySelector('#contFim');
         elFim.innerHTML = "<input type='date' id='dtFim' />";
       }
@@ -290,7 +298,7 @@ export default {
         element2.bulmaCalendar.on('select', datepicker => {
           this.filter.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
         });
-        
+
         element2.bulmaCalendar.on('clear', datepicker => {
           this.filter.dt_final = '';
         });
@@ -307,7 +315,40 @@ export default {
           element2.bulmaCalendar.emit('select', { startDate: todayDate });
         });
       }
+
+
+      const elementM = document.querySelector('#dtMes');
+
+      if (elementM.type == 'text') {
+        const elDt = document.querySelector('#contMes');
+        elDt.innerHTML = "<input type='month' id='dtMes' />";
+
+      }
+      var options = {
+        type: "date",
+        dateFormat: "MMMM/yyyy",
+        startDate: this.mes,
+        showHeader: false,
+        color: "primary",
+        cancelLabel: 'Cancelar',
+        showClearButton: false,
+        todayLabel: 'Hoje',
+      };
+
+      var calMes = bulmaCalendar.attach('#dtMes', options);
+
+      if (elementM) {
+        // bulmaCalendar instance is available as element.bulmaCalendar
+        elementM.bulmaCalendar.on('select', datepicker => {
+          this.filter.mes = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+        });
+
+        elementM.bulmaCalendar.on('clear', datepicker => {
+          this.filter.mes = '';
+        });
+      }
     }
+
   },
   created() {
     this.tipo_relat = this.$route.params.id;
@@ -336,8 +377,9 @@ export default {
   cursor: pointer;
   transition: 0.5s;
 }
+
 .myToday {
-  color:#FF5722 !important
+  color: #FF5722 !important
 }
 
 .submit-btn:hover {

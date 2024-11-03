@@ -44,6 +44,11 @@ export default {
   mounted() {
     if (this.hide) {
       this.onToggleCollapse(true);
+    } 
+  },
+  watch:{
+    hide(val){
+      this.onToggleCollapse(val);
     }
   },
   computed: {
@@ -77,8 +82,8 @@ export default {
               title: "Meu Cadastro",
             },
             {
-              href: "/about",
-              title: "Sobre",
+              href: "/ajuda",
+              title: "Materiais Auxiliares",
             },
             {
               href: "/",
@@ -369,6 +374,10 @@ export default {
               href: "/mainReport/11",
               title: "Detalhamento de Perdas",
             },
+            {
+              href: "/mainReport/14",
+              title: "Recriar Boletim",
+            },
           ],
         },
         {
@@ -475,7 +484,7 @@ body {
   margin-left: 290px;
   width: calc(100% - 290px);
   height: calc(100% - 7rem);
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 .main_colapsed {
   margin-left: 65px;

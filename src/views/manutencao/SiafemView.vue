@@ -6,7 +6,7 @@
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title is-centered">Modalidade</p>
+            <p class="card-header-title is-centered">Listas</p>
           </header>
           <div class="card-content">
             <div class="content">
@@ -14,7 +14,7 @@
                 <label class="label">Nome</label>
                 <div class="control">
                   <input class="input" type="text" placeholder="Nome" v-model="modalidade.descricao"
-                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" />
+                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" maxlength="40"/>
                   <span class="is-error" v-if="v$.modalidade.descricao.$error">
                     {{ v$.modalidade.descricao.$errors[0].$message }}
                   </span>
@@ -115,7 +115,7 @@ export default {
             error.toString();
           this.showMessage = true;
           this.type = "alert";
-          this.caption = "Modalidade";
+          this.caption = "Listas";
           setTimeout(() => (this.showMessage = false), 3000);
         }
       );
@@ -130,9 +130,9 @@ export default {
         modalidadeService.update(this.modalidade).then(
           (response) => {
             this.showMessage = true;
-            this.message = "Dados da modalidade alterados com sucesso.";
+            this.message = "Dados da lista alterados com sucesso.";
             this.type = "success";
-            this.caption = "Modalidade";
+            this.caption = "Listas";
             setTimeout(() => (this.showMessage = false), 3000);
           },
           (error) => {
@@ -145,7 +145,7 @@ export default {
               error.toString();
             this.showMessage = true;
             this.type = "alert";
-            this.caption = "Modalidade";
+            this.caption = "Listas";
             setTimeout(() => (this.showMessage = false), 3000);
           }
         )
@@ -156,9 +156,9 @@ export default {
             manutencaoService.create(4, this.modalidade).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Modalidade cadastrada com sucesso.";
+                            this.message = "Lista cadastrada com sucesso.";
                             this.type = "success";
-                            this.caption = "Modalidade";
+                            this.caption = "Listas";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -171,7 +171,7 @@ export default {
                              error.toString();*/
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Modalidade";
+                            this.caption = "Listas";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -183,7 +183,7 @@ export default {
         this.message = "Corrija os erros para enviar as informações";
         this.showMessage = true;
         this.type = "alert";
-        this.caption = "Modalidade";
+        this.caption = "Listas";
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },

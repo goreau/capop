@@ -224,7 +224,6 @@ export default {
         cancelLabel: 'Cancelar',
         showClearButton: false,
         todayLabel: 'Hoje',
-        maxDate: new Date(),
       };
 
       var calini = bulmaCalendar.attach('#dtCad', options);

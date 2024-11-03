@@ -71,7 +71,6 @@ import Message from "@/components/general/Message.vue";
 import Loader from "@/components/general/Loader.vue";
 import CmbServidor from "@/components/forms/CmbServidor.vue";
 import CmbAuxiliares from "@/components/forms/CmbAuxiliares.vue";
-import CmbMunicipio from "@/components/forms/CmbMunicipio.vue";
 import footerCard from '@/components/forms/FooterCard.vue'
 import laboratorioService from "@/services/laboratorio.service";
 import auxiliaresService from "@/services/auxiliares.service.js";
@@ -135,7 +134,6 @@ export default {
     Loader,
     CmbServidor,
     CmbAuxiliares,
-    CmbMunicipio,
     footerCard
   },
   methods: {

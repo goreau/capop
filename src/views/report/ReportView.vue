@@ -9,8 +9,7 @@
           </header>
           <div class="card-content">
             <span class="filter">{{ strFiltro }}</span>
-            <MyTable :tableData="dataTable" :columns="columns" :filtered="false"  v-if="id != 12"/>
-            <MyGroupedTable :tableData="dataTable" :columns="columns" :filtered="false" v-if="id == 12"/>
+            <MyTable :tableData="dataTable" :columns="columns" :filtered="false" :tableName="tableName" :extra="extra"  v-if="id != 12"/>
           </div>
         </div>
       </div>
@@ -35,6 +34,8 @@ export default {
       columns: [],
       title: 'Relatórios',
       strFiltro: '',
+      tableName: 'capop_relatorio',
+      extra: '',
     };
   },
   components: {
@@ -57,7 +58,7 @@ export default {
               for (var i = 34; i<=58; i++){
                 if (i % 2 === 0) {
                   var j = i.toString();
-                  this.columns.push({ title: j, field: j, type: "number" });
+                  this.columns.push({ title: j, field: j });
                 }
               }
               break;
@@ -81,7 +82,7 @@ export default {
               ];
               for (var i = 33; i<=45; i++){
                 var j = i.toString();
-                this.columns.push({ title: j, field: j, type: "number" })
+                this.columns.push({ title: j, field: j })
               }
               break;
           }
@@ -94,8 +95,8 @@ export default {
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
                         { title: "Município", field: "local",  },
-                        { title: "Imóveis", field: "imoveis", type: "integer", sorter: "number", hozAlign:"right" },
-                        { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Imóveis", field: "imoveis", sorter: "number", hozAlign:"right" },
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -130,11 +131,11 @@ export default {
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
                         { title: "Município", field: "local",  },
-                        { title: "Imóveis", field: "imoveis", type: "number", hozAlign:"right" },
-                        { title: "Desinsetizador", field: "desin", type: "number", hozAlign:"right" },
-                        { title: "Of. Operacional", field: "motorista", type: "number", hozAlign:"right" },
-                        { title: "ATS", field: "vis_san", type: "number", hozAlign:"right" }, 
-                        { title: "Outros", field: "outros", type: "number", hozAlign:"right" },                     
+                        { title: "Imóveis", field: "imoveis", hozAlign:"right" },
+                        { title: "Desinsetizador", field: "desin", hozAlign:"right" },
+                        { title: "Of. Operacional", field: "motorista", hozAlign:"right" },
+                        { title: "ATS", field: "vis_san", hozAlign:"right" }, 
+                        { title: "Outros", field: "outros", hozAlign:"right" },                     
           ];
           break;
         case '4':
@@ -144,9 +145,9 @@ export default {
                         { title: "Atividade", field: "atividade",  },
                         { title: "Município", field: "local",  },
                         {title: "Programado", headerHozAlign:"center", columns: [
-                          { title: "Imóveis", field: "imoveis", type: "number", hozAlign:"right" },
-                          { title: "H/D", field: "hdp", type: "number", hozAlign:"right" },
-                          { title: "Diária", field: "diariap", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Imóveis", field: "imoveis", hozAlign:"right" },
+                          { title: "H/D", field: "hdp", hozAlign:"right" },
+                          { title: "Diária", field: "diariap", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -175,9 +176,9 @@ export default {
                           },    
                         ]},
                         {title: "Executado", headerHozAlign:"center", columns: [
-                          { title: "Imóveis", field: "prod", type: "number", hozAlign:"right" },
-                          { title: "H/D", field: "hd", type: "number", hozAlign:"right" },
-                          { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                          { title: "Imóveis", field: "prod", hozAlign:"right" },
+                          { title: "H/D", field: "hd", hozAlign:"right" },
+                          { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                               decimal:",",
                               thousand:".",
                               symbol:"",
@@ -212,12 +213,12 @@ export default {
           this.title = 'Capacidade Instalada';
           this.columns = [
                         { title: "Local", field: "local",  },
-                        { title: "Desinsetizador", field: "desin", type: "number", hozAlign:"right" },
-                        { title: "Of. Operacional", field: "motorista", type: "number", hozAlign:"right" },
-                        { title: "ATS", field: "ats", type: "number", hozAlign:"right" }, 
-                        { title: "Eq. Técnica", field: "tecnico", type: "number", hozAlign:"right" }, 
-                        { title: "Laboratório", field: "laboratorio", type: "number", hozAlign:"right" }, 
-                        { title: "Outros", field: "outros", type: "number", hozAlign:"right" }, 
+                        { title: "Desinsetizador", field: "desin", hozAlign:"right" },
+                        { title: "Of. Operacional", field: "motorista", hozAlign:"right" },
+                        { title: "ATS", field: "ats", hozAlign:"right" }, 
+                        { title: "Eq. Técnica", field: "tecnico", hozAlign:"right" }, 
+                        { title: "Laboratório", field: "laboratorio", hozAlign:"right" }, 
+                        { title: "Outros", field: "outros", hozAlign:"right" }, 
                      
           ];
           break;
@@ -239,8 +240,8 @@ export default {
           this.columns = [
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
-                        { title: "Produção", field: "producao", type: "integer", sorter: "number", hozAlign:"right" },
-                        { title: "H/D", field: "hd", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Produção", field: "producao", sorter: "number", hozAlign:"right" },
+                        { title: "H/D", field: "hd", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -249,7 +250,7 @@ export default {
                             precision:false,
                           }
                         },
-                        { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -280,29 +281,21 @@ export default {
           break;
         case '8':
           this.title = 'Indicador de Perdas';
-          this.columns = [
-                        { title: "Local", field: "local",  },
+          this.columns = [                       
                         { title: "Motivo", field: "motivo",  },
                         { title: "Dias", field: "dias",  },
+                        { title: "Percentual", field: "perc",  },
                       ];
           break;
         case '9':
           this.title = 'Indicador de Rendimento';
           this.columns = [
-                        { title: "Servidor", field: "nome",  },
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
                         { title: "Rendimento", field: "rendimento",  },
                         { title: "H/D", field: "hd",  },
                         { title: "Produção", field: "producao", sorter: "date" },
-                        { title: "Ind. Rendimento", field: "ind_rend", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
-                            decimal:",",
-                            thousand:".",
-                            symbol:"",
-                            symbolAfter:"p",
-                            negativeSign:true,
-                            precision:false,
-                          } },
+                        { title: "Ind. Rendimento", field: "ind_rend", sorter: "number", hozAlign:"right", },
                       ];
           break;
         case '10':
@@ -313,7 +306,7 @@ export default {
                         { title: "Local", field: "local",  },
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
-                        { title: "Diária", field: "diaria", type: "number", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
                             decimal:",",
                             thousand:".",
                             symbol:"",
@@ -338,19 +331,19 @@ export default {
           this.columns = [
                         { title: "Servidor", field: "nome",  },
                         { title: "Função", field: "funcao",  },
-                        { title: "Trabalhados", field: "trab", type: "number", hozAlign:"right" },
+                        { title: "Trabalhados", field: "trab", hozAlign:"right" },
                         {title: "Perdas", headerHozAlign:"center", columns: [
-                          { title: "Lic Prêmio", field: "lic_premio", type: "number", hozAlign:"right"},
-                          { title: "Justif", field: "justif", type: "number", hozAlign:"right"},
-                          { title: "Compensação", field: "comp", type: "number", hozAlign:"right" },
-                          { title: "Clima", field: "clima", type: "number", hozAlign:"right" },
-                          { title: "Falta Viat", field: "viat", type: "number", hozAlign:"right" },
-                          { title: "Falta Prog", field: "prog", type: "number", hozAlign:"right" },
-                          { title: "Falta Verba", field: "verba", type: "number", hozAlign:"right" },
-                          { title: "Greve", field: "greve", type: "number", hozAlign:"right" },
-                          { title: "Outros", field: "outros", type: "number", hozAlign:"right" },
+                          { title: "Lic Prêmio", field: "lic_premio", hozAlign:"right"},
+                          { title: "Justif", field: "justif", hozAlign:"right"},
+                          { title: "Compensação", field: "comp", hozAlign:"right" },
+                          { title: "Clima", field: "clima", hozAlign:"right" },
+                          { title: "Falta Viat", field: "viat", hozAlign:"right" },
+                          { title: "Falta Prog", field: "prog", hozAlign:"right" },
+                          { title: "Falta Verba", field: "verba", hozAlign:"right" },
+                          { title: "Greve", field: "greve", hozAlign:"right" },
+                          { title: "Outros", field: "outros", hozAlign:"right" },
                         ]},
-                        { title: "Total", field: "total", type: "number", hozAlign:"right" },
+                        { title: "Total", field: "total", hozAlign:"right" },
                       ];
           break;
         case '12':
@@ -402,19 +395,33 @@ export default {
                         }},
                       ];
           break;
+        case '14':
+          this.title = 'Boletim de Campo';
+          this.columns = [
+                        { title: "Dia", field: "dia",  },
+                        { title: "Município", field: "municipio",  },
+                        { title: "Produção", field: "producao",  },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Modalidade", field: "modalidade",  },
+                        { title: "Perda", field: "perda",  },                        
+                        { title: "Custo", field: "valor", sorter: "number", hozAlign:"right", },
+                        { title: "Função", field: "funcao",  },        
+                      ];
+          break;
         default:
           break;
       }
-    }
-  },
-  mounted() {
-    this.isLoading = true;
-  
-    reportService.getRelat(this.id,this.filter)
+      this.loadData();
+    },
+    loadData(){
+      this.isLoading = true; 
+      reportService.getRelat(this.id,this.filter)
       .then((response) => {
         var data = response.data;
         if (this.id == '8'){
           this.dataTable = data.data.dados;
+          this.extra = `Nº Desin/Dia disponíveis: ${data.data.total}  -   Indicador de Utilização: ${data.data.indicador}`;
         } else {
           this.dataTable = data.data;
         }
@@ -427,12 +434,15 @@ export default {
         //console.log('done');
         this.isLoading = false;
       });
+    }
+  },
+  mounted() {
     
-    this.createColumns();
   },
   created() {
     this.id = this.$route.params.id;
     this.filter = localStorage.getItem('filter');
+    this.createColumns();
   },
 };
 </script>
