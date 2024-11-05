@@ -95,6 +95,12 @@
                         XXGG
                       </label>
                     </div>
+                    <div class="column is-1">
+                      <label class="radio">
+                        <input type="radio" name="camisa" value="99" v-model="uniforme.camisa" />
+                        N/A
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <span class="is-error" v-if="v$.uniforme.camisa.$error">
@@ -147,6 +153,12 @@
                         XXGG
                       </label>
                     </div>
+                    <div class="column is-1">
+                      <label class="radio">
+                        <input type="radio" name="camiseta" value="99" v-model="uniforme.camiseta" />
+                        N/A
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <span class="is-error" v-if="v$.uniforme.camiseta.$error">
@@ -197,6 +209,12 @@
                       <label class="radio">
                         <input type="radio" name="jaqueta" value="7" v-model="uniforme.jaqueta" />
                         XXGG
+                      </label>
+                    </div>
+                    <div class="column is-1">
+                      <label class="radio">
+                        <input type="radio" name="jaqueta" value="99" v-model="uniforme.jaqueta" />
+                        N/A
                       </label>
                     </div>
                   </div>

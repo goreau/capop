@@ -101,7 +101,7 @@ export default {
           .finally(() => this.isLoading = false);
 
       this.columns = [
-          {title: 'Data', field: 'data', sorter:"date", minWidth: 50, responsive: 2,formatter:"datetime", formatterParams:{
+          {title: 'Data', field: 'data', sorter:"date", minWidth: 100, responsive: 2,formatter:"datetime", formatterParams:{
               inputFormat:"yyyy-MM-dd",
               outputFormat:"dd/MM/yyyy",
               invalidPlaceholder:"Data inválida",
@@ -114,7 +114,8 @@ export default {
           {title: 'Produção', field: 'producao', minWidth: 100},
           {title: 'Tipo Pgto', field: 'pagamento', minWidth: 100},
           {title: 'Valor', field: 'valor', minWidth: 100},
-          {title: 'Ações', responsive: 0, minWidth: 250, 
+          {title: 'Responsável', field: 'owner', minWidth: 100},
+          {title: 'Ações', responsive: 0, minWidth: 200, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();
 

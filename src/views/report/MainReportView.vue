@@ -18,8 +18,8 @@
                       <div class="field">
                         <label class="label">Regional</label>
                         <div class="control">
-                          <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_drs" :tipo="2"
-                            @selTerr="filter.id_drs = $event" />
+                          <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_regional" :tipo="2"
+                            @selTerr="filter.id_regional = $event" />
                         </div>
                       </div>
                     </div>
@@ -35,7 +35,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="columns">
+                  <div class="columns" v-if="hasFilter.municipio.indexOf(this.tipo_relat) == -1">
                     <div class="column is-full">
                       <div class="field">
                         <label class="label">Município</label>
@@ -46,7 +46,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="columns" v-if="tipo_relat == 1 || tipo_relat == 14">
+                  <div class="columns" v-if="hasFilter.servidor.indexOf(this.tipo_relat) > -1">
                     <div class="column is-full">
                       <div class="field">
                         <label class="label">Servidor</label>
@@ -56,7 +56,7 @@
                       </div>
                     </div>
                   </div>
-                  <fieldset class="fieldset" v-if="tipo_relat == 1">
+                  <fieldset class="fieldset" v-if="hasFilter.uniforme.indexOf(this.tipo_relat) > -1">
                     <legend>Tipo de Uniforme</legend>
                     <div class="control has-icons-left has-icons-right">
                       <div class="columns">
@@ -99,7 +99,7 @@
                       </div>
                     </div>
                   </fieldset>
-                  <div class="columns" v-if="hasData">
+                  <div class="columns" v-if="hasFilter.data.indexOf(this.tipo_relat) == -1">
                     <div class="column is-4">
                       <label class="label">Início</label>
                       <div class="field">
@@ -173,6 +173,12 @@ export default {
         id_prop: 0,
         unif: 1,
       },
+      hasFilter:{
+        servidor: ['1','14'],
+        municipio: ['1','2','5'],
+        data: ['1','5'],
+        uniforme: ['1']
+      },
       cFooter: {
         strSubmit: 'Filtrar',
         strCancel: 'Cancelar',
@@ -205,6 +211,9 @@ export default {
     CmbServidor
   },
   methods: {
+    closeMessage(){
+      this.showMessage = false;
+    },
     processar() {
       this.filter.id_prop = this.id_usuario;
       localStorage.setItem('filter', JSON.stringify(this.filter));
@@ -229,7 +238,7 @@ export default {
       this.ini_date = this.filter.dt_inicio == '' ? null : moment(String(this.filter.dt_inicio)).format('DD/MM/YYYY');
       this.fim_date = this.filter.dt_final == '' ? null : moment(String(this.filter.dt_final)).format('DD/MM/YYYY');
     }
-    if (this.hasData) {
+    if (this.hasFilter.data.indexOf(this.tipo_relat) == -1) {
 
       const teste = document.querySelector('#dtIni');
 

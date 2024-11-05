@@ -39,6 +39,9 @@ export default {
     }
   },
   methods: {
+    closeMessage(){
+      this.showMessage = false;
+    },
     alertEmail() {
       authService.getUserData(this.user).then(
         (response) => {

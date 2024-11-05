@@ -108,6 +108,7 @@ export default {
               timezone:"America/Sao_Paulo",
           }},
           {title: 'Local', field: 'local', minWidth: 250},
+          {title: 'Responsável', field: 'owner', minWidth: 150},
           {title: 'Ações', responsive: 0, minWidth: 250, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();

@@ -110,6 +110,7 @@ export default {
           {title: 'Local', field: 'municipio', minWidth: 250},
           {title: 'Programa', field: 'programa', minWidth: 150},
           {title: 'Atividade', field: 'atividade', minWidth: 250, responsive: 3},
+          {title: 'Responsável', field: 'owner', minWidth: 150},
           {title: 'Ações', responsive: 0, minWidth: 250, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();

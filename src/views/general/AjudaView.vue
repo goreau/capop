@@ -11,10 +11,10 @@
             <div class="content">
               <div class="columns">
                 <ul>
-                  <li><a href="/Capop/files/instrução.pdf"  target="_blank">Instrução de Preenchimento</a></li>
-                  <li><a href="/Capop/files/boletim.pdf" target="_blank">Boletim de Campo</a></li>
+                  <li><a href="'/files/instrução.pdf'"  target="_blank">Instrução de Preenchimento</a></li>
+                  <li><a href="'/files/boletim.pdf'" target="_blank">Boletim de Campo</a></li>
                   <li><a @click="gerar" target="_blank">Listagem de Códigos</a></li>
-                  <li><a href="/Capop/files/relação.pdf" target="_blank">Relação de Atividades segundo orgão responsável</a></li>
+                  <li><a href="'/files/relação.pdf'" target="_blank">Relação de Atividades segundo orgão responsável</a></li>
                   <!-- <a v-bind:href="item.loc" download>{{item.title}}</a>-->
                 </ul>
                 <br>
@@ -41,10 +41,16 @@ export default {
   },
   data() {
     return {
-  //    bol: {title: 'Boletim de Campo', loc: require( '../../assets/files/boletim.pdf')}
+      message: "",
+      caption: "",
+      type: "",
+      showMessage: false,
     }
   },
   methods: {
+    closeMessage(){
+      this.showMessage = false;
+    },
     gerar() {
       auxiliaresService.getListaAtividades().then(
         (response) => {

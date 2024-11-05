@@ -110,6 +110,7 @@ export default {
           {title: 'Local', field: 'local', minWidth: 350},
           {title: 'Ativo', field: 'ativo', formatter:"tickCross", hozAlign:"center",minWidth: 20},
           {title: 'Temp', field: 'temporario', formatter:"tickCross", hozAlign:"center",minWidth: 20},
+          {title: 'Responsável', field: 'owner', minWidth: 100},
           {title: 'Ações', responsive: 0, minWidth: 250, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();
