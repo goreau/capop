@@ -29,7 +29,7 @@
                     <label class="label">Município</label>
                     <div class="control">
                       <CmbMunicipio :id_prop="planejamento.id_municipio" :tipo="9" :sel="planejamento.id_municipio"
-                        @selMun="planejamento.id_municipio = $event" :all="currentUser.nivel > 1"
+                        @selMun="planejamento.id_municipio = $event" :all="currentUser.nivel > 1" :loadAll="true"
                         :errclass="{ 'is-danger': v$.planejamento.id_municipio.$error }" />
                       <span class="is-error" v-if="v$.planejamento.id_municipio.$error">
                         {{ v$.planejamento.id_municipio.$errors[0].$message }}
@@ -340,6 +340,9 @@ export default {
       this.isLoading = false;
     },
     update() {
+      this.planejamento.diaria = this.forceChangeComma(this.planejamento.diaria);
+      this.planejamento.gratificacao = this.forceChangeComma(this.planejamento.gratificacao);
+      this.planejamento.etapa = this.forceChangeComma(this.planejamento.etapa);
       this.v$.$validate();
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");

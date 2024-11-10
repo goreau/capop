@@ -9,7 +9,8 @@
           </header>
           <div class="card-content">
             <span class="filter">{{ strFiltro }}</span>
-            <MyTable :tableData="dataTable" :columns="columns" :filtered="false" :tableName="tableName" :extra="extra"  v-if="id != 12"/>
+            <MyTable :tableData="dataTable" :columns="columns" :filtered="false" :tableName="tableName" :extra="extra"  v-if="grouped.indexOf(id) == -1"/>
+            <MyGroupedTable :tableData="dataTable" :columns="columns" :is-filtered="false" :myGroups="group" :has-exports="true" v-if="grouped.indexOf(id) > -1"/>
           </div>
         </div>
       </div>
@@ -36,6 +37,8 @@ export default {
       strFiltro: '',
       tableName: 'capop_relatorio',
       extra: '',
+      grouped: ['12','15'],
+      group:[],
     };
   },
   components: {
@@ -348,10 +351,10 @@ export default {
           break;
         case '12':
         this.title = 'Custo por Programa';
-        this.group = ['local','programa']
+        this.group = ['programa','local']
           this.columns = [
-                        { title: "Local", field: "local" },
                         { title: "Programa", field: "programa"},
+                        { title: "Local", field: "local" },    
                         { title: "Favorecido", field: "favorecido"},
                         { title: "Função", field: "funcao"},                       
                         { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -385,11 +388,17 @@ export default {
           break;
         case '13':
           this.title = 'Resumo para PPA';
-          this.group = ['local','programa']
           this.columns = [
-                        { title: "Visitas", field: "visitas" },
-                        { title: "Capacitações", field: "capacitacoes"},
-                        { title: "Assessorias", field: "assessorias"},
+                        { title: "Visitas", field: "visitas", formatter:function(cell, formatterParams, onRendered){   
+                              return cell.getValue() == null ? 0 :cell.getValue(); //return the contents of the cell;
+                          }, 
+                        },
+                        { title: "Capacitações", field: "capacitacoes", formatter:function(cell, formatterParams, onRendered){   
+                              return cell.getValue() == null ? 0 :cell.getValue(); //return the contents of the cell;
+                          },},
+                        { title: "Assessorias", field: "assessorias", formatter:function(cell, formatterParams, onRendered){   
+                              return cell.getValue() == null ? 0 :cell.getValue(); //return the contents of the cell;
+                          },},
                         {title:"Total", field:"c", mutator:function(value, data){
                             return data.visitas + data.capacitacoes + data.assessorias;
                         }},
@@ -407,6 +416,43 @@ export default {
                         { title: "Perda", field: "perda",  },                        
                         { title: "Custo", field: "valor", sorter: "number", hozAlign:"right", },
                         { title: "Função", field: "funcao",  },        
+                      ];
+          break;
+        case '15':
+          this.title = 'Custo por Local';
+          this.group = ['local','programa']
+          this.columns = [
+                        { title: "Local", field: "local" },
+                        { title: "Programa", field: "programa"},
+                        { title: "Favorecido", field: "favorecido"},
+                        { title: "Função", field: "funcao"},                       
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },
+                        { title: "Gratificação", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },    
+                        { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            precision:false,
+                          }
+                        },   
                       ];
           break;
         default:

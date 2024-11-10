@@ -33,7 +33,7 @@ export default {
       tudo: false,
     };
   },
-  props: ['id_prop', 'sel', 'errclass', 'disabled', 'all'],
+  props: ['id_prop', 'sel', 'errclass', 'disabled', 'all','loadAll'],
   methods: {
     trocaLista() {
       this.tudo = this.tudo ? false : true;
@@ -65,12 +65,14 @@ export default {
     }
   },
   watch: {
-    /*  id_prop(value) {
-        this.loadData();
+     /* loadAll(value) {
+        this.tudo == loadAll == true ? true : false;
       },*/
   },
   mounted() {
+    this.tudo = this.loadAll == true ? true : false;
     this.loadData();
+    
   },
 
 };

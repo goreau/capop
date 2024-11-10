@@ -25,3 +25,8 @@ export const maxValue$ = (max) => helpers.withMessage(({ $params}) => `O valor m
 export const between$ = (min, max) => helpers.withMessage(({ $params}) => `O valor deve estar entre ${$params.min} e ${$params.max}.`, between(min, max))
 
 export const requiredIf$ = (cond) => helpers.withMessage('Informe o valor desse campo.', requiredIf(cond))
+
+
+export const minLengthIfFilled$ = (min) => helpers.withMessage(({ $params }) => `O tamanho mínimo permitido é de ${ min } caracteres.`,   (value) => value.length === 0 || value.length >= min)
+
+//export const minLengthIfFilled$ = (min) => helpers.withMessage(({ $params }) => `O tamanho mínimo permitido é de ${$params.min} caracteres.`,   minLength(min) || maxLength(0))

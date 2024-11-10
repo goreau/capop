@@ -426,6 +426,10 @@ export default {
               title: "Custo por Programa",
             },
             {
+              href: "/mainReport/15",
+              title: "Custo por Local",
+            },
+            {
               href: "/mainReport/13",
               title: "Resumo para PPA",
             },

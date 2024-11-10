@@ -11,12 +11,14 @@
             <div class="content">
               <div class="columns">
                 <ul>
-                  <li><a href="'/files/instrução.pdf'"  target="_blank">Instrução de Preenchimento</a></li>
-                  <li><a href="'/files/boletim.pdf'" target="_blank">Boletim de Campo</a></li>
+                  <li><a href="/capop/files/instrução.pdf"  target="_blank">Instrução de Preenchimento</a></li>
+                  <li><a href="/capop/files/boletim.pdf" target="_blank">Boletim de Campo</a></li>
                   <li><a @click="gerar" target="_blank">Listagem de Códigos</a></li>
-                  <li><a href="'/files/relação.pdf'" target="_blank">Relação de Atividades segundo orgão responsável</a></li>
-                  <!-- <a v-bind:href="item.loc" download>{{item.title}}</a>-->
+                  <li><a href="/capop/files/relação.pdf" target="_blank">Relação de Atividades segundo orgão responsável</a></li>
+                  <li><a href="/capop/files/atualizacao.html" target="_blank">Histórico de Atualizações</a></li>
+                  <!--<li><a href="./files/atualizacao.html" target="_blank">Atualizações</a></li>-->
                 </ul>
+                
                 <br>
                 <br>
               </div>

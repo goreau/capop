@@ -169,7 +169,7 @@
         this.filter = e.target.checked;
       },
     },
-    props: ["tableData", "columns","filtered"],
+    props: ["tableData", "columns","filtered","myGroups"],
     watch: {
       tableData(value) {
         this.tabulator = new Tabulator(this.$refs.table, {
@@ -182,12 +182,13 @@
           columns: this.columns, //define table columns
           pagination: "servidor",
           paginationSize: 10,
-          groupBy: ['local', 'programa'],
+          groupBy: this.myGroups,
           groupStartOpen:[false, false],
           groupHeader:[
                   function(value, count, data, group){ //generate header contents for gender groups 
                       group.getElement().style.backgroundColor = "#D3D4DC";
                       var total = 0;
+                      var fant = [];
                       var rows = tabulatorGetGroupData(group);
                       for (var i = 0; i < rows.length; i++) {
                           total += parseFloat(rows[i].data.total);
@@ -201,6 +202,7 @@
                           return rows;
                       }
                   function tabulatorGetGroupDataList(groupList) {
+                      fant.push(groupList.field.toUpperCase());
                       var rows = groupList.rows;
                       for (var i = 0; i < groupList.groupList.length; i++) {
                           rows = rows.concat(tabulatorGetGroupDataList(groupList.groupList[i]));
@@ -208,17 +210,18 @@
                       return rows;
                   }
   
-                      return "Local: " + value + "<span style='color:#00d; margin-left:10px;'>  - Total: " + tot + "</span>";
+                      return  `${fant[0]}: ` + value + "<span style='color:#00d; margin-left:10px;'>  - Total: " + tot + "</span>";
                   },
                   function(value, count, data, group){ //generate header contents for color groups
                       var total = 0;
-                      
+                      var fant = group._group.field.toUpperCase();
+
                       for (var i = 0; i < data.length; i++) {
                           total += parseFloat(data[i].total);
                       }
                       var tot = ' - R$ ' +  total.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                       group.getElement().style.backgroundColor = '#F1F2F8';
-                      return "Programa: " + value + "<span style='color:#1D8423; margin-left:10px;'>  -  " + tot + "</span>";
+                      return`${fant}: ` + value + "<span style='color:#1D8423; margin-left:10px;'>  -  " + tot + "</span>";
                   },
                   
           ],

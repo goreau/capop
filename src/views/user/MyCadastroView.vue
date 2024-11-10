@@ -110,7 +110,11 @@
                     type="password"
                     v-model="user.old_password"
                     placeholder="Informe a senha"
+                    :class="{ 'is-danger': v$.user.old_password.$error }"
                   />
+                  <span class="is-error" v-if="v$.user.old_password.$error">
+                    {{ v$.user.old_password.$errors[0].$message }}
+                  </span>
                 </div>
               </div>
               <div class="field">
@@ -143,7 +147,7 @@
                   </span>
                 </div>
               </div>
-              <div class="columns">
+              <div class="columns" v-if="false">
                 <div class="column is-1 is-offset-11 vs">{{ version }}</div>
               </div>
             </div>
@@ -166,7 +170,9 @@ import authService from "@/services/auth.service";
 import useValidate from "@vuelidate/core";
 import {
   required$,
+  requiredIf$,
   minLength$,
+  minLengthIfFilled$,
   email$,
   sameAs$
 } from "../../components/forms/validators.js";
@@ -184,7 +190,7 @@ export default {
         role: 0,
         id: 1,
       },
-      version: '29.08',
+      version: '14.11',
       senha: '',
       v$: useValidate(),
       unidade:'',
@@ -205,11 +211,12 @@ export default {
   validations(){
     return {
       user: {
-        nome: {required$, minLength: minLength$(10)},
-        new_password: {required$, minLength: minLength$(4)},
+        nome: {minLength: minLength$(10)},
+        new_password: {minLength: minLengthIfFilled$(4)},
+        old_password: {requiredIf: requiredIf$(this.user.new_password.length > 0),},
         email: {required$, email$},
       },
-      senha: {sameAs: sameAs$(this.user.new_password)}
+      senha: {sameAs: sameAs$(this.user.new_password) || !this.user.new_password}
     }
   },
   computed: {
@@ -229,6 +236,7 @@ export default {
   methods: {  
     update() {
       this.v$.$validate(); 
+      var teste = this.v$.senha.$dirty;
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");
 
@@ -269,7 +277,7 @@ export default {
           this.user.email = data.email;
           this.municipio = data.tlocal;
           this.user.role = data.nivel;
-          this.user.password = data.password;
+          //this.user.old_password = data.password;
           this.user.username = data.username;
           this.strLocal = (data.nivel == 3 ? 'GVE' : (data.nivel == 1 ? 'Local' : 'Regional'));
         },

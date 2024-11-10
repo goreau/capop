@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizações</title>
+    <script>
+        
+    </script>
+    <style type="text/css">
+        li{
+            font-size: 1.5rem;
+        }
+        body{
+            padding: 1rem 3rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data: 14/11/2024</h1>
+    <h2>Materiais Auxiliares</h2>
+    <ul>
+        <li>Criado o histórico de atualizações para auxiliar na fase de implantação do sistema</li>
+    </ul>
+    <br>
+    <h2>Meu cadastro</h2>
+    <ul>
+        <li>permite edição de dados sem o preenchimento de todos os campos: altere o nome, login ou email, sem precisar preencher os campos de senha</li>
+        <li>para a alteração da senha, preencha os campos senha atual, nova senha e confirme a senha</li>
+    </ul>
+    <br>
+    <h2>Servidor</h2>
+    <ul>
+        <li>alterada a exclusão de servidor, seguindo uma das 3 possibilidades:</li>
+        <ol>
+            <li>Servidor não foi utilizado em nenhuma outra fonte de informação (uniforme, atividade de campo ou laboratório) -> o servidor é excluído permanentemente</li>
+            <li>Servidor teve apenas seu uniforme inserido, sem outra fonte de informação -> a informação do uniforme e o servidor são excluídos permanentemente</li>
+            <li>Servidor foi utilizados nas demais fontes de informação -> servidor é marcado como inativo e é informado ao usuário a fonte com dados relacionados.
+                <br>Dessa forma, o servidor não aparece mais nas listas de escolha de servidor em novas atividades, mas as informações onde foi utilizado ficam preservadas;
+                <br>Para excluir definitivamente o servidor, é preciso excluir ou editar os registros onde ele foi utilizado e depois repetir a rotina de exclusão;
+                <br>Quando não houver masi registros associados ao servidor, será seguida a rotina descrita no item 1
+            </li>
+        </ol>
+    </ul>
+    <br>
+    <h2>Usuário - Excluir</h2>
+    <ul>
+        <li>Exibição de resumo do que será processado, visando dar mais segurança ao processo de exclusão de usuário</li>
+    </ul>
+    <br>
+
+</body>
+</html>

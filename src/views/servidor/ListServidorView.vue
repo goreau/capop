@@ -68,8 +68,8 @@ export default {
 
   },
   methods: {
-    newUser() {
-      this.$router.push('/user');
+      newUser() {
+        this.$router.push('/servidor');
       },
       editUser(id) {
           this.$router.push(`/manage/${id}`);
@@ -147,13 +147,27 @@ export default {
                 servidorService.delete(row.id_servidor)
                 .then(resp =>{
                   if (resp.status == '200'){
-                    location.reload();
+                    if (resp.data.err){
+                      var uses = resp.data.msg.join();
+                      this.message = `Esse usuário tem uso nas seguinte(s) fonte(s) de informação: <b> ${uses}</b>. Ele foi marcado como inativo. Para excluí-lo definitavamente, exclua os usos e depois tente novamente!`;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Usuário";
+                      setTimeout(() => {
+                        this.showMessage = false;
+                        location.reload();
+                      }, 5000);
+                      
+                    } else {
+                      location.reload();
+                    }
+                    
                   } else {
                     this.message = resp;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Usuário";
-                    setTimeout(() => (this.showMessage = false), 3000);
+                    setTimeout(() => {this.showMessage = false}, 3000);
                   }
                 })
                 .catch(err =>{
@@ -161,7 +175,7 @@ export default {
                   this.showMessage = true;
                   this.type = "alert";
                   this.caption = "Usuário";
-                  setTimeout(() => (this.showMessage = false), 3000);
+                  setTimeout(() => {this.showMessage = false}, 3000);
                 })
               }
               });

@@ -1,7 +1,7 @@
 <template>
   <div class="control">
     <div class="select">
-      <select @change="onChange($event)" class="input" :class="errclass" :disabled="disabled">
+      <select @change="onChange($event)" :id="id" class="input" :class="errclass" :disabled="disabled">
         <option value="0">-- Selecione --</option>
         <option
           v-for="loc in auxiliares"
@@ -24,10 +24,10 @@ export default {
   name: "CmbAuxiliar",
   data() {
     return {
-      auxiliares: [],
+      auxiliares: []
     };
   },
-  props: ['sel', 'errclass','tipo', 'aux', 'disabled'],
+  props: ['sel', 'errclass','tipo', 'aux', 'disabled', 'id'],
   methods: {
     onChange(event) {
       this.$emit('selAux',event.target.value);
@@ -49,7 +49,7 @@ export default {
     },
     aux(value) {
       this.loadData();
-    }
+    },
   },
   mounted() {
     this.loadData();

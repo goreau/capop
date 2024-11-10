@@ -47,7 +47,7 @@
                     <div class="control">
                       <CmbMunicipio :id_prop="atividade.id_municipio" :tipo="9" :disabled="atividade.id_perda != 999"
                         @selMun="atividade.id_municipio = $event" :sel="atividade.id_municipio" :all="currentUser.nivel > 1"
-                        :errclass="{ 'is-danger': v$.atividade.id_municipio.$error }" />
+                        :errclass="{ 'is-danger': v$.atividade.id_municipio.$error }" :loadAll="true" />
                       <span class="is-error" v-if="v$.atividade.id_municipio.$error">
                         {{ v$.atividade.id_municipio.$errors[0].$message }}
                       </span>
