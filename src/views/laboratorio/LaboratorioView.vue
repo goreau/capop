@@ -137,6 +137,12 @@ export default {
     footerCard
   },
   methods: {
+    repeat(){
+      let dt = moment(this.laboratorio.dt_cadastro).add(1, 'd');
+      this.laboratorio.dt_cadastro = dt.format('YYYY-MM-DD');
+      this.startCalendar();
+      this.cFooter.aux = false;
+    },
     startCalendar() {
       const teste = document.querySelector('#dtCad');
 
@@ -276,6 +282,7 @@ export default {
             this.message = "Laboratório cadastrado com sucesso.";
             this.type = "success";
             this.caption = "Laboratório";
+            this.cFooter.aux = true;
             setTimeout(() => (this.showMessage = false), 3000);
           },
           (error) => {

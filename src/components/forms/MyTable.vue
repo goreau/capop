@@ -188,10 +188,10 @@ export default {
       let me = this;
 
       this.tabulator.on("tableBuilt", function () {
-        if (me.filter && me.tabulator.ta) {
-          if (this.arrFilter.lenght > 0){
-            this.tabulator.setFilter(this.arrFilter);
-          }
+        if (me.filter ) {//&& me.tabulator.ta
+          if (me.arrFilter.length > 0){
+            me.tabulator.setFilter(me.arrFilter);
+          } 
          // this.$router.go();
         }
       //  this.isLoading = false;

@@ -31,7 +31,7 @@
             </div>
           </div>
           <footer class="card-footer">
-            <footerCard @submit="save" @cancel="null" @aux="details" :cFooter="cFooter" />
+            <footerCard @submit="save" @cancel="null" @aux="null" :cFooter="cFooter" />
           </footer>
         </div>
       </div>

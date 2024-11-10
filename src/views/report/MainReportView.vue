@@ -18,8 +18,8 @@
                       <div class="field">
                         <label class="label">Regional</label>
                         <div class="control">
-                          <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_regional" :tipo="2"
-                            @selTerr="filter.id_regional = $event" />
+                          <CmbTerritorio :id_prop="currentUser.id" :sel="filterCp.id_regional" :tipo="2"
+                            @selTerr="filterCp.id_regional = $event" />
                         </div>
                       </div>
                     </div>
@@ -29,8 +29,8 @@
                       <div class="field">
                         <label class="label">GVE</label>
                         <div class="control">
-                          <CmbTerritorio :id_prop="currentUser.id" :sel="filter.id_gve" :tipo="3"
-                            @selTerr="filter.id_gve = $event" />
+                          <CmbTerritorio :id_prop="currentUser.id" :sel="filterCp.id_gve" :tipo="3"
+                            @selTerr="filterCp.id_gve = $event" />
                         </div>
                       </div>
                     </div>
@@ -40,8 +40,8 @@
                       <div class="field">
                         <label class="label">Município</label>
                         <div class="control">
-                          <CmbMunicipio :id_prop="currentUser.id" :sel="filter.id_municipio" :tipo="9" :all="false"
-                            @selTerr="filter.id_municipio = $event" />
+                          <CmbMunicipio :id_prop="currentUser.id" :sel="filterCp.id_municipio" :tipo="9" :all="false"
+                            @selTerr="filterCp.id_municipio = $event" />
                         </div>
                       </div>
                     </div>
@@ -51,7 +51,7 @@
                       <div class="field">
                         <label class="label">Servidor</label>
                         <div class="control">
-                          <CmbServidor :id_prop="filter.id_prop" :tipo="9" @selServ="filter.id_servidor = $event" />
+                          <CmbServidor :id_prop="filterCp.id_prop" :tipo="9" @selServ="filterCp.id_servidor = $event" />
                         </div>
                       </div>
                     </div>
@@ -62,7 +62,7 @@
                       <div class="columns">
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="1" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="1" v-model="filterCp.unif" />
                             Calça
                           </label>
                         </div>
@@ -162,7 +162,7 @@ export default {
   data() {
     return {
       tipo_relat: 1,
-      filter: {
+      filterCp: {
         id_regional: 0,
         id_gve: 0,
         dt_inicio: "",
@@ -231,7 +231,7 @@ export default {
       this.id_usuario = cUser.id;
     }
 
-    var obj = localStorage.getItem('filter');
+    var obj = localStorage.getItem('filterCp');
     if (obj) {
       this.filter = JSON.parse(obj);
 
@@ -349,11 +349,11 @@ export default {
       if (elementM) {
         // bulmaCalendar instance is available as element.bulmaCalendar
         elementM.bulmaCalendar.on('select', datepicker => {
-          this.filter.mes = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+          this.filterCp.mes = moment(datepicker.data.startDate).format('YYYY-MM-DD');
         });
 
         elementM.bulmaCalendar.on('clear', datepicker => {
-          this.filter.mes = '';
+          this.filterCp.mes = '';
         });
       }
     }

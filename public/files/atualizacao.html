@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizações</title>
     <script>
-        
+
     </script>
     <style type="text/css">
         li{
@@ -46,6 +46,24 @@
     <h2>Usuário - Excluir</h2>
     <ul>
         <li>Exibição de resumo do que será processado, visando dar mais segurança ao processo de exclusão de usuário</li>
+    </ul>
+    <br>
+    <h2>Consultas (todas)</h2>
+    <ul>
+        <li>Como usar o filtro:</li>
+        <ol>
+            <li>Defina os valores dos campos Coluna, Comparador e Valor conforme o que e como deseja filtrar os dados da tabela. A seguir, pressione o botão de filtrar (azul) para aplicar o filtro.
+                <br>O campo coluna indica em qual das colunas da tabela será aplicada a condição definida pelos campos Comparador e Valor;
+                <br>O campo comparador define a forma como o Valor será procurado. 
+                <br>A opção 'contendo' é a mais abrangente, permitindo filtrar parcialmente um campo, por exemplo, coluna = nome, comparador = contendo e valor = sil, filtrará todas as ocorrencias
+                dessas letras (sil) no campo nome, retornando por exemplo, registros como <b>Sil</b>vio..., ... da <b>Sil</b>va, ...Bra<b>sil</b>..., etc..
+                <br>A opção 'igual' filtará apenas os registros com a exata correspondencia do texto informado em valor. É util por exemplo, para filtrar uma determinada data.
+                <br>As opções maior que e menor que, são aplicáveis preferencialmente a campos data e numéricos, filtrando os valores que obedecem a essa condição definida em valor
+            </li>
+            <li>Caso queira filtrar uma nova informação, primeiro limpe o filtro anterior, clicando no botão limpar (verde) e repita o processo descrito em 1.</li>
+            <li>Caso queira aplicar um novo filtro aos dados ja filtrados, repita o processo descrito em 1, sem limpar o filtro ja aplicado. Isso aplicará o novo filtro apenas aos dados já filtrados (filtros cumulativos) </li>
+            <li>Ao retornar a uma tela de consulta após realizar outras ações (como outra consulta ou inserção de dados), o último filtro aplicado (simples ou cumulativo) será reaplicado aos dados da tabela. Case deseje, limpe os dados para visualizar todos os registros ou aplicar um novo filtro. </li>
+        </ol>
     </ul>
     <br>
 
