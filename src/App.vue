@@ -216,6 +216,56 @@ export default {
           ],
         },
         {
+          href: "",
+          title: "Mobile",
+          icon: {
+            element: "font-awesome-icon",
+            attributes: {
+              icon: "fa-solid fa-mobile-screen",
+              size: "lg",
+              transform: "shrink-8",
+            },
+          },
+          child: [
+            {
+              href: "/mobileResp",
+              title: "Responsável",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/mobileFiles",
+              title: "Arquivos",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-file-lines",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/mobileManual",
+              title: "Recebimento Manual",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-wrench",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+          ]
+        },
+        {
           href: "/servidor",
           title: "Servidores",
           icon: {

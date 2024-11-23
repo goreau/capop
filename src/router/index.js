@@ -173,6 +173,26 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ListManutencaoView.vue'),
   },
   {
+    path: '/mobileResp',
+    name: 'mobileResp',
+    component: () => import(/* webpackChunkName: "user" */ '../views/mobile/ListTerritorioView.vue'),
+  },
+  {
+    path: '/mobileEditResp/:territorio',
+    name: 'mobileEditResp',
+    component: () => import(/* webpackChunkName: "user" */ '../views/mobile/EditRespView.vue'),
+  },
+  {
+    path: '/mobileFiles',
+    name: 'mobileFiles',
+    component: () => import(/* webpackChunkName: "user" */ '../views/mobile/ListFilesView.vue'),
+  },
+  {
+    path: '/mobileManual',
+    name: 'mobileManual',
+    component: () => import(/* webpackChunkName: "user" */ '../views/mobile/ManualView.vue'),
+  },
+  {
     path: '/mainReport/:id',
     name: 'mainReport',
     component: () => import(/* webpackChunkName: "user" */ '../views/report/MainReportView.vue'),

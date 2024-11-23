@@ -107,6 +107,7 @@ export default {
               invalidPlaceholder:"Data inválida",
               timezone:"America/Sao_Paulo",
           }},
+          {title: 'Unidade', field: 'unidade', minWidth: 250},
           {title: 'Servidor', field: 'servidor', minWidth: 300, responsive: 1},
           {title: 'Local', field: 'local', minWidth: 250},
           {title: 'Programa', field: 'programa', minWidth: 150},

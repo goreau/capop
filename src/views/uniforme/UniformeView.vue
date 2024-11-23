@@ -347,6 +347,7 @@ export default {
           let data = response.data;
           this.serv_nome = data.nome;
           if (data.id_uniforme == null) return;
+          this.uniforme.id_uniforme = data.id_uniforme;
           this.uniforme.camisa = data.camisa;
           this.uniforme.camiseta = data.camiseta;
           this.uniforme.jaqueta = data.jaqueta;
@@ -380,7 +381,7 @@ export default {
         uniformeService.upsert(this.uniforme).then(
           (response) => {
             this.showMessage = true;
-            this.message = "Uniforme cadastrado com sucesso.";
+            this.message = this.id_uniforme == 0 ? "Uniforme cadastrado com sucesso." : "Uniforme alterado com sucesso.";
             this.type = "success";
             this.caption = "Uniforme";
             setTimeout(() => (this.showMessage = false), 3000);

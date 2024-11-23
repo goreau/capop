@@ -215,8 +215,8 @@ export default {
       this.showMessage = false;
     },
     processar() {
-      this.filter.id_prop = this.id_usuario;
-      localStorage.setItem('filter', JSON.stringify(this.filter));
+      this.filterCp.id_prop = this.id_usuario;
+      localStorage.setItem('filterCp', JSON.stringify(this.filterCp));
 
       if (this.tipo_relat < 100) {
         this.$router.push(`/report/${this.tipo_relat}`);
@@ -233,10 +233,10 @@ export default {
 
     var obj = localStorage.getItem('filterCp');
     if (obj) {
-      this.filter = JSON.parse(obj);
+      this.filterCp = JSON.parse(obj);
 
-      this.ini_date = this.filter.dt_inicio == '' ? null : moment(String(this.filter.dt_inicio)).format('DD/MM/YYYY');
-      this.fim_date = this.filter.dt_final == '' ? null : moment(String(this.filter.dt_final)).format('DD/MM/YYYY');
+      this.ini_date = this.filterCp.dt_inicio == '' ? null : moment(String(this.filterCp.dt_inicio)).format('DD/MM/YYYY');
+      this.fim_date = this.filterCp.dt_final == '' ? null : moment(String(this.filterCp.dt_final)).format('DD/MM/YYYY');
     }
     if (this.hasFilter.data.indexOf(this.tipo_relat) == -1) {
 
@@ -267,11 +267,11 @@ export default {
       if (element) {
         // bulmaCalendar instance is available as element.bulmaCalendar
         element.bulmaCalendar.on('select', datepicker => {
-          this.filter.dt_inicio = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+          this.filterCp.dt_inicio = moment(datepicker.data.startDate).format('YYYY-MM-DD');
         });
 
         element.bulmaCalendar.on('clear', datepicker => {
-          this.filter.dt_inicio = '';
+          this.filterCp.dt_inicio = '';
         });
       }
 
@@ -305,11 +305,11 @@ export default {
       if (element2) {
         // bulmaCalendar instance is available as element.bulmaCalendar
         element2.bulmaCalendar.on('select', datepicker => {
-          this.filter.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+          this.filterCp.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
         });
 
         element2.bulmaCalendar.on('clear', datepicker => {
-          this.filter.dt_final = '';
+          this.filterCp.dt_final = '';
         });
       }
 
