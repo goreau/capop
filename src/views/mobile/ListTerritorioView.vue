@@ -92,7 +92,7 @@ export default {
           const btEdit = document.createElement('button');
           btEdit.type = 'button';
           btEdit.title = 'Alterar';
-          btEdit.disabled = this.currentUser.nivel != 1;
+         // btEdit.disabled = this.currentUser.nivel != 1;
           btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
           btEdit.classList.add('button', 'is-primary', 'is-outlined');
           btEdit.innerHTML = this.myspan.innerHTML;

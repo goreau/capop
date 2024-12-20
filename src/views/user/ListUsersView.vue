@@ -43,7 +43,7 @@ export default {
   name: 'ListaVendas',
   data() {
       return {
-          tableName: 'usuarios',
+          tableName: 'usuariosCp',
           dataTable: [],
           isLoading: false,
           showMessage: false,

@@ -338,6 +338,7 @@ export default {
       field.addEventListener('keyup', changed)
     },
     forceChangeComma(str) {
+      if (str.length == 0) str = 0;
       if (typeof str != 'string') return str;
       return str.replace(/,/g, ".");
     },
@@ -379,6 +380,8 @@ export default {
       this.isLoading = false;
     },
     update() {
+      this.atividade.valor = this.forceChangeComma(this.atividade.valor);
+      
       this.v$.$validate();
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");

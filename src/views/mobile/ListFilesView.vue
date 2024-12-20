@@ -14,7 +14,7 @@
         </div>
         <div style="display: none;">
           <span class="icon is-small is-left" name="coisa">
-            <font-awesome-icon icon="fa-solid fa-edit" />
+            <font-awesome-icon icon="fa-solid fa-eye" />
           </span>
         </div>
       </div>
@@ -84,10 +84,9 @@ export default {
 
           const btEdit = document.createElement('button');
           btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
+          btEdit.title = 'Visualizar';
           btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
+          btEdit.classList.add('button', 'is-link', 'is-outlined');
           btEdit.innerHTML = this.myspan.innerHTML;
           btEdit.addEventListener('click', () => {
             mobileService.getFile(row.fant).then(

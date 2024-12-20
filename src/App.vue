@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       hide: false,
+      user: true,
       menu: [
         {
           header: "Opções",
@@ -251,7 +252,7 @@ export default {
                 },
               },
             },
-            {
+           /* {
               href: "/mobileManual",
               title: "Recebimento Manual",
               icon: {
@@ -262,7 +263,7 @@ export default {
                   transform: "shrink-8",
                 },
               },
-            },
+            },*/
           ]
         },
         {
@@ -482,6 +483,10 @@ export default {
             {
               href: "/mainReport/13",
               title: "Resumo para PPA",
+            },
+            {
+              href: "/mainReport/16",
+              title: "Valor por Servidor",
             },
           ],
         },

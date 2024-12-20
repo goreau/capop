@@ -105,7 +105,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -114,7 +114,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },    
                         { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -123,7 +123,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },                       
                       ];
@@ -156,7 +156,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },
                           { title: "Gratifição", field: "gratificacaop", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -165,7 +165,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },    
                           { title: "Etapa", field: "etapap", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -174,7 +174,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },    
                         ]},
@@ -187,7 +187,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },
                           { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -196,7 +196,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },    
                           { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -205,7 +205,7 @@ export default {
                               symbol:"",
                               symbolAfter:"p",
                               negativeSign:true,
-                              precision:false,
+                              //.precision:false,
                             }
                           },    
                         ]}
@@ -250,7 +250,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -259,7 +259,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -268,7 +268,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },    
                         { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -277,7 +277,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },         
                       ];
@@ -315,7 +315,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Passagem", field: "passagem", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -324,7 +324,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },    
                       ];
@@ -363,7 +363,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Gratificação", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -372,7 +372,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },    
                         { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -381,7 +381,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },   
                       ];
@@ -432,7 +432,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },
                         { title: "Gratificação", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -441,7 +441,7 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
                           }
                         },    
                         { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
@@ -450,7 +450,51 @@ export default {
                             symbol:"",
                             symbolAfter:"p",
                             negativeSign:true,
-                            precision:false,
+                            //.precision:false,
+                          }
+                        },   
+                      ];
+          break;
+        case '16':
+          this.title = 'Valor por Servidor';
+          this.columns = [
+                        { title: "Local", field: "local", headerHozAlign:"center" },
+                        { title: "Nome", field: "servidor", minWidth: 450, headerHozAlign:"center"},
+                        { title: "Função", field: "funcao", headerHozAlign:"center"},                       
+                        { title: "Diária", field: "diaria", headerHozAlign:"center", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //precision:true,
+                          }
+                        },
+                        { title: "Gratificação", field: "gratificacao", headerHozAlign:"center", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //precision:true,
+                          }
+                        },    
+                        { title: "Etapa", field: "etapa", sorter: "number", headerHozAlign:"center", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //precision:true,
+                          }
+                        },   
+                        { title: "Total", field: "total", sorter: "number", headerHozAlign:"center", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //precision:true,
                           }
                         },   
                       ];

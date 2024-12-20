@@ -118,7 +118,7 @@
                   <div class="columns">
                     <div class="column is-3" v-for="pgt in pgtos" :key="pgt.id">
                       <label class="radio">
-                        <input type="radio" name="pgto" :value="pgt.id" v-model="atividade.id_pagamento" :disabled="atividade.id_perda != 999" />
+                        <input type="radio" name="pgto" :value="pgt.id" v-model="pgto" :disabled="atividade.id_perda != 999" />
                         {{ pgt.nome }}
                       </label>
                     </div>
@@ -193,8 +193,10 @@ export default {
         id_pagamento: 0,
         id_lista: 0,
         owner_id: 0,
+        valor: ''
       },
       pgtos: [],
+      pgto: 0,
       v$: useValidate(),
       isLoading: false,
       message: "",
@@ -266,7 +268,20 @@ export default {
       this.strProd =  rc;
     },
     repeat(){
-      let dt = moment(this.atividade.dt_cadastro).add(1, 'd');
+     // let weekDay = 10;
+    /*  while (weekDay > 5) {
+        let dt = moment(this.atividade.dt_cadastro).add(1, 'd');
+        weekDay = dt.isoWeekday();
+      }*/
+
+      let dt = moment(this.atividade.dt_cadastro);
+      do{
+        dt.add(1, 'd');
+        var weekDay = dt.isoWeekday();
+      }
+      while (weekDay > 5);  
+      
+
       this.atividade.dt_cadastro = dt.format('YYYY-MM-DD');
       this.startCalendar();
       this.cFooter.aux = false;
@@ -394,6 +409,7 @@ export default {
       field.addEventListener('keyup', changed)
     },
     forceChangeComma(str){
+      if (str.length == 0) str = 0;
       if (typeof str != 'string') return str;
       return str.replace(/,/g , ".");
     },
@@ -438,6 +454,14 @@ export default {
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },
+  },
+  watch: {
+    pgto(value){
+        this.atividade.id_pagamento = value;
+        if (value == 0){
+          this.atividade.valor = 0;
+        }              
+    }                  
   },
   mounted() {
     this.atividade.owner_id = this.currentUser.id;

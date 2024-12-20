@@ -336,7 +336,7 @@ export default {
       var options = {
         type: "date",
         dateFormat: "MMMM/yyyy",
-        startDate: this.mes,
+        startDate: this.filterCp.mes,
         showHeader: false,
         color: "primary",
         cancelLabel: 'Cancelar',

@@ -190,7 +190,7 @@ export default {
         role: 0,
         id: 1,
       },
-      version: '14.11',
+      version: '27.11',
       senha: '',
       v$: useValidate(),
       unidade:'',

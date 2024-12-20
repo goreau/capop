@@ -104,6 +104,19 @@ export default {
                 });
             }
     },
+    mounted() {
+        let cUser = this.currentUser;
+        if (cUser && cUser.nivel != 1){
+        this.message = "Você não tem permissão para receber dados manualmente";
+            this.showMessage = true;
+            this.type = "alert";
+            this.caption = "Mobile";
+            setTimeout(() => {
+            this.showMessage = false
+            this.$router.go(-1);
+            }, 3000);
+        }
+    },
 };
 </script>
 

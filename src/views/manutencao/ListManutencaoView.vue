@@ -43,7 +43,7 @@ export default {
   name: 'ListaVendas',
   data() {
     return {
-      tableName: 'usuarios',
+      tableName: 'manutencao',
       dataTable: [],
       isLoading: false,
       showMessage: false,
@@ -545,21 +545,27 @@ export default {
     switch (this.tipo) {
       case '1':
         this.strTipo = 'Programas Cadastrados';
+        this.tableName = 'manProg';
         break;
       case '2':
         this.strTipo = 'Atividades Cadastradas';
+        this.tableName = 'manAtiv';
         break;
       case '3':
         this.strTipo = 'Atividades de Laboratório Cadastradas';
+        this.tableName = 'manLab';
         break;
       case '4':
         this.strTipo = 'Modalidades Cadastradas';
+        this.tableName = 'manMod';
         break;
       case '5':
         this.strTipo = 'Motivos de Perda Cadastrados';
+        this.tableName = 'manPerda';
         break;
       case '6':
         this.strTipo = 'Listas SIAFEM Cadastradas';
+        this.tableName = 'manLista';
         break;
       default:
       this.strTipo = 'ERRO';
