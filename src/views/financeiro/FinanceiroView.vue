@@ -375,6 +375,14 @@ export default {
   mounted() {
     this.financeiro.owner_id = this.currentUser.id;
 
+    if (this.currentUser.nivel == 9){
+      this.message = "Você não tem permissão para cadastrar planejamento";
+        this.showMessage = true;
+        this.type = "alert";
+        this.caption = "Planejamento Financeiro";
+        setTimeout(() => {this.showMessage = false; this.$router.push('/financeiros'); }, 3000);
+    }
+
     auxiliaresService.getCombo(8, 0)
       .then((res) => {
         this.pgtos = res.data;

@@ -2,15 +2,10 @@
   <Header />
   <div class="cont_total pt-5">
     <div class="cont_menu" v-if="showMenu">
-      <sidebar-menu
-        :menu="menu"
-        :relative="true"
-        @update:collapsed="onToggleCollapse"
-        :showOneChild="true"
-      />
+      <sidebar-menu :menu="menu" :relative="true" @update:collapsed="onToggleCollapse" :showOneChild="true" />
     </div>
     <div class="main" id="main">
-      
+
       <router-view />
     </div>
   </div>
@@ -29,7 +24,7 @@ export default {
     Header,
     SidebarMenu,
     Footer,
-    
+
   },
   methods: {
     onToggleCollapse(collapsed) {
@@ -44,16 +39,16 @@ export default {
   mounted() {
     if (this.hide) {
       this.onToggleCollapse(true);
-    } 
+    }
   },
-  watch:{
-    hide(val){
+  watch: {
+    hide(val) {
       this.onToggleCollapse(val);
     }
   },
   computed: {
     showMenu() {
-      this.hide = this.$route.path === "/"  || this.$route.path === "/login" || this.$route.path === "/forgot" || this.$route.path === "/reset";
+      this.hide = this.$route.path === "/" || this.$route.path === "/login" || this.$route.path === "/forgot" || this.$route.path === "/reset";
       return !this.hide;
     },
   },
@@ -214,7 +209,57 @@ export default {
                 },
               },
             },
+            {
+              href: "/listManutencao/7",
+              title: "Tipos de EPI",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
           ],
+        },
+        {
+          href: "",
+          title: "Gerenciamento",
+          icon: {
+            element: "font-awesome-icon",
+            attributes: {
+              icon: "fa-solid fa-gears",
+              size: "lg",
+              transform: "shrink-8",
+            },
+          },
+          child: [
+            {
+              href: "/dupliServidor",
+              title: "Duplicidade Servidor",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/listEpi",
+              title: "EPIs",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+          ]
         },
         {
           href: "",
@@ -252,18 +297,18 @@ export default {
                 },
               },
             },
-           /* {
-              href: "/mobileManual",
-              title: "Recebimento Manual",
-              icon: {
-                element: "font-awesome-icon",
-                attributes: {
-                  icon: "fa-solid fa-wrench",
-                  size: "lg",
-                  transform: "shrink-8",
-                },
-              },
-            },*/
+            /* {
+               href: "/mobileManual",
+               title: "Recebimento Manual",
+               icon: {
+                 element: "font-awesome-icon",
+                 attributes: {
+                   icon: "fa-solid fa-wrench",
+                   size: "lg",
+                   transform: "shrink-8",
+                 },
+               },
+             },*/
           ]
         },
         {
@@ -281,6 +326,30 @@ export default {
             {
               href: "/servidores",
               title: "Consultar",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/dUniforme",
+              title: "Fornecimento Uniforme",
+              icon: {
+                element: "font-awesome-icon",
+                attributes: {
+                  icon: "fa-solid fa-search",
+                  size: "lg",
+                  transform: "shrink-8",
+                },
+              },
+            },
+            {
+              href: "/dEpi",
+              title: "Fornecimento EPI",
               icon: {
                 element: "font-awesome-icon",
                 attributes: {
@@ -414,6 +483,10 @@ export default {
               title: "Resumo Atividades Campo",
             },
             {
+              href: "/mainReport/17",
+              title: "Relação Atividades Campo",
+            },
+            {
               href: "/mainReport/8",
               title: "Indicador de Perdas",
             },
@@ -525,38 +598,48 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+
 .main-container {
   margin: 5rem;
   min-height: 40rem;
 }
-iframe#webpack-dev-server-client-overlay{display:none!important}
+
+iframe#webpack-dev-server-client-overlay {
+  display: none !important
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
   margin: 0;
 }
+
 #app {
   height: 100%;
 }
+
 .main {
   margin-left: 290px;
   width: calc(100% - 290px);
   height: calc(100% - 7rem);
   margin-top: 6rem;
 }
+
 .main_colapsed {
   margin-left: 65px;
   width: calc(100% - 65px);
   height: calc(100% - 7rem);
   //   border:1px solid green;
 }
+
 .cont_total {
   width: 100%;
   height: calc(100%);
 
   ///  border:1px solid red;
 }
+
 .cont_menu {
   position: fixed;
   height: calc(100% - 7rem);
@@ -585,15 +668,17 @@ body {
   color: red;
   padding-left: 1rem;
 }
+
 .vsm--child {
   padding-left: 2rem;
-  color:rgb(4, 5, 92);
-}
-.right-border {
-    border-right: 2px solid black !important;
+  color: rgb(4, 5, 92);
 }
 
-.tabulator-col-group{
+.right-border {
+  border-right: 2px solid black !important;
+}
+
+.tabulator-col-group {
   border-right: 2px solid black !important;
 }
 </style>

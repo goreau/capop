@@ -2,7 +2,6 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-11">
-        <Loader v-if="isLoading" />
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
@@ -25,6 +24,12 @@
           <span class="icon is-small is-left" name="coisa2">
             <font-awesome-icon  icon="fa-solid fa-trash" />
           </span>
+          <span class="icon is-small is-left" name="coisa3">
+            <font-awesome-icon  icon="fa-solid fa-user-secret" />
+          </span>
+          <span class="icon is-small is-left" name="coisa4">
+            <font-awesome-icon  icon="fa-solid fa-power-off" />
+          </span>
         </div>
       </div>
     </div>
@@ -35,7 +40,6 @@
 <script>
 import authService from "@/services/auth.service";
 import MyTable from '@/components/forms/MyTable.vue';
-import Loader from '@/components/general/Loader.vue';
 import Message from "@/components/general/Message.vue";
 import ConfirmDialog from '@/components/forms/ConfirmDialog.vue';
 
@@ -45,7 +49,6 @@ export default {
       return {
           tableName: 'usuariosCp',
           dataTable: [],
-          isLoading: false,
           showMessage: false,
           message: "",
           caption: "",
@@ -58,7 +61,6 @@ export default {
   },
   components: {
       MyTable,
-      Loader,
       ConfirmDialog,
       Message,
 
@@ -85,19 +87,20 @@ export default {
 
     this.myspan = document.getElementsByName('coisa')[0];
     this.myspan2 = document.getElementsByName('coisa2')[0];
+    this.myspan3 = document.getElementsByName('coisa3')[0];
+    this.myspan4 = document.getElementsByName('coisa4')[0];
     //document.createElement('span');
    // this.myspan.innerHTML='<p>teste</p>';;
 
-      this.isLoading = true;
       authService.list(this.id_user)
           .then((response) => {
               this.dataTable = response.data;
-              this.isLoading = false;
+              
           })
           .catch((err) =>{
             console.log(err);
           })
-          .finally(() => this.isLoading = false);
+          .finally(() => {});
 
       this.columns = [
           {title: 'Nome', field: 'nome', minWidth: 200, responsive: 3},
@@ -105,14 +108,14 @@ export default {
           {title: 'Local', field: 'local', minWidth: 150},
           {title: 'Nivel', field: 'role', minWidth: 150},
           {title: 'Responsável', field: 'owner', minWidth: 100},
-          {title: 'Ações', responsive: 0, minWidth: 250, 
+          {title: 'Ações', responsive: 0, minWidth: 350, 
             formatter: (cell, formatterParrams) =>{
               const row = cell.getRow().getData();
 
               const btEdit = document.createElement('button');
               btEdit.type = 'button';
               btEdit.title = 'Editar';
-              btEdit.disabled = this.id_user != row.id_prop;
+              btEdit.disabled = this.id_user != row.owner_id;
               btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
               btEdit.classList.add('button', 'is-primary', 'is-outlined');
               btEdit.innerHTML = this.myspan.innerHTML;
@@ -127,7 +130,7 @@ export default {
               const btDel = document.createElement('button');
               btDel.type = 'button';
               btDel.title = 'Excluir';
-              btDel.disabled = this.id_user != row.id_prop;
+              btDel.disabled = this.id_user != row.owner_id;
               btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
               btDel.classList.add('button', 'is-danger', 'is-outlined');
               btDel.innerHTML = this.myspan2.innerHTML;
@@ -160,10 +163,77 @@ export default {
               }
               });
 
+              const btImpess = document.createElement('button');
+              btImpess.type = 'button';
+              btImpess.title = 'Logar como';
+              btImpess.style.cssText = 'height: fit-content; margin-left: 1rem;';
+              btImpess.classList.add('button', 'is-info', 'is-outlined');
+              btImpess.innerHTML = this.myspan3.innerHTML;
+              btImpess.addEventListener('click', async () => {
+                const user = { username: row.username , password: 'AH@g654321'};
+                const resp = await authService.impersonate(user);
+                if (resp){
+                  this.$store.commit('auth/loginSuccess', resp);
+                  location.href = this.$router.resolve({ name: 'home' }).href;
+                  //this.$router.push({ name: 'home' });
+                }
+               /* .then(
+                  () => {
+                    document.getElementById('main').className = "main";
+                    this.$router.push({ name: 'home' });
+                  },
+
+                );*/
+              });
+
+              const btReset = document.createElement('button');
+              btReset.type = 'button';
+              btReset.title = 'Reset';
+              btReset.style.cssText = 'height: fit-content; margin-left: 1rem;';
+              btReset.classList.add('button', 'is-warning');
+              btReset.innerHTML = this.myspan4.innerHTML;
+              btReset.addEventListener('click', async () => {
+                const ok = await this.$refs.confirmDialog.show({
+                  title: 'Reset',
+                  message: 'Deseja reiniciar o usuário para o padrão inicial?',
+                  okButton: 'Confirmar',
+              })
+              if (ok) {
+                authService.restart(row)
+                .then(resp =>{
+                  if (resp.status == '200'){
+                    this.message = resp.data;
+                    this.showMessage = true;
+                    this.type = "success";
+                    this.caption = "Usuário";
+                    setTimeout(() => (this.showMessage = false), 3000);
+                  } else {
+                    this.message = resp;
+                    this.showMessage = true;
+                    this.type = "alert";
+                    this.caption = "Usuário";
+                    setTimeout(() => (this.showMessage = false), 3000);
+                  }
+                })
+                .catch(err =>{
+                  this.message = err;
+                  this.showMessage = true;
+                  this.type = "alert";
+                  this.caption = "Usuário";
+                  setTimeout(() => (this.showMessage = false), 3000);
+                })
+              }
+              });
+
 
               const buttonHolder = document.createElement('span');
               buttonHolder.appendChild(btEdit);
               buttonHolder.appendChild(btDel);
+
+              if (this.currentUser.nivel == 1){
+                buttonHolder.appendChild(btImpess);
+                buttonHolder.appendChild(btReset);
+              }
 
               return buttonHolder;
 

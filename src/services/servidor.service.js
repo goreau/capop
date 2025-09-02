@@ -21,6 +21,16 @@ class ServidorService {
     })
   } 
 
+  getServidorFantasia(id) {
+    return axios.get(`/servidorFantasia/${id}`)
+    .then(response => {
+        return {data: response.data};
+    },
+    (error) => {
+        return error;
+    })
+  } 
+
   update(data) {
     return axios.put("/servidor", data)
     .then(response => {
@@ -61,6 +71,25 @@ class ServidorService {
     })
   }
 
+  getDuplicidade(){
+    return axios.get('/duplicidadeServ')
+    .then(response => {
+        return {data: response.data};
+    },
+    (error) => {
+        return error.response.data;
+    })
+  }
+
+  removeDuplicidades(ids){
+    return axios.post(`/delDuplicidadeServ/`, ids)
+    .then(response => {
+        return response.data;
+    },
+    (error) => {
+        return error.response.data;
+    })
+  }
   
 }
 

@@ -51,6 +51,30 @@ class AuthService {
       });
     }
 
+    impersonate(user) {
+      return axios.post("/impersonate", user)
+       .then(response => {
+         if (response.data.token) {
+           localStorage.setItem('user', JSON.stringify(response.data));
+         } 
+   
+         return response.data;
+       },
+       (error) => {
+         throw new Error(error.data.msg);
+      })
+   }
+
+    restart(data) {
+      return axios.put(`/restart`,data)
+      .then(response => {
+        return response;
+      },
+      (error) => {
+        return error.data;
+      })
+    }
+
     firstAccess(data) {
       return axios.put("/firstaccess", data)
       .then(response => {

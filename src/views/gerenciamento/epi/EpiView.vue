@@ -6,24 +6,44 @@
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title is-centered">Programa</p>
+            <p class="card-header-title is-centered">EPI</p>
           </header>
           <div class="card-content">
             <div class="content">
               <div class="field">
-                <label class="label">Nome</label>
+                <label class="label">Tipo</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Nome" v-model="programa.descricao"
-                    :class="{ 'is-danger': v$.programa.descricao.$error }" maxlength="40" />
-                  <span class="is-error" v-if="v$.programa.descricao.$error">
-                    {{ v$.programa.descricao.$errors[0].$message }}
+                  <CmbGeneric :data="tipos" @change="setFantasia($event)" @selGen="epi.id_epi_tipo = $event"
+                    :sel="epi.id_epi_tipo" />
+                    <span class="is-error" v-if="v$.epi.id_epi_tipo.$error">
+                    {{ v$.epi.id_epi_tipo.$errors[0].$message }}
                   </span>
                 </div>
               </div>
               <div class="field">
+                <label class="label">Descricao</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Descrição do EPI" v-model="epi.descricao"
+                    :class="{ 'is-danger': v$.epi.descricao.$error }" maxlength="40" />
+                  <span class="is-error" v-if="v$.epi.descricao.$error">
+                    {{ v$.epi.descricao.$errors[0].$message }}
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">CA</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Opcional: CA do EPI" v-model="epi.ca"
+                    :class="{ 'is-danger': v$.epi.ca.$error }" maxlength="40" />
+                  <span class="is-error" v-if="v$.epi.ca.$error">
+                    {{ v$.epi.ca.$errors[0].$message }}
+                  </span>
+                </div>
+              </div>
+              <div class="field" v-if="epi.id_epi > 0">
                 <div class="control">
                   <label for="" class="checkbox">
-                    <input type="checkbox" v-model="programa.active" :value="1">
+                    <input type="checkbox" v-model="epi.active" :value="1">
                     Ativo
                   </label>
                 </div>
@@ -42,21 +62,24 @@
 <script>
 import Message from "@/components/general/Message.vue";
 import Loader from "@/components/general/Loader.vue";
+import CmbGeneric from "@/components/forms/CmbGeneric.vue";
 import footerCard from '@/components/forms/FooterCard.vue'
 import useValidate from "@vuelidate/core";
 import {
   required$,
   combo$,
-  minLength$,
-} from "../../components/forms/validators.js";
-import manutencaoService from "@/services/manutencao.service";
+  maxLength$,
+} from "../../../components/forms/validators.js";
+import epiService from "@/services/epi.service";
 
 export default {
   data() {
     return {
-      programa: {
-        id_programa: 0,
+      epi: {
+        id_epi: 0,
+        id_epi_tipo: 0,
         descricao: "",
+        ca: '',
         active: true,
       },
       v$: useValidate(),
@@ -66,6 +89,7 @@ export default {
       type: "",
       strLocal: "",
       showMessage: false,
+      tipos: [],
       cFooter: {
         strSubmit: 'Salvar',
         strCancel: 'Cancelar',
@@ -76,8 +100,10 @@ export default {
   },
   validations() {
     return {
-      programa: {
-        descricao: { required$, minLength: minLength$(5) },
+      epi: {
+        id_epi_tipo: { required$, minValue: combo$(1) },
+        descricao: { required$, maxLength: maxLength$(100) },
+        ca: { maxLength: maxLength$(30)}
       }
     }
   },
@@ -92,17 +118,20 @@ export default {
   components: {
     Message,
     Loader,
-    footerCard
+    footerCard,
+    CmbGeneric
   },
   methods: {
     loadData() {
       this.isLoading = true;
 
-      manutencaoService.getDados(1, this.programa.id_programa).then(
+      epiService.getEpi(this.epi.id_epi).then(
         (response) => {
           let data = response.data;
-          this.programa.descricao = data.descricao;
-          this.programa.active = data.active;
+          this.epi.id_epi_tipo = data.id_epi_tipo
+          this.epi.descricao = data.descricao;
+          this.epi.ca = data.ca;
+          this.epi.active = data.active;
         },
         (error) => {
           this.message =
@@ -114,7 +143,7 @@ export default {
             error.toString();
           this.showMessage = true;
           this.type = "alert";
-          this.caption = "Programa";
+          this.caption = "EPI";
           setTimeout(() => (this.showMessage = false), 3000);
         }
       );
@@ -125,13 +154,13 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");
-        if (this.programa.id_programa > 0) {
-          programaService.update(this.programa).then(
+        if (this.epi.id_epi > 0) {
+          epiService.update(this.epi).then(
             (response) => {
               this.showMessage = true;
-              this.message = "Dados do programa alterados com sucesso.";
+              this.message = "Dados do EPI alterados com sucesso.";
               this.type = "success";
-              this.caption = "Programa";
+              this.caption = "EPI";
               setTimeout(() => (this.showMessage = false), 3000);
             },
             (error) => {
@@ -144,7 +173,7 @@ export default {
                 error.toString();
               this.showMessage = true;
               this.type = "alert";
-              this.caption = "Programa";
+              this.caption = "EPI";
               setTimeout(() => (this.showMessage = false), 3000);
             }
           )
@@ -152,12 +181,12 @@ export default {
               document.getElementById("login").classList.remove("is-loading");
             });
         } else {
-          manutencaoService.create(1, this.programa).then(
+          epiService.create(this.epi).then(
             (response) => {
               this.showMessage = true;
-              this.message = "Programa cadastrado com sucesso.";
+              this.message = "EPI cadastrado com sucesso.";
               this.type = "success";
-              this.caption = "Programa";
+              this.caption = "EPI";
               setTimeout(() => (this.showMessage = false), 3000);
             },
             (error) => {
@@ -170,7 +199,7 @@ export default {
                error.toString();*/
               this.showMessage = true;
               this.type = "alert";
-              this.caption = "Programa";
+              this.caption = "EPI";
               setTimeout(() => (this.showMessage = false), 3000);
             }
           )
@@ -182,20 +211,41 @@ export default {
         this.message = "Corrija os erros para enviar as informações";
         this.showMessage = true;
         this.type = "alert";
-        this.caption = "Programa";
+        this.caption = "EPI";
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },
   },
   mounted() {
-    this.programa.owner_id = this.currentUser.id;
+   // this.epi.owner_id = this.currentUser.id;
+
   },
   created() {
-    this.programa.id_programa = this.$route.params.id;
-    if (this.programa.id_programa > 0) {
+    this.epi.id_epi = this.$route.params.id;
+    if (this.epi.id_epi > 0) {
       this.loadData();
     }
 
+    epiService.getComboTipo()
+      .then(
+        (response) => {
+          let data = response.data;
+          this.tipos = data;
+        },
+        (error) => {
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.response.data ||
+            error.message ||
+            error.toString();
+          this.showMessage = true;
+          this.type = "alert";
+          this.caption = "EPI";
+          setTimeout(() => (this.showMessage = false), 3000);
+        }
+      );
   },
 };
 </script>

@@ -41,7 +41,8 @@ class AtividadeService {
     })
   }  
 
-  getAtividades(prop){
+  getAtividades(filter){
+    var prop = JSON.stringify(filter);
     return axios.get(`/atividades/${prop}`)
     .then(response => {
         return {data: response.data};

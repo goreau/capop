@@ -173,6 +173,13 @@ export default {
   },
   mounted() {
     this.servidor.owner_id = this.currentUser.id;
+    if (this.currentUser.nivel == 9){
+      this.message = "Você não tem permissão para cadastrar novos servidores";
+        this.showMessage = true;
+        this.type = "alert";
+        this.caption = "Servidor";
+        setTimeout(() => {this.showMessage = false; this.$router.push('/servidores'); }, 3000);
+    }
   },
 };
 </script>

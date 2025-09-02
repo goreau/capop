@@ -24,7 +24,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="columns" v-if="currentUser.nivel >= 2">
+                  <div class="columns" v-if="currentUser.nivel >= 1">
                     <div class="column is-full">
                       <div class="field">
                         <label class="label">GVE</label>
@@ -51,7 +51,7 @@
                       <div class="field">
                         <label class="label">Servidor</label>
                         <div class="control">
-                          <CmbServidor :id_prop="filterCp.id_prop" :tipo="9" @selServ="filterCp.id_servidor = $event" />
+                          <CmbServidor :id_prop="filterCp.id_prop" :tipo="9" :sel="filterCp.id_servidor" @selServ="filterCp.id_servidor = $event" />
                         </div>
                       </div>
                     </div>
@@ -68,32 +68,57 @@
                         </div>
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="2" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="2" v-model="filterCp.unif" />
                             Camisa
                           </label>
                         </div>
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="3" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="3" v-model="filterCp.unif" />
                             Camiseta
                           </label>
                         </div>
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="4" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="4" v-model="filterCp.unif" />
                             Jaqueta
                           </label>
                         </div>
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="5" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="5" v-model="filterCp.unif" />
                             Bermuda
                           </label>
                         </div>
                         <div class="column is-2">
                           <label class="radio">
-                            <input type="radio" name="unif" value="6" v-model="filter.unif" />
+                            <input type="radio" name="unif" value="6" v-model="filterCp.unif" />
                             Sapato
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+              <fieldset class="fieldset" v-if="hasFilter.origem.indexOf(this.tipo_relat) > -1 && currentUser.nivel > 1">
+                    <legend>Dados de Origem</legend>
+                    <div class="control has-icons-left has-icons-right">
+                      <div class="columns">
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="origem" value="1" v-model="filterCp.origem" />
+                            Servidor
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="origem" value="2" v-model="filterCp.origem" />
+                            Município
+                          </label>
+                        </div>
+                        <div class="column is-2">
+                          <label class="radio">
+                            <input type="radio" name="origem" value="9" v-model="filterCp.origem" />
+                            Todos
                           </label>
                         </div>
                       </div>
@@ -172,12 +197,14 @@ export default {
         id_servidor: 0,
         id_prop: 0,
         unif: 1,
+        origem: 9,
       },
       hasFilter:{
-        servidor: ['1','14'],
-        municipio: ['1','2','5'],
-        data: ['1','5'],
-        uniforme: ['1']
+        servidor: ['1','14','6'],
+        municipio: ['1','2','5','6'],
+        data: ['1','5','6'],
+        uniforme: ['1'],
+        origem: ['7']
       },
       cFooter: {
         strSubmit: 'Filtrar',

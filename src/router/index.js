@@ -168,6 +168,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/SiafemView.vue'),
   },
   {
+    path: '/epi/:id',
+    name: 'epi',
+    component: () => import(/* webpackChunkName: "user" */ '../views/gerenciamento/epi/EpiView.vue'),
+  },
+  {
+    path: '/listEpi',
+    name: 'listEpi',
+    component: () => import(/* webpackChunkName: "user" */ '../views/gerenciamento/epi/ListEpiView.vue'),
+  },
+  {
+    path: '/epiTipo/:id',
+    name: 'epiTipo',
+    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/EpiTipoView.vue'),
+  },
+  {
     path: '/listManutencao/:id',
     name: 'listManutencao',
     component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ListManutencaoView.vue'),
@@ -211,6 +226,21 @@ const routes = [
     path: '/mensalReportData/:linha',
     name: 'mensalReportData',
     component: () => import(/* webpackChunkName: "user" */ '../views/report/MensalReportView.vue'),
+  },
+  {
+    path: '/dUniforme',
+    name: 'dUniforme',
+    component: () => import(/* webpackChunkName: "user" */ '../views/servidor/DistUniformeView.vue'),
+  },
+  {
+    path: '/dEpi',
+    name: 'dEpi',
+    component: () => import(/* webpackChunkName: "user" */ '../views/servidor/DistEpiView.vue'),
+  },
+  {
+    path: '/dupliServidor',
+    name: 'dupliServidor',
+    component: () => import(/* webpackChunkName: "user" */ '../views/gerenciamento/ListDuplServidorView.vue'),
   },
 ]
 

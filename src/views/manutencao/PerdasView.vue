@@ -6,7 +6,7 @@
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title is-centered">Modalidade</p>
+            <p class="card-header-title is-centered">Perdas</p>
           </header>
           <div class="card-content">
             <div class="content">
@@ -42,8 +42,7 @@
 <script>
 import Message from "@/components/general/Message.vue";
 import Loader from "@/components/general/Loader.vue";
-import footerCard from '@/components/forms/FooterCard.vue'
-import maqnutencaoService from "@/services/manutencao.service";
+import footerCard from '@/components/forms/FooterCard.vue';
 import useValidate from "@vuelidate/core";
 import {
   required$,

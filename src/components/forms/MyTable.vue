@@ -73,7 +73,7 @@
     </button>
   </div>
   <br>
-  <Loader v-if="isLoading" />
+  <Loader :active="isLoading" />
   <div v-if="extra">
     <div class="columns is-centered">
       <div class="column is-10"><b>{{ extra }}</b></div>
@@ -143,7 +143,21 @@ export default {
       this.tabulator.download("csv", "data.csv");
     },
     download_xlsx() {
-      this.tabulator.download("xlsx", "data.xlsx", { sheetName: "Capop" });
+      this.tabulator.download("xlsx", "data.xlsx", { 
+        sheetName: "Capop",
+        exportConfig: {
+          formatCells: (cell, row, column) => {
+            let value = cell.getValue();
+            
+            // Verifica se o valor é numérico e não vazio
+            if (!isNaN(value) && value !== "" && value !== null) {
+              return Number(value); // Converte para número
+            }
+
+            return value; // Retorna o valor original para texto ou células vazias
+          }
+        }
+    })
     },
     download_pdf() {
       try {
@@ -162,26 +176,24 @@ export default {
     toggleFilter(e) {
       this.filter = e.target.checked;
     },
-  },
-  props: ["tableData", "columns", "filtered", "tableName", "extra"],
-  watch: {
-    tableData(value) {
-     // this.isLoading = true;
-      this.tabulator = new Tabulator(this.$refs.table, {
-        columnHeaderVertAlign:"middle",
-        langs: lang,
-        locale: "pt-br",
-        data: value, //link data to table
-        responsiveLayout: true,
-        layout: "fitColumns",
-        placeholder: "Nenhum registro atende aos critérios escolhidos!",
-        reactiveData: true, //enable data reactivity
-        columns: this.columns, //define table columns
-        pagination: "local",
-        paginationSize: 10,
-        paginationSizeSelector: [5, 10, 15, 20],
-        movableColumns: true,
-        paginationCounter: "rows",
+    async loadData(data){
+      this.isLoading = true;
+      try {
+        this.tabulator = new Tabulator(this.$refs.table, {
+          columnHeaderVertAlign:"middle",
+          langs: lang,
+          locale: "pt-br",
+          data: data, //link data to table
+          responsiveLayout: true,
+          layout: "fitColumns",
+          placeholder: "Nenhum registro atende aos critérios escolhidos!",
+          reactiveData: true, //enable data reactivity
+          columns: this.columns, //define table columns
+          pagination: "local",
+          paginationSize: 10,
+          paginationSizeSelector: [5, 10, 15, 20],
+          movableColumns: true,
+          paginationCounter: "rows",
       });
 
       this.cbColumns = this.columns.filter(el => el.title !== "Ações");
@@ -194,8 +206,21 @@ export default {
           } 
          // this.$router.go();
         }
-      //  this.isLoading = false;
+        me.isLoading = false;
       });
+        
+      } catch (error) {
+        console.log(error);
+      } finally{
+        //this.isLoading = false;
+      }
+    }
+  },
+  props: ["tableData", "columns", "filtered", "tableName", "extra"],
+  watch: {
+    tableData(value) {
+     // this.isLoading = true;
+      this.loadData(value);
       
     },
   },
@@ -235,7 +260,7 @@ export default {
         localStorage.removeItem(this.tableName);
       }
     }
-    this.isLoading = false;
+    //this.isLoading = false;
 
   },
 };

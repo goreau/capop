@@ -6,24 +6,24 @@
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title is-centered">Listas</p>
+            <p class="card-header-title is-centered">Tipos de EPI</p>
           </header>
           <div class="card-content">
             <div class="content">
               <div class="field">
                 <label class="label">Nome</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Nome" v-model="modalidade.descricao"
-                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" maxlength="40"/>
-                  <span class="is-error" v-if="v$.modalidade.descricao.$error">
-                    {{ v$.modalidade.descricao.$errors[0].$message }}
+                  <input class="input" type="text" placeholder="Nome" v-model="epi_tipo.descricao"
+                    :class="{ 'is-danger': v$.epi_tipo.descricao.$error }" maxlength="40"/>
+                  <span class="is-error" v-if="v$.epi_tipo.descricao.$error">
+                    {{ v$.epi_tipo.descricao.$errors[0].$message }}
                   </span>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
                   <label for="" class="checkbox">
-                    <input type="checkbox" v-model="modalidade.active" :value="1">
+                    <input type="checkbox" v-model="epi_tipo.active" :value="1">
                     Ativo
                   </label>
                 </div>
@@ -42,7 +42,7 @@
 <script>
 import Message from "@/components/general/Message.vue";
 import Loader from "@/components/general/Loader.vue";
-import footerCard from '@/components/forms/FooterCard.vue'
+import footerCard from '@/components/forms/FooterCard.vue';
 import useValidate from "@vuelidate/core";
 import {
   required$,
@@ -54,8 +54,8 @@ import manutencaoService from "@/services/manutencao.service";
 export default {
   data() {
     return {
-      modalidade: {
-        id_modalidade: 0,
+      epi_tipo: {
+        id_epi_tipo: 0,
         descricao: "",
         active: true,
       },
@@ -76,7 +76,7 @@ export default {
   },
   validations(){
     return {
-      modalidade: {
+      epi_tipo: {
         descricao: { required$, minLength: minLength$(5) },
       }
     }
@@ -98,11 +98,11 @@ export default {
     loadData(){
       this.isLoading = true;
 
-      manutencaoService.getDados(4, this.modalidade.id_modalidade).then(
+      manutencaoService.getDados(7, this.epi_tipo.id_epi_tipo).then(
         (response) => {
           let data = response.data;
-          this.modalidade.descricao = data.descricao;
-          this.modalidade.active = data.active;
+          this.epi_tipo.descricao = data.descricao;
+          this.epi_tipo.active = data.active;
         },
         (error) => {
           this.message =
@@ -114,7 +114,7 @@ export default {
             error.toString();
           this.showMessage = true;
           this.type = "alert";
-          this.caption = "Listas";
+          this.caption = "Tipo de Epi";
           setTimeout(() => (this.showMessage = false), 3000);
         }
       );
@@ -125,13 +125,13 @@ export default {
       this.v$.$validate(); 
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");
-        if (this.modalidade.id_modalidade > 0) {
-        modalidadeService.update(this.modalidade).then(
+        if (this.epi_tipo.id_epi_tipo > 0) {
+        manutencaoService.update(this.epi_tipo).then(
           (response) => {
             this.showMessage = true;
-            this.message = "Dados da lista alterados com sucesso.";
+            this.message = "Dados do EPI alterados com sucesso.";
             this.type = "success";
-            this.caption = "Listas";
+            this.caption = "Tipo de EPI";
             setTimeout(() => (this.showMessage = false), 3000);
           },
           (error) => {
@@ -144,7 +144,7 @@ export default {
               error.toString();
             this.showMessage = true;
             this.type = "alert";
-            this.caption = "Listas";
+            this.caption = "Perdas";
             setTimeout(() => (this.showMessage = false), 3000);
           }
         )
@@ -152,12 +152,12 @@ export default {
             document.getElementById("login").classList.remove("is-loading");
           });
         } else {
-            manutencaoService.create(4, this.modalidade).then(
+            manutencaoService.create(7, this.epi_tipo).then(
                         (response) => {
                             this.showMessage = true;
-                            this.message = "Lista cadastrada com sucesso.";
+                            this.message = "Tipo de EPI cadastrado com sucesso.";
                             this.type = "success";
-                            this.caption = "Listas";
+                            this.caption = "Tipo de EPI";
                             setTimeout(() => (this.showMessage = false), 3000);
                         },
                         (error) => {
@@ -170,7 +170,7 @@ export default {
                              error.toString();*/
                             this.showMessage = true;
                             this.type = "alert";
-                            this.caption = "Listas";
+                            this.caption = "Tipo de EPI";
                             setTimeout(() => (this.showMessage = false), 3000);
                         }
                     )
@@ -182,17 +182,17 @@ export default {
         this.message = "Corrija os erros para enviar as informações";
         this.showMessage = true;
         this.type = "alert";
-        this.caption = "Listas";
+        this.caption = "Tipo de EPI";
         setTimeout(() => (this.showMessage = false), 3000);
       }
     },
   },
   mounted() {
-    this.modalidade.owner_id = this.currentUser.id;
+    
   },
   created() {
-    this.modalidade.id_modalidade = this.$route.params.id;
-    if (this.modalidade.id_modalidade > 0){
+    this.epi_tipo.id_epi_tipo = this.$route.params.id;
+    if (this.epi_tipo.id_epi_tipo > 0){
       this.loadData();
     }
     

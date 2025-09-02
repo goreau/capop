@@ -2,7 +2,6 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-11">
-        <Loader v-if="isLoading" />
         <div class="card">
           <header class="card-header">
             <p class="card-header-title is-centered">{{ title }}</p>
@@ -19,7 +18,6 @@
 </template>
 
 <script>
-import Loader from "@/components/general/Loader.vue";
 import MyTable from "@/components/forms/MyTable.vue";
 import MyGroupedTable from "@/components/forms/MyGroupedTable.vue";
 import reportService from "@/services/report.service";
@@ -31,7 +29,6 @@ export default {
       id: 0,
       filter: {},
       dataTable: [],
-      isLoading: false,
       columns: [],
       title: 'Relatórios',
       strFiltro: '',
@@ -42,7 +39,6 @@ export default {
     };
   },
   components: {
-    Loader,
     MyTable,
     MyGroupedTable,
   },
@@ -216,12 +212,12 @@ export default {
           this.title = 'Capacidade Instalada';
           this.columns = [
                         { title: "Local", field: "local",  },
-                        { title: "Desinsetizador", field: "desin", hozAlign:"right" },
-                        { title: "Of. Operacional", field: "motorista", hozAlign:"right" },
-                        { title: "ATS", field: "ats", hozAlign:"right" }, 
-                        { title: "Eq. Técnica", field: "tecnico", hozAlign:"right" }, 
-                        { title: "Laboratório", field: "laboratorio", hozAlign:"right" }, 
-                        { title: "Outros", field: "outros", hozAlign:"right" }, 
+                        { title: "Desinsetizador", field: "desin", bottomCalc: 'sum', hozAlign:"right" },
+                        { title: "Of. Operacional", field: "motorista", bottomCalc: 'sum', hozAlign:"right" },
+                        { title: "ATS", field: "ats", bottomCalc: 'sum', hozAlign:"right" }, 
+                        { title: "Eq. Técnica", field: "tecnico", bottomCalc: 'sum', hozAlign:"right" }, 
+                        { title: "Laboratório", field: "laboratorio", bottomCalc: 'sum', hozAlign:"right" }, 
+                        { title: "Outros", field: "outros", bottomCalc: 'sum', hozAlign:"right" }, 
                      
           ];
           break;
@@ -241,6 +237,7 @@ export default {
         case '7':
           this.title = 'Resumo Atividades Campo';
           this.columns = [
+                        { title: "Local", field: "local",  },
                         { title: "Programa", field: "programa",  },
                         { title: "Atividade", field: "atividade",  },
                         { title: "Produção", field: "producao", sorter: "number", hozAlign:"right" },
@@ -499,13 +496,59 @@ export default {
                         },   
                       ];
           break;
+        case '17':
+          this.title = 'Relação Atividades Campo';
+          this.columns = [
+                        { title: "GVE", field: "local",  },
+                        { title: "Município", field: "municipio",  },
+                        { title: "Executor", field: "executor",  },
+                        { title: "Programa", field: "programa",  },
+                        { title: "Atividade", field: "atividade",  },
+                        { title: "Produção", field: "producao", sorter: "number", hozAlign:"right" },
+                        { title: "H/D", field: "hd", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //.precision:false,
+                          }
+                        },
+                        { title: "Diária", field: "diaria", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //.precision:false,
+                          }
+                        },
+                        { title: "Gratifição", field: "gratificacao", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //.precision:false,
+                          }
+                        },    
+                        { title: "Etapa", field: "etapa", sorter: "number", hozAlign:"right", formatter:"money", formatterParams:{
+                            decimal:",",
+                            thousand:".",
+                            symbol:"",
+                            symbolAfter:"p",
+                            negativeSign:true,
+                            //.precision:false,
+                          }
+                        },         
+                      ];
+          break;
         default:
           break;
       }
       this.loadData();
     },
     loadData(){
-      this.isLoading = true; 
       reportService.getRelat(this.id,this.filter)
       .then((response) => {
         var data = response.data;
@@ -522,7 +565,6 @@ export default {
       })
       .finally(() => {
         //console.log('done');
-        this.isLoading = false;
       });
     }
   },

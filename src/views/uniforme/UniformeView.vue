@@ -417,6 +417,13 @@ export default {
   },
   created() {
     this.uniforme.id_servidor = this.$route.params.serv;
+    if (this.currentUser.nivel == 9){
+      this.message = "Você não tem permissão para cadastrar ou alterar uniformes";
+        this.showMessage = true;
+        this.type = "alert";
+        this.caption = "Uniforme";
+        setTimeout(() => {this.showMessage = false; this.$router.push('/uniformes'); }, 3000);
+    }
     this.loadData();
   },
 };

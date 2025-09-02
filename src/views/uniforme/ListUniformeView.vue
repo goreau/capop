@@ -2,7 +2,6 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-11">
-        <Loader v-if="isLoading" />
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
@@ -35,7 +34,6 @@
 <script>
 import servidorService from "@/services/servidor.service";
 import MyTable from '@/components/forms/MyTable.vue';
-import Loader from '@/components/general/Loader.vue';
 import Message from "@/components/general/Message.vue";
 import ConfirmDialog from '@/components/forms/ConfirmDialog.vue';
 
@@ -45,7 +43,6 @@ export default {
       return {
           tableName: 'usuarios',
           dataTable: [],
-          isLoading: false,
           showMessage: false,
           message: "",
           caption: "",
@@ -58,7 +55,6 @@ export default {
   },
   components: {
       MyTable,
-      Loader,
       ConfirmDialog,
       Message,
 
@@ -88,16 +84,14 @@ export default {
     //document.createElement('span');
    // this.myspan.innerHTML='<p>teste</p>';;
 
-      this.isLoading = true;
       servidorService.getServidors(this.id_user)
           .then((response) => {
               this.dataTable = response.data;
-              this.isLoading = false;
           })
           .catch((err) =>{
             console.log(err);
           })
-          .finally(() => this.isLoading = false);
+          .finally(() => {});
 
       this.columns = [
           {title: 'Nome', field: 'nome', minWidth: 400, responsive: 1},

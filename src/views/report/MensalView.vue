@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="columns is-centered">
             <div class="column is-three-fifths">
-                <Loader v-if="isLoading" />
+                <Loader :active="isLoading" />
                 <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
                 <div class="card">
                     <header class="card-header">
@@ -214,7 +214,7 @@ export default {
             linhas: [],
             incrementos: [],
             filtros: [],
-            anos: [2024, 2023, 2022, 2021, 2020],
+            anos: [],
             v$: useValidate(),
             isLoading: false,
             message: "",
@@ -263,11 +263,11 @@ export default {
             if (element) {
                 // bulmaCalendar instance is available as element.bulmaCalendar
                 element.bulmaCalendar.on('select', datepicker => {
-                    this.filter.dt_inicio = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+                    this.mensal.filtro.dt_inicio = moment(datepicker.data.startDate).format('YYYY-MM-DD');
                 });
 
                 element.bulmaCalendar.on('clear', datepicker => {
-                    this.filter.dt_inicio = '';
+                    this.mensal.filtro.dt_inicio = '';
                 });
             }
 
@@ -286,10 +286,10 @@ export default {
             if (element2) {
                 // bulmaCalendar instance is available as element.bulmaCalendar
                 element2.bulmaCalendar.on('select', datepicker => {
-                    this.filter.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
+                    this.mensal.filtro.dt_final = moment(datepicker.data.startDate).format('YYYY-MM-DD');
                 });
                 element2.bulmaCalendar.on('clear', datepicker => {
-                    this.filter.dt_final = '';
+                    this.mensal.filtro.dt_final = '';
                 });
             }
 
@@ -363,6 +363,10 @@ export default {
         }
     },
     mounted() {
+        var year = new Date().getFullYear();
+        for (let vez=year; vez>=2020; vez--){
+            this.anos.push(vez);
+        }
     }
 }
 </script>

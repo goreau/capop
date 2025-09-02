@@ -2,7 +2,6 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-11">
-        <Loader v-if="isLoading" />
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
@@ -35,7 +34,6 @@
 <script>
 import financeiroService from "@/services/financeiro.service";
 import MyTable from '@/components/forms/MyTable.vue';
-import Loader from '@/components/general/Loader.vue';
 import Message from "@/components/general/Message.vue";
 import ConfirmDialog from '@/components/forms/ConfirmDialog.vue';
 
@@ -45,7 +43,6 @@ export default {
       return {
           tableName: 'financeiro',
           dataTable: [],
-          isLoading: false,
           showMessage: false,
           message: "",
           caption: "",
@@ -59,7 +56,6 @@ export default {
   },
   components: {
       MyTable,
-      Loader,
       ConfirmDialog,
       Message,
 

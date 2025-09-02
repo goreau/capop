@@ -42,8 +42,7 @@
 <script>
 import Message from "@/components/general/Message.vue";
 import Loader from "@/components/general/Loader.vue";
-import footerCard from '@/components/forms/FooterCard.vue'
-import maqnutencaoService from "@/services/manutencao.service";
+import footerCard from '@/components/forms/FooterCard.vue';
 import useValidate from "@vuelidate/core";
 import {
   required$,

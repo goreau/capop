@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import auxiliaresService from "@/services/auxiliares.service.js";
 
 export default {
   name: "CmbGeneric",
@@ -25,7 +24,7 @@ export default {
     return {
     };
   },
-  props: ['sel', 'errclass','tipo', 'data'],
+  props: ['sel', 'errclass', 'data'],
   methods: {
     onChange(event) {
       this.$emit('selGen',event.target.value);

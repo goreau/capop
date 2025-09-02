@@ -2,7 +2,6 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-8">
-        <Loader v-if="isLoading" />
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
@@ -35,7 +34,6 @@
 <script>
 import manutencaoService from "@/services/manutencao.service";
 import MyTable from '@/components/forms/MyTable.vue';
-import Loader from '@/components/general/Loader.vue';
 import Message from "@/components/general/Message.vue";
 import ConfirmDialog from '@/components/forms/ConfirmDialog.vue';
 
@@ -45,7 +43,6 @@ export default {
     return {
       tableName: 'manutencao',
       dataTable: [],
-      isLoading: false,
       showMessage: false,
       message: "",
       caption: "",
@@ -60,7 +57,6 @@ export default {
   },
   components: {
     MyTable,
-    Loader,
     ConfirmDialog,
     Message,
 
@@ -79,7 +75,9 @@ export default {
         this.$router.push('/perdas/0');
       } else if (this.tipo == 6) {
         this.$router.push('/siafem/0');
-      }         
+      } else if (this.tipo == 7) {
+        this.$router.push('/epiTipo/0');
+      }            
     },
     editItem(id) {
       this.$router.push(`/manage/${id}`);
@@ -99,17 +97,15 @@ export default {
 
     this.myspan = document.getElementsByName('coisa')[0];
     this.myspan2 = document.getElementsByName('coisa2')[0];
-    this.isLoading = true;
 
     manutencaoService.getLista(this.tipo)
       .then((response) => {
         this.dataTable = response.data;
-        this.isLoading = false;
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => this.isLoading = false);
+      .finally(() => {});
 
     if (this.tipo == 1){
       this.columns = [
@@ -525,6 +521,74 @@ export default {
         }
       }
     ]
+    } else if (this.tipo == 7){
+      this.columns = [
+      { title: 'Nome', field: 'descricao', minWidth: 100 },
+      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
+      {
+        title: 'Ações', responsive: 0, minWidth: 250,
+        formatter: (cell, formatterParrams) => {
+          const row = cell.getRow().getData();
+
+          const btEdit = document.createElement('button');
+          btEdit.type = 'button';
+          btEdit.title = 'Editar';
+          btEdit.disabled = this.currentUser.nivel != 1;
+          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+          btEdit.classList.add('button', 'is-primary', 'is-outlined');
+          btEdit.innerHTML = this.myspan.innerHTML;
+          btEdit.addEventListener('click', () => {
+            this.$router.push(`/epiTipo/${row.id_epi_tipo}`);
+          });
+
+          const btDel = document.createElement('button');
+          btDel.type = 'button';
+          btDel.title = 'Excluir';
+          btDel.disabled = this.currentUser.nivel != 1;
+          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+          btDel.classList.add('button', 'is-danger', 'is-outlined');
+          btDel.innerHTML = this.myspan2.innerHTML;
+          btDel.addEventListener('click', async () => {
+            const ok = await this.$refs.confirmDialog.show({
+              title: 'Excluir',
+              message: 'Deseja mesmo excluir essa lista?',
+              okButton: 'Confirmar',
+            })
+            if (ok) {
+              manutencaoService.delete(this.tipo, row.id_epi_tipo)
+                .then(resp => {
+                  if (resp.status == '200') {
+                    location.reload();
+                  } else {
+                    this.message = resp;
+                    this.showMessage = true;
+                    this.type = "alert";
+                    this.caption = "Tipo de EPI";
+                    setTimeout(() => (this.showMessage = false), 3000);
+                  }
+                })
+                .catch(err => {
+                  this.message = err;
+                  this.showMessage = true;
+                  this.type = "alert";
+                  this.caption = "Tipo de EPI";
+                  setTimeout(() => (this.showMessage = false), 3000);
+                })
+            }
+          });
+
+          
+
+
+          const buttonHolder = document.createElement('span');
+          buttonHolder.appendChild(btEdit);
+          buttonHolder.appendChild(btDel);
+
+          return buttonHolder;
+
+        }
+      }
+    ]
     }
   },
   computed: {
@@ -566,6 +630,10 @@ export default {
       case '6':
         this.strTipo = 'Listas SIAFEM Cadastradas';
         this.tableName = 'manLista';
+        break;
+      case '7':
+        this.strTipo = 'Tipos de EPI Cadastrados';
+        this.tableName = 'epiLista';
         break;
       default:
       this.strTipo = 'ERRO';

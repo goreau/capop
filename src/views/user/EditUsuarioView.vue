@@ -68,10 +68,10 @@
                     <input
                       type="radio"
                       nome="nivel"
-                      value="3"
+                      value="9"
                       v-model="role"
                     />
-                    Usuário Município
+                    Convidado
                   </label>
                 </div>
               </div>

@@ -314,6 +314,14 @@ export default {
   mounted() {
     this.laboratorio.owner_id = this.currentUser.id;
 
+    if (this.currentUser.nivel == 9){
+      this.message = "Você não tem permissão para cadastrar atividades laboratoriais";
+        this.showMessage = true;
+        this.type = "alert";
+        this.caption = "Atividade Laboratorial";
+        setTimeout(() => {this.showMessage = false; this.$router.push('/laboratorios'); }, 3000);
+    }
+
     auxiliaresService.getCombo(8, 0)
       .then((res) => {
         this.pgtos = res.data;

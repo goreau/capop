@@ -53,13 +53,7 @@ export default {
     },
   data() {
       return {
-        log: false,
-        items : [
-          {
-          name: 'uuu',
-          menu: [{ name: "Meu Cadastro"}, {name: "Sair"}]
-        }
-      ]
+      
       }
   },
   computed: {
@@ -72,17 +66,7 @@ export default {
     },
   },
   watch:{
-    log(val){
-      if (val){
-        var anchors = document.getElementsByClassName('name-container');
-        for (var i=0; i<anchors.length; i++){
-          if (anchors[i].innerHTML == 'uuu'){
-            anchors[i].innerHTML = this.currentUser.nome;
-            break;
-          }
-        }
-      } 
-    }
+    
   }
 };
 </script>
