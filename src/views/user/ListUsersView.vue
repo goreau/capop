@@ -175,6 +175,7 @@ export default {
                 if (resp){
                   this.$store.commit('auth/loginSuccess', resp);
                   location.href = this.$router.resolve({ name: 'home' }).href;
+                  localStorage.removeItem('filterCp');
                   //this.$router.push({ name: 'home' });
                 }
                /* .then(

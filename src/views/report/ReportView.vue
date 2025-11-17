@@ -66,13 +66,15 @@ export default {
             case '4':
               this.columns = [
                 { title: "Local", field: "local",  },
-                { title: "PP", field: "PP",  },
                 { title: "P", field: "P",  },
                 { title: "M", field: "M",  },
                 { title: "G", field: "G",  },
                 { title: "GG", field: "GG",  },
-                { title: "XGG", field: "XGG",  },
-                { title: "XXGG", field: "XXGG",  },
+                { title: "EG", field: "EG",  },
+                { title: "G1", field: "G1",  },
+                { title: "G2", field: "G2",  },
+                { title: "G3", field: "G3",  },
+                { title: "N/I", field: "N/I",  },
               ];
               break;  
             default:

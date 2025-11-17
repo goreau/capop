@@ -53,52 +53,10 @@
                 <legend>Camisa</legend>
                 <div class="control has-icons-left has-icons-right">
                   <div class="columns">
-                    <div class="column is-1">
+                    <div class="column is-1" v-for="tam in lstCamisa">
                       <label class="radio">
-                        <input type="radio" name="camisa" value="1" v-model="uniforme.camisa" />
-                        PP
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="2" v-model="uniforme.camisa" />
-                        P
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="3" v-model="uniforme.camisa" />
-                        M
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="4" v-model="uniforme.camisa" />
-                        G
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="5" v-model="uniforme.camisa" />
-                        GG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="6" v-model="uniforme.camisa" />
-                        XGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="7" v-model="uniforme.camisa" />
-                        XXGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camisa" value="99" v-model="uniforme.camisa" />
-                        N/A
+                        <input type="radio" name="camisa" :value="tam.id" v-model="uniforme.camisa" :checked="uniforme.camisa == tam.id"/>
+                        {{ tam.nome }}
                       </label>
                     </div>
                   </div>
@@ -111,52 +69,10 @@
                 <legend>Camiseta</legend>
                 <div class="control has-icons-left has-icons-right">
                   <div class="columns">
-                    <div class="column is-1">
+                    <div class="column is-1" v-for="tam in lstCamisa">
                       <label class="radio">
-                        <input type="radio" name="camiseta" value="1" v-model="uniforme.camiseta" />
-                        PP
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="2" v-model="uniforme.camiseta" />
-                        P
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="3" v-model="uniforme.camiseta" />
-                        M
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="4" v-model="uniforme.camiseta" />
-                        G
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="5" v-model="uniforme.camiseta" />
-                        GG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="6" v-model="uniforme.camiseta" />
-                        XGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="7" v-model="uniforme.camiseta" />
-                        XXGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="camiseta" value="99" v-model="uniforme.camiseta" />
-                        N/A
+                        <input type="radio" name="camiseta" :value="tam.id" v-model="uniforme.camiseta" :checked="uniforme.camiseta == tam.id"/>
+                        {{ tam.nome }}
                       </label>
                     </div>
                   </div>
@@ -169,52 +85,10 @@
                 <legend>Jaqueta</legend>
                 <div class="control has-icons-left has-icons-right">
                   <div class="columns">
-                    <div class="column is-1">
+                    <div class="column is-1" v-for="tam in lstCamisa">
                       <label class="radio">
-                        <input type="radio" name="jaqueta" value="1" v-model="uniforme.jaqueta" />
-                        PP
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="2" v-model="uniforme.jaqueta" />
-                        P
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="3" v-model="uniforme.jaqueta" />
-                        M
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="4" v-model="uniforme.jaqueta" />
-                        G
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="5" v-model="uniforme.jaqueta" />
-                        GG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="6" v-model="uniforme.jaqueta" />
-                        XGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="7" v-model="uniforme.jaqueta" />
-                        XXGG
-                      </label>
-                    </div>
-                    <div class="column is-1">
-                      <label class="radio">
-                        <input type="radio" name="jaqueta" value="99" v-model="uniforme.jaqueta" />
-                        N/A
+                        <input type="radio" name="jaqueta" :value="tam.id" v-model="uniforme.jaqueta" :checked="uniforme.jaqueta == tam.id"/>
+                        {{ tam.nome }}
                       </label>
                     </div>
                   </div>
@@ -273,6 +147,7 @@ import CmbAuxiliares from "@/components/forms/CmbAuxiliares.vue";
 import footerCard from '@/components/forms/FooterCard.vue'
 import uniformeService from "@/services/uniforme.service";
 import useValidate from "@vuelidate/core";
+import auxiliaresService from "@/services/auxiliares.service.js";
 import {
   required$,
   combo$,
@@ -293,6 +168,7 @@ export default {
         bermuda: 0,
         sapato: 0,
       },
+      lstCamisa: [],
       serv_nome: '',
       v$: useValidate(),
       isLoading: false,
@@ -341,6 +217,15 @@ export default {
   methods: {
   loadData(){
       this.isLoading = true;
+
+      auxiliaresService.getCombo(12, this.aux)
+      .then((res) => {
+        this.lstCamisa = res.data;
+      })
+      .catch((err) => {
+        console.log(err.response);
+        this.lstCamisa = [];
+      })
 
       uniformeService.getUniformeByServ(this.uniforme.id_servidor).then(
         (response) => {

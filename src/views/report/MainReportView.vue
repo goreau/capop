@@ -99,7 +99,7 @@
                       </div>
                     </div>
                   </fieldset>
-              <fieldset class="fieldset" v-if="hasFilter.origem.indexOf(this.tipo_relat) > -1 && currentUser.nivel > 1">
+              <fieldset class="fieldset" v-if="hasFilter.origem.indexOf(this.tipo_relat) > -1">
                     <legend>Dados de Origem</legend>
                     <div class="control has-icons-left has-icons-right">
                       <div class="columns">
@@ -115,12 +115,12 @@
                             Município
                           </label>
                         </div>
-                        <div class="column is-2">
+                        <!--<div class="column is-2">
                           <label class="radio">
                             <input type="radio" name="origem" value="9" v-model="filterCp.origem" />
                             Todos
                           </label>
-                        </div>
+                        </div>-->
                       </div>
                     </div>
                   </fieldset>
@@ -204,7 +204,7 @@ export default {
         municipio: ['1','2','5','6'],
         data: ['1','5','6'],
         uniforme: ['1'],
-        origem: ['7']
+        origem: ['7','17']
       },
       cFooter: {
         strSubmit: 'Filtrar',

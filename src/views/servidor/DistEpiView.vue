@@ -137,7 +137,7 @@ export default {
   methods: {
     insereItem() {
       this.epi.itens.push({...this.item})
-      console.log(this.epi.itens)
+      //console.log(this.epi.itens)
     },
     removerItem(index) {
       this.epi.itens.splice(index, 1)
