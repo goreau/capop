@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-11">
-        
+
         <Message v-if="showMessage" @do-close="closeMessage" :msg="message" :type="type" :caption="caption" />
         <div class="card">
           <header class="card-header">
@@ -56,7 +56,8 @@
                   <div class="field">
                     <label class="label">Servidor</label>
                     <div class="control">
-                      <CmbServidor :id_prop="filter.id_prop" :tipo="9" @selServ="filter.id_servidor = $event" :sel="filter.id_servidor"/>
+                      <CmbServidor :id_prop="filter.id_prop" :tipo="9" @selServ="filter.id_servidor = $event"
+                        :sel="filter.id_servidor" />
                     </div>
                   </div>
                 </div>
@@ -174,7 +175,7 @@ export default {
     CmbMunicipio
   },
   methods: {
-    newFilter(){
+    newFilter() {
       this.hasRows = false;
     },
     trocaPerda(ev) {
@@ -210,7 +211,7 @@ export default {
       atividadeService.getAtividades(this.filter)
         .then(async (response) => {
           this.dataTable = response.data;
-          if (this.dataTable.length > 0){
+          if (this.dataTable.length > 0) {
             this.hasRows = true;
           } else {
             localStorage.removeItem('mainAtivCp');
@@ -222,14 +223,14 @@ export default {
               this.showMessage = false;
               window.location.reload();
             }, 3000);
-            
-            
+
+
           }
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {});
+        .finally(() => { });
     },
     startCalendar() {
       const teste = document.querySelector('#dtIni');
@@ -349,10 +350,21 @@ export default {
       { title: 'Servidor', field: 'servidor', minWidth: 300, responsive: 1 },
       { title: 'Local', field: 'local', minWidth: 250, responsive: 4 },
       { title: 'Programa', field: 'programa', minWidth: 150, responsive: 4 },
-      { title: 'Atividade', field: 'aux_atividade', minWidth: 250, responsive: 3 },
-      { title: 'Produção', field: 'producao', minWidth: 100, responsive: 4 },
+      { title: 'Atividade', field: 'aux_atividade', minWidth: 250, responsive: 2 },
+      { title: 'Produção', field: 'producao', minWidth: 100, responsive: 3 },
       { title: 'Tipo Pgto', field: 'pagamento', minWidth: 100, responsive: 4 },
-      { title: 'Valor', field: 'valor', minWidth: 100, responsive: 4 },
+      {
+        title: 'Valor', field: 'valor', minWidth: 100, responsive: 3, hozAlign: "right", formatter: "money", formatterParams: {
+          decimal: ",",
+          thousand: ".",
+          symbol: "",
+          symbolAfter: "p",
+          negativeSign: true,
+        },
+        accessorDownload: (value) => {
+          return Number(value);
+        }
+      },
       { title: 'Responsável', field: 'owner', minWidth: 100, responsive: 3 },
       {
         title: 'Ações', responsive: 0, minWidth: 200,

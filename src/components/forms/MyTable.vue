@@ -80,7 +80,7 @@
     </div>
     <br>
   </div>
-  
+
   <div ref="table" id="myTable" class="is-striped"></div>
 </template>
 
@@ -103,7 +103,7 @@ export default {
       arrFilter: [],
       filter: false,
       isLoading: false,
-      cbColumns: []
+      cbColumns: [],
     };
   },
   components: {
@@ -117,7 +117,7 @@ export default {
 
       var finalValue = obj.value;
 
-      if (col[0].formatter == 'datetime'){
+      if (col[0].formatter == 'datetime') {
         finalValue = obj.value.split('/').reverse().join('-');
       }
 
@@ -135,7 +135,7 @@ export default {
 
       this.arrFilter = [],
 
-      this.tabulator.clearFilter();
+        this.tabulator.clearFilter();
       localStorage.removeItem(this.tableName);
       this.isLoading = false;
     },
@@ -143,22 +143,11 @@ export default {
       this.tabulator.download("csv", "data.csv");
     },
     download_xlsx() {
-      this.tabulator.download("xlsx", "data.xlsx", { 
+      this.tabulator.download("xlsx", "data.xlsx", {
         sheetName: "Capop",
-        exportConfig: {
-          formatCells: (cell, row, column) => {
-            let value = cell.getValue();
-            
-            // Verifica se o valor é numérico e não vazio
-            if (!isNaN(value) && value !== "" && value !== null) {
-              return Number(value); // Converte para número
-            }
-
-            return value; // Retorna o valor original para texto ou células vazias
-          }
-        }
-    })
+      })
     },
+
     download_pdf() {
       try {
         this.tabulator.download("pdf", "data.pdf", {
@@ -176,11 +165,11 @@ export default {
     toggleFilter(e) {
       this.filter = e.target.checked;
     },
-    async loadData(data){
+    async loadData(data) {
       this.isLoading = true;
       try {
         this.tabulator = new Tabulator(this.$refs.table, {
-          columnHeaderVertAlign:"middle",
+          columnHeaderVertAlign: "middle",
           langs: lang,
           locale: "pt-br",
           data: data, //link data to table
@@ -194,24 +183,24 @@ export default {
           paginationSizeSelector: [5, 10, 15, 20],
           movableColumns: true,
           paginationCounter: "rows",
-      });
+        });
 
-      this.cbColumns = this.columns.filter(el => el.title !== "Ações");
-      let me = this;
+        this.cbColumns = this.columns.filter(el => el.title !== "Ações");
+        let me = this;
 
-      this.tabulator.on("tableBuilt", function () {
-        if (me.filter ) {//&& me.tabulator.ta
-          if (me.arrFilter.length > 0){
-            me.tabulator.setFilter(me.arrFilter);
-          } 
-         // this.$router.go();
-        }
-        me.isLoading = false;
-      });
-        
+        this.tabulator.on("tableBuilt", function () {
+          if (me.filter) {//&& me.tabulator.ta
+            if (me.arrFilter.length > 0) {
+              me.tabulator.setFilter(me.arrFilter);
+            }
+            // this.$router.go();
+          }
+          me.isLoading = false;
+        });
+
       } catch (error) {
         console.log(error);
-      } finally{
+      } finally {
         //this.isLoading = false;
       }
     }
@@ -219,9 +208,9 @@ export default {
   props: ["tableData", "columns", "filtered", "tableName", "extra"],
   watch: {
     tableData(value) {
-     // this.isLoading = true;
+      // this.isLoading = true;
       this.loadData(value);
-      
+
     },
   },
   mounted() {
@@ -266,10 +255,10 @@ export default {
 };
 </script>
 <style scoped>
-#myTable{
-    background-color:#f2f3f8;
-    border: 1px solid #333;
-    border-radius: 5px;
+#myTable {
+  background-color: #f2f3f8;
+  border: 1px solid #333;
+  border-radius: 5px;
 }
 
 
@@ -343,7 +332,7 @@ input:checked+.slider:before {
   border-radius: 50%;
 }
 
-.tabulator-row .tabulator-cell{
+.tabulator-row .tabulator-cell {
   padding: .5em 2em .5 .75em;
 }
 </style>
