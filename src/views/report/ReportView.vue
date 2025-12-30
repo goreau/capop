@@ -498,7 +498,6 @@ export default {
             { title: "Produção", field: "producao", },
             { title: "Programa", field: "programa", },
             { title: "Atividade", field: "atividade", },
-            { title: "Modalidade", field: "modalidade", },
             { title: "Perda", field: "perda", },
             { title: "Custo", field: "valor", sorter: "number", hozAlign: "right", },
             { title: "Função", field: "funcao", },

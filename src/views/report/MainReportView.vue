@@ -51,7 +51,19 @@
                       <div class="field">
                         <label class="label">Servidor</label>
                         <div class="control">
-                          <CmbServidor :id_prop="filterCp.id_prop" :tipo="9" :sel="filterCp.id_servidor" @selServ="filterCp.id_servidor = $event" />
+                          <CmbServidor :id_prop="filterCp.id_prop" :tipo="9" :sel="filterCp.id_servidor"
+                            @selServ="filterCp.id_servidor = $event" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="columns" v-if="hasFilter.programa.indexOf(this.tipo_relat) > -1">
+                    <div class="column is-full">
+                      <div class="field">
+                        <label class="label">Programa</label>
+                        <div class="control">
+                          <CmbAuxiliares :id_prop="filterCp.id_programa" :tipo="5" :sel="filterCp.id_programa"
+                            @selAux="filterCp.id_programa = $event" />
                         </div>
                       </div>
                     </div>
@@ -99,7 +111,7 @@
                       </div>
                     </div>
                   </fieldset>
-              <fieldset class="fieldset" v-if="hasFilter.origem.indexOf(this.tipo_relat) > -1">
+                  <fieldset class="fieldset" v-if="hasFilter.origem.indexOf(this.tipo_relat) > -1">
                     <legend>Dados de Origem</legend>
                     <div class="control has-icons-left has-icons-right">
                       <div class="columns">
@@ -182,6 +194,7 @@ import CmbServidor from "@/components/forms/CmbServidor.vue";
 import moment from 'moment';
 import bulmaCalendar from 'bulma-calendar/dist/js/bulma-calendar.min.js';
 import "bulma-calendar/dist/css/bulma-calendar.min.css";
+import CmbAuxiliares from "@/components/forms/CmbAuxiliares.vue";
 
 export default {
   data() {
@@ -196,15 +209,17 @@ export default {
         id_programa: 0,
         id_servidor: 0,
         id_prop: 0,
+        id_programa: 0,
         unif: 1,
         origem: 9,
       },
-      hasFilter:{
-        servidor: ['1','14','6'],
-        municipio: ['1','2','5','6'],
-        data: ['1','5','6'],
+      hasFilter: {
+        servidor: ['1', '14', '6'],
+        municipio: ['1', '2', '5', '6'],
+        data: ['1', '5', '6'],
         uniforme: ['1'],
-        origem: ['7','17']
+        origem: ['7', '17'],
+        programa: ['13']
       },
       cFooter: {
         strSubmit: 'Filtrar',
@@ -235,14 +250,25 @@ export default {
     CmbTerritorio,
     CmbMunicipio,
     CmbGeneric,
-    CmbServidor
+    CmbServidor,
+    CmbAuxiliares
   },
   methods: {
-    closeMessage(){
+    closeMessage() {
       this.showMessage = false;
     },
+    limpaFiltros() {
+      if (this.hasFilter.programa.indexOf(this.tipo_relat) == -1) {
+        this.filterCp.id_programa = 0;
+      }
+      if (this.hasFilter.municipio.indexOf(this.tipo_relat) > -1) {
+        this.filterCp.id_municipio = 0;
+      }
+    },
     processar() {
+      this.limpaFiltros();
       this.filterCp.id_prop = this.id_usuario;
+
       localStorage.setItem('filterCp', JSON.stringify(this.filterCp));
 
       if (this.tipo_relat < 100) {

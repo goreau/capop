@@ -42,16 +42,6 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="" class="label">Modalidade</label>
-                                <div class="control">
-                                    <CmbAuxiliares @selAux="aux_atividade.id_modalidade = $event" :tipo="7"
-                                        :aux="aux_atividade.id_modalidade" :sel="aux_atividade.id_modalidade" />
-                                    <span class="is-error" v-if="v$.aux_atividade.id_modalidade.$error">
-                                        {{ v$.aux_atividade.id_modalidade.$errors[0].$message }}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="field">
                                 <label class="label">Quantidade Prevista</label>
                                 <div class="control">
                                     <input class="input" type="text" placeholder="Nome" v-model="aux_atividade.producao"
@@ -108,7 +98,6 @@ export default {
                 id_aux_atividade: 0,
                 descricao: "",
                 id_programa: 0,
-                id_modalidade: 0,
                 producao: 0,
                 codigo: 0,
                 active: true,
@@ -134,7 +123,6 @@ export default {
             aux_atividade: {
                 descricao: { required$, minLength: minLength$(5) },
                 id_programa: { required$, minValue: combo$(1) },
-                id_modalidade: { required$, minValue: combo$(1) },
                 producao: { required$ },
                 codigo: { required$ },
             }
@@ -162,7 +150,6 @@ export default {
                 (response) => {
                     let data = response.data;
                     this.aux_atividade.id_programa = data.id_programa;
-                    this.aux_atividade.id_modalidade = data.id_modalidade;
                     this.aux_atividade.codigo = data.codigo;
                     this.aux_atividade.descricao = data.descricao;
                     this.aux_atividade.producao = data.producao;

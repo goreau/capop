@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container">
+  <div class="main-container">
     <div class="columns is-centered">
       <div class="column is-two-fifths">
         <Loader v-if="isLoading" />
@@ -13,17 +13,17 @@
               <div class="field">
                 <label class="label">Nome</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Nome" v-model="modalidade.descricao"
-                    :class="{ 'is-danger': v$.modalidade.descricao.$error }" maxlength="40"/>
-                  <span class="is-error" v-if="v$.modalidade.descricao.$error">
-                    {{ v$.modalidade.descricao.$errors[0].$message }}
+                  <input class="input" type="text" placeholder="Nome" v-model="perda.descricao"
+                    :class="{ 'is-danger': v$.perda.descricao.$error }" maxlength="40" />
+                  <span class="is-error" v-if="v$.perda.descricao.$error">
+                    {{ v$.perda.descricao.$errors[0].$message }}
                   </span>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
                   <label for="" class="checkbox">
-                    <input type="checkbox" v-model="modalidade.active" :value="1">
+                    <input type="checkbox" v-model="perda.active" :value="1">
                     Ativo
                   </label>
                 </div>
@@ -54,8 +54,8 @@ import manutencaoService from "@/services/manutencao.service";
 export default {
   data() {
     return {
-      modalidade: {
-        id_modalidade: 0,
+      perda: {
+        id_perda: 0,
         descricao: "",
         active: true,
       },
@@ -66,17 +66,17 @@ export default {
       type: "",
       strLocal: "",
       showMessage: false,
-      cFooter:{
-          strSubmit:'Salvar',
-          strCancel: 'Cancelar',
-          strAux:'',
-          aux: false
-        }
+      cFooter: {
+        strSubmit: 'Salvar',
+        strCancel: 'Cancelar',
+        strAux: '',
+        aux: false
+      }
     };
   },
-  validations(){
+  validations() {
     return {
-      modalidade: {
+      perda: {
         descricao: { required$, minLength: minLength$(5) },
       }
     }
@@ -95,14 +95,14 @@ export default {
     footerCard
   },
   methods: {
-    loadData(){
+    loadData() {
       this.isLoading = true;
 
-      manutencaoService.getDados(4, this.modalidade.id_modalidade).then(
+      manutencaoService.getDados(4, this.perda.id_perda).then(
         (response) => {
           let data = response.data;
-          this.modalidade.descricao = data.descricao;
-          this.modalidade.active = data.active;
+          this.perda.descricao = data.descricao;
+          this.perda.active = data.active;
         },
         (error) => {
           this.message =
@@ -114,7 +114,7 @@ export default {
             error.toString();
           this.showMessage = true;
           this.type = "alert";
-          this.caption = "Modalidade";
+          this.caption = "perda";
           setTimeout(() => (this.showMessage = false), 3000);
         }
       );
@@ -122,61 +122,61 @@ export default {
       this.isLoading = false;
     },
     save() {
-      this.v$.$validate(); 
+      this.v$.$validate();
       if (!this.v$.$error) {
         document.getElementById("login").classList.add("is-loading");
-        if (this.modalidade.id_modalidade > 0) {
-        modalidadeService.update(this.modalidade).then(
-          (response) => {
-            this.showMessage = true;
-            this.message = "Dados da perda alterados com sucesso.";
-            this.type = "success";
-            this.caption = "Perdas";
-            setTimeout(() => (this.showMessage = false), 3000);
-          },
-          (error) => {
-            this.message =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.response.data ||
-              error.message ||
-              error.toString();
-            this.showMessage = true;
-            this.type = "alert";
-            this.caption = "Perdas";
-            setTimeout(() => (this.showMessage = false), 3000);
-          }
-        )
-        .finally(() => {
-            document.getElementById("login").classList.remove("is-loading");
-          });
+        if (this.perda.id_perda > 0) {
+          perdaService.update(this.perda).then(
+            (response) => {
+              this.showMessage = true;
+              this.message = "Dados da perda alterados com sucesso.";
+              this.type = "success";
+              this.caption = "Perdas";
+              setTimeout(() => (this.showMessage = false), 3000);
+            },
+            (error) => {
+              this.message =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.response.data ||
+                error.message ||
+                error.toString();
+              this.showMessage = true;
+              this.type = "alert";
+              this.caption = "Perdas";
+              setTimeout(() => (this.showMessage = false), 3000);
+            }
+          )
+            .finally(() => {
+              document.getElementById("login").classList.remove("is-loading");
+            });
         } else {
-            manutencaoService.create(4, this.modalidade).then(
-                        (response) => {
-                            this.showMessage = true;
-                            this.message = "Perda cadastrada com sucesso.";
-                            this.type = "success";
-                            this.caption = "Perdas";
-                            setTimeout(() => (this.showMessage = false), 3000);
-                        },
-                        (error) => {
-                            this.message = error;
-                            /* (error.response &&
-                               error.response.data &&
-                               error.response.data.message) ||
-                             error.data.err ||
-                             error.message ||
-                             error.toString();*/
-                            this.showMessage = true;
-                            this.type = "alert";
-                            this.caption = "Perdas";
-                            setTimeout(() => (this.showMessage = false), 3000);
-                        }
-                    )
-                        .finally(() => {
-                            document.getElementById("login").classList.remove("is-loading");
-                        });
+          manutencaoService.create(4, this.perda).then(
+            (response) => {
+              this.showMessage = true;
+              this.message = "Perda cadastrada com sucesso.";
+              this.type = "success";
+              this.caption = "Perdas";
+              setTimeout(() => (this.showMessage = false), 3000);
+            },
+            (error) => {
+              this.message = error;
+              /* (error.response &&
+                 error.response.data &&
+                 error.response.data.message) ||
+               error.data.err ||
+               error.message ||
+               error.toString();*/
+              this.showMessage = true;
+              this.type = "alert";
+              this.caption = "Perdas";
+              setTimeout(() => (this.showMessage = false), 3000);
+            }
+          )
+            .finally(() => {
+              document.getElementById("login").classList.remove("is-loading");
+            });
         }
       } else {
         this.message = "Corrija os erros para enviar as informações";
@@ -188,14 +188,14 @@ export default {
     },
   },
   mounted() {
-    this.modalidade.owner_id = this.currentUser.id;
+    this.perda.owner_id = this.currentUser.id;
   },
   created() {
-    this.modalidade.id_modalidade = this.$route.params.id;
-    if (this.modalidade.id_modalidade > 0){
+    this.perda.id_perda = this.$route.params.id;
+    if (this.perda.id_perda > 0) {
       this.loadData();
     }
-    
+
   },
 };
 </script>

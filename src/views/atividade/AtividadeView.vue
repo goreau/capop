@@ -46,8 +46,8 @@
                     <label class="label">Município</label>
                     <div class="control">
                       <CmbMunicipio :id_prop="atividade.id_municipio" :tipo="9" :sel="atividade.id_municipio"
-                        @selMun="atividade.id_municipio = $event" :disabled="atividade.id_perda != 999" :all="currentUser.nivel > 1"
-                        :errclass="{ 'is-danger': v$.atividade.id_municipio.$error }" />
+                        @selMun="atividade.id_municipio = $event" :disabled="atividade.id_perda != 999"
+                        :all="currentUser.nivel > 1" :errclass="{ 'is-danger': v$.atividade.id_municipio.$error }" />
                       <span class="is-error" v-if="v$.atividade.id_municipio.$error">
                         {{ v$.atividade.id_municipio.$errors[0].$message }}
                       </span>
@@ -58,7 +58,8 @@
                   <div class="field">
                     <label for="" class="label">Perda</label>
                     <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_perda = $event" :tipo="4" :sel="atividade.id_perda" @change="trocaPerda($event)" />
+                      <CmbAuxiliares @selAux="atividade.id_perda = $event" :tipo="4" :sel="atividade.id_perda"
+                        @change="trocaPerda($event)" />
                       <span class="is-error" v-if="v$.atividade.id_perda.$error">
                         {{ v$.atividade.id_perda.$errors[0].$message }}
                       </span>
@@ -67,39 +68,27 @@
                 </div>
               </div>
               <div class="columns">
-                <div class="column">
+                <div class="column is-4">
                   <div class="field">
                     <label for="" class="label">Programa</label>
                     <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_programa = $event" :tipo="5" :sel="atividade.id_programa" :disabled="atividade.id_perda != 999"/>
+                      <CmbAuxiliares @selAux="atividade.id_programa = $event" :tipo="5" :sel="atividade.id_programa"
+                        :disabled="atividade.id_perda != 999" />
                       <span class="is-error" v-if="v$.atividade.id_programa.$error">
                         {{ v$.atividade.id_programa.$errors[0].$message }}
                       </span>
                     </div>
                   </div>
                 </div>
-                <div class="column">
+                <div class="column is-5">
                   <div class="field">
                     <label for="" class="label">Atividade</label>
                     <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_aux_atividade = $event" :tipo="6" :aux="atividade.id_programa"
-                        :sel="atividade.id_aux_atividade" @change="setCaption($event)" :disabled="atividade.id_perda != 999" />
+                      <CmbAuxiliares @selAux="atividade.id_aux_atividade = $event" :tipo="6"
+                        :aux="atividade.id_programa" :sel="atividade.id_aux_atividade" @change="setCaption($event)"
+                        :disabled="atividade.id_perda != 999" />
                       <span class="is-error" v-if="v$.atividade.id_aux_atividade.$error">
                         {{ v$.atividade.id_aux_atividade.$errors[0].$message }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column">
-                  <div class="field">
-                    <label for="" class="label">Modalidade</label>
-                    <div class="control">
-                      <CmbAuxiliares @selAux="atividade.id_modalidade = $event" :tipo="7" :aux="atividade.id_modalidade"
-                        :sel="atividade.id_modalidade" :disabled="atividade.id_perda != 999" />
-                      <span class="is-error" v-if="v$.atividade.id_modalidade.$error">
-                        {{ v$.atividade.id_modalidade.$errors[0].$message }}
                       </span>
                     </div>
                   </div>
@@ -118,7 +107,8 @@
                   <div class="columns">
                     <div class="column is-3" v-for="pgt in pgtos" :key="pgt.id">
                       <label class="radio">
-                        <input type="radio" name="pgto" :value="pgt.id" v-model="pgto" :disabled="atividade.id_perda != 999" />
+                        <input type="radio" name="pgto" :value="pgt.id" v-model="pgto"
+                          :disabled="atividade.id_perda != 999" />
                         {{ pgt.nome }}
                       </label>
                     </div>
@@ -144,7 +134,8 @@
                 <div class="column">
                   <div class="field">
                     <label class="label">Valor</label>
-                    <input class="input" type="text" v-model="atividade.valor" :disabled="atividade.id_perda != 999 || atividade.id_pagamento == 0" />
+                    <input class="input" type="text" v-model="atividade.valor"
+                      :disabled="atividade.id_perda != 999 || atividade.id_pagamento == 0" />
                   </div>
                 </div>
               </div>
@@ -188,7 +179,6 @@ export default {
         id_perda: 999,
         id_programa: 0,
         id_aux_atividade: 0,
-        id_modalidade: 0,
         producao: 0,
         id_pagamento: 0,
         id_lista: 0,
@@ -222,7 +212,6 @@ export default {
         id_perda: { required$, minValue: combo$(1) },
         id_programa: { required$, minValue: combo$(1) },
         id_aux_atividade: { required$, minValue: combo$(1) },
-        id_modalidade: { required$, minValue: combo$(1) },
         producao: { required$ },
         id_pagamento: { required$ },
         id_lista: { required$ },
@@ -247,40 +236,38 @@ export default {
     footerCard
   },
   methods: {
-    trocaPerda(ev){
-      if (ev.target.value == '999' || ev.target.value == '0'){
-        this.atividade.id_perda = 999;   
-        this.atividade.id_municipio = 0;             
+    trocaPerda(ev) {
+      if (ev.target.value == '999' || ev.target.value == '0') {
+        this.atividade.id_perda = 999;
+        this.atividade.id_municipio = 0;
         this.atividade.id_programa = 0;
         this.atividade.id_aux_atividade = 0;
-        this.atividade.id_modalidade = 0;
-        this.atividade.id_lista = 0; 
+        this.atividade.id_lista = 0;
       } else {
-        this.atividade.id_municipio = 999;             
+        this.atividade.id_municipio = 999;
         this.atividade.id_programa = 999;
         this.atividade.id_aux_atividade = 999;
-        this.atividade.id_modalidade = 999;
-        this.atividade.id_lista = 0; 
-      }                 
+        this.atividade.id_lista = 0;
+      }
     },
-    setCaption(ev){
+    setCaption(ev) {
       var rc = ev.target.options[ev.target.selectedIndex].dataset.g;
-      this.strProd =  rc;
+      this.strProd = rc;
     },
-    repeat(){
-     // let weekDay = 10;
-    /*  while (weekDay > 5) {
-        let dt = moment(this.atividade.dt_cadastro).add(1, 'd');
-        weekDay = dt.isoWeekday();
-      }*/
+    repeat() {
+      // let weekDay = 10;
+      /*  while (weekDay > 5) {
+          let dt = moment(this.atividade.dt_cadastro).add(1, 'd');
+          weekDay = dt.isoWeekday();
+        }*/
 
       let dt = moment(this.atividade.dt_cadastro);
-      do{
+      do {
         dt.add(1, 'd');
         var weekDay = dt.isoWeekday();
       }
-      while (weekDay > 5);  
-      
+      while (weekDay > 5);
+
 
       this.atividade.dt_cadastro = dt.format('YYYY-MM-DD');
       this.startCalendar();
@@ -292,7 +279,7 @@ export default {
       if (teste.type == 'text') {
         const elDt = document.querySelector('#contDate');
         elDt.innerHTML = "<input type='date' id='dtCad' />";
-        
+
       }
 
       const options = {
@@ -408,10 +395,10 @@ export default {
       field.addEventListener('click', changed)
       field.addEventListener('keyup', changed)
     },
-    forceChangeComma(str){
+    forceChangeComma(str) {
       if (str.length == 0) str = 0;
       if (typeof str != 'string') return str;
-      return str.replace(/,/g , ".");
+      return str.replace(/,/g, ".");
     },
     create() {
       this.atividade.valor = this.forceChangeComma(this.atividade.valor);
@@ -456,22 +443,22 @@ export default {
     },
   },
   watch: {
-    pgto(value){
-        this.atividade.id_pagamento = value;
-        if (value == 0){
-          this.atividade.valor = 0;
-        }              
-    }                  
+    pgto(value) {
+      this.atividade.id_pagamento = value;
+      if (value == 0) {
+        this.atividade.valor = 0;
+      }
+    }
   },
   mounted() {
     this.atividade.owner_id = this.currentUser.id;
 
-    if (this.currentUser.nivel == 9){
+    if (this.currentUser.nivel == 9) {
       this.message = "Você não tem permissão para cadastrar atividades";
-        this.showMessage = true;
-        this.type = "alert";
-        this.caption = "Atividade";
-        setTimeout(() => {this.showMessage = false; this.$router.push('/atividades'); }, 3000);
+      this.showMessage = true;
+      this.type = "alert";
+      this.caption = "Atividade";
+      setTimeout(() => { this.showMessage = false; this.$router.push('/atividades'); }, 3000);
     }
 
     auxiliaresService.getCombo(8, 0)

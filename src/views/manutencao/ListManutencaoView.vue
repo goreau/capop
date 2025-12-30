@@ -63,21 +63,19 @@ export default {
   },
   methods: {
     newItem() {
-      if (this.tipo == 1){
+      if (this.tipo == 1) {
         this.$router.push('/programa/0');
-      } else if (this.tipo == 2){
+      } else if (this.tipo == 2) {
         this.$router.push('/aux_atividade/0');
       } else if (this.tipo == 3) {
         this.$router.push('/ativ_lab/0');
-      } else if (this.tipo == 4) {
-        this.$router.push('/modalidade/0');
       } else if (this.tipo == 5) {
         this.$router.push('/perdas/0');
       } else if (this.tipo == 6) {
         this.$router.push('/siafem/0');
       } else if (this.tipo == 7) {
         this.$router.push('/epiTipo/0');
-      }            
+      }
     },
     editItem(id) {
       this.$router.push(`/manage/${id}`);
@@ -105,490 +103,421 @@ export default {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {});
+      .finally(() => { });
 
-    if (this.tipo == 1){
+    if (this.tipo == 1) {
       this.columns = [
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/programa/${row.id_programa}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/programa/${row.id_programa}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir esse programa?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_programa)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir esse programa?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_programa)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Programa";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Programa";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Programa";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
 
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
+
+            return buttonHolder;
+
+          }
         }
-      }
-    ]
-    } else if (this.tipo == 2){
+      ]
+    } else if (this.tipo == 2) {
       this.columns = [
-      { title: 'Programa', field: 'programa', minWidth: 100 }, 
-      { title: 'Codigo', field: 'codigo', minWidth: 100 }, 
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Produção', field: 'producao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Programa', field: 'programa', minWidth: 100 },
+        { title: 'Codigo', field: 'codigo', minWidth: 100 },
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Produção', field: 'producao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/aux_atividade/${row.id_aux_atividade}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/aux_atividade/${row.id_aux_atividade}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir essa atividade?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_programa)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir essa atividade?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_programa)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Programa";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Programa";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Programa";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
 
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
+
+            return buttonHolder;
+
+          }
         }
-      }
-    ]
-    } else if (this.tipo == 3){
+      ]
+    } else if (this.tipo == 3) {
       this.columns = [
-      { title: 'Programa', field: 'programa', minWidth: 100 }, 
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Programa', field: 'programa', minWidth: 100 },
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/ativ_lab/${row.id_ativ_lab}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/ativ_lab/${row.id_ativ_lab}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir essa atividade?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_ativ_lab)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir essa atividade?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_ativ_lab)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Atividade Laboratorial";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Atividade Laboratorial";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Atividade Laboratorial";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
-
-          return buttonHolder;
-
-        },
-      }
-    ]
-    } else if (this.tipo == 4){
-      this.columns = [
-      { title: 'Codigo', field: 'id_modalidade', minWidth: 100 },
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
-
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/modalidade/${row.id_modalidade}`);
-          });
-
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir essa modalidade?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_modalidade)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
-                    this.showMessage = true;
-                    this.type = "alert";
-                    this.caption = "Modalidade";
-                    setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Modalidade";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
+            return buttonHolder;
 
+          },
         }
-      }
-    ]
-    } else if (this.tipo == 5){
+      ]
+    } else if (this.tipo == 5) {
       this.columns = [
-      { title: 'Codigo', field: 'id_perda', minWidth: 100 },
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Codigo', field: 'id_perda', minWidth: 100 },
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/perda/${row.id_perda}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/perda/${row.id_perda}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir esse motivo de perda?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_perda)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir esse motivo de perda?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_perda)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Perda";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Perda";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Perda";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
 
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
+
+            return buttonHolder;
+
+          }
         }
-      }
-    ]
-    } else if (this.tipo == 6){
+      ]
+    } else if (this.tipo == 6) {
       this.columns = [
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/siafem/${row.id_lista}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/siafem/${row.id_lista}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir essa lista?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_lista)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir essa lista?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_lista)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Lista SIAFEM";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Lista SIAFEM";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Lista SIAFEM";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
 
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
+
+            return buttonHolder;
+
+          }
         }
-      }
-    ]
-    } else if (this.tipo == 7){
+      ]
+    } else if (this.tipo == 7) {
       this.columns = [
-      { title: 'Nome', field: 'descricao', minWidth: 100 },
-      { title: 'Ativo', field: 'active', minWidth: 100, formatter:"tickCross" },
-      {
-        title: 'Ações', responsive: 0, minWidth: 250,
-        formatter: (cell, formatterParrams) => {
-          const row = cell.getRow().getData();
+        { title: 'Nome', field: 'descricao', minWidth: 100 },
+        { title: 'Ativo', field: 'active', minWidth: 100, formatter: "tickCross" },
+        {
+          title: 'Ações', responsive: 0, minWidth: 250,
+          formatter: (cell, formatterParrams) => {
+            const row = cell.getRow().getData();
 
-          const btEdit = document.createElement('button');
-          btEdit.type = 'button';
-          btEdit.title = 'Editar';
-          btEdit.disabled = this.currentUser.nivel != 1;
-          btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btEdit.classList.add('button', 'is-primary', 'is-outlined');
-          btEdit.innerHTML = this.myspan.innerHTML;
-          btEdit.addEventListener('click', () => {
-            this.$router.push(`/epiTipo/${row.id_epi_tipo}`);
-          });
+            const btEdit = document.createElement('button');
+            btEdit.type = 'button';
+            btEdit.title = 'Editar';
+            btEdit.disabled = this.currentUser.nivel != 1;
+            btEdit.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btEdit.classList.add('button', 'is-primary', 'is-outlined');
+            btEdit.innerHTML = this.myspan.innerHTML;
+            btEdit.addEventListener('click', () => {
+              this.$router.push(`/epiTipo/${row.id_epi_tipo}`);
+            });
 
-          const btDel = document.createElement('button');
-          btDel.type = 'button';
-          btDel.title = 'Excluir';
-          btDel.disabled = this.currentUser.nivel != 1;
-          btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
-          btDel.classList.add('button', 'is-danger', 'is-outlined');
-          btDel.innerHTML = this.myspan2.innerHTML;
-          btDel.addEventListener('click', async () => {
-            const ok = await this.$refs.confirmDialog.show({
-              title: 'Excluir',
-              message: 'Deseja mesmo excluir essa lista?',
-              okButton: 'Confirmar',
-            })
-            if (ok) {
-              manutencaoService.delete(this.tipo, row.id_epi_tipo)
-                .then(resp => {
-                  if (resp.status == '200') {
-                    location.reload();
-                  } else {
-                    this.message = resp;
+            const btDel = document.createElement('button');
+            btDel.type = 'button';
+            btDel.title = 'Excluir';
+            btDel.disabled = this.currentUser.nivel != 1;
+            btDel.style.cssText = 'height: fit-content; margin-left: 1rem;';
+            btDel.classList.add('button', 'is-danger', 'is-outlined');
+            btDel.innerHTML = this.myspan2.innerHTML;
+            btDel.addEventListener('click', async () => {
+              const ok = await this.$refs.confirmDialog.show({
+                title: 'Excluir',
+                message: 'Deseja mesmo excluir essa lista?',
+                okButton: 'Confirmar',
+              })
+              if (ok) {
+                manutencaoService.delete(this.tipo, row.id_epi_tipo)
+                  .then(resp => {
+                    if (resp.status == '200') {
+                      location.reload();
+                    } else {
+                      this.message = resp;
+                      this.showMessage = true;
+                      this.type = "alert";
+                      this.caption = "Tipo de EPI";
+                      setTimeout(() => (this.showMessage = false), 3000);
+                    }
+                  })
+                  .catch(err => {
+                    this.message = err;
                     this.showMessage = true;
                     this.type = "alert";
                     this.caption = "Tipo de EPI";
                     setTimeout(() => (this.showMessage = false), 3000);
-                  }
-                })
-                .catch(err => {
-                  this.message = err;
-                  this.showMessage = true;
-                  this.type = "alert";
-                  this.caption = "Tipo de EPI";
-                  setTimeout(() => (this.showMessage = false), 3000);
-                })
-            }
-          });
-
-          
+                  })
+              }
+            });
 
 
-          const buttonHolder = document.createElement('span');
-          buttonHolder.appendChild(btEdit);
-          buttonHolder.appendChild(btDel);
 
-          return buttonHolder;
 
+            const buttonHolder = document.createElement('span');
+            buttonHolder.appendChild(btEdit);
+            buttonHolder.appendChild(btDel);
+
+            return buttonHolder;
+
+          }
         }
-      }
-    ]
+      ]
     }
   },
   computed: {
@@ -619,10 +548,6 @@ export default {
         this.strTipo = 'Atividades de Laboratório Cadastradas';
         this.tableName = 'manLab';
         break;
-      case '4':
-        this.strTipo = 'Modalidades Cadastradas';
-        this.tableName = 'manMod';
-        break;
       case '5':
         this.strTipo = 'Motivos de Perda Cadastrados';
         this.tableName = 'manPerda';
@@ -636,10 +561,10 @@ export default {
         this.tableName = 'epiLista';
         break;
       default:
-      this.strTipo = 'ERRO';
+        this.strTipo = 'ERRO';
         break;
     }
-   // this.loadData();
+    // this.loadData();
   }
 }
 </script>

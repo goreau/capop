@@ -174,18 +174,6 @@ export default {
               },
             },
             {
-              href: "/listManutencao/4",
-              title: "Modalidade",
-              icon: {
-                element: "font-awesome-icon",
-                attributes: {
-                  icon: "fa-solid fa-search",
-                  size: "lg",
-                  transform: "shrink-8",
-                },
-              },
-            },
-            {
               href: "/listManutencao/5",
               title: "Perdas",
               icon: {

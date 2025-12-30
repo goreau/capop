@@ -153,11 +153,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/AtivLabView.vue'),
   },
   {
-    path: '/modalidade/:id',
-    name: 'modalidade',
-    component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/ModalidadeView.vue'),
-  },
-  {
     path: '/perda/:id',
     name: 'perda',
     component: () => import(/* webpackChunkName: "user" */ '../views/manutencao/PerdasView.vue'),

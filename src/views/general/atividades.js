@@ -59,20 +59,6 @@ export function gerarPDF(data) {
     pdf.line(cellStart, ln+2, cellStart+55, ln+2);
     ln+=3;
     pdf.setFont("arial", "bold");       
-    pdf.cell(cellStart,ln,55,6,'Modalidades');
-            
-    ln = ln + inc*2;
-    pdf.setFont("arial", "normal");       
-            
-    for (const linha of data.mods) {
-        pdf.text(linha['codigo'] + ' - ' + linha['modalidade'],col,ln);
-        poeBorda(pdf, ln, cellStart);
-        ln = ln + inc;
-    }
-    ln = ln - inc;
-    pdf.line(cellStart, ln+2, cellStart+55, ln+2);
-    ln+=3;
-    pdf.setFont("arial", "bold");       
     pdf.cell(cellStart,ln,55,6,'Perdas');
             
     ln = ln + inc*2;
